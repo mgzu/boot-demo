@@ -36,7 +36,7 @@ public class ConvertTest {
     @Test
     public void Test1() {
         for (int i = 0; i < forNum; i++) {
-             Convert.toBigDecimal(list.get(i));
+            Convert.toBigDecimal(list.get(i));
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.example.demo.bad;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
+import com.example.demo.BaseTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -11,7 +10,7 @@ import java.util.Map;
  * @author MaGuangZu
  * @since 2021-09-26
  */
-public class CastObjectTest {
+public class CastObjectTest extends BaseTest {
 
     @Test
     public void testCast() {

@@ -5,6 +5,10 @@ package com.example.demo.fsm;
  * @since 2021-09-26
  */
 public class OrderInfo implements FsmOrder {
+    private String orderState;
+    private String userId;
+    private int serviceType;
+
     @Override
     public String getOrderId() {
         return null;
@@ -26,14 +30,14 @@ public class OrderInfo implements FsmOrder {
     }
 
     public void setOrderState(String nextState) {
-
+        this.orderState = nextState;
     }
 
     public Object getUserId() {
-        return null;
+        return this.userId;
     }
 
-    public String getServiceType() {
-        return null;
+    public int getServiceType() {
+        return this.serviceType;
     }
 }
