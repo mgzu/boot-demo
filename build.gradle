@@ -23,26 +23,21 @@ configurations {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.hibernate.validator:hibernate-validator'
+    implementation 'org.codehaus.groovy:groovy-jsr223'
+
+    // tool
+    // https://mvnrepository.com/artifact/cn.hutool/hutool-core
+    implementation 'cn.hutool:hutool-core:5.7.13'
+
+    // dev
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    // https://mvnrepository.com/artifact/org.springframework.statemachine/spring-statemachine-core
-    implementation 'org.springframework.statemachine:spring-statemachine-core:2.5.0'
-    // https://mvnrepository.com/artifact/cn.hutool/hutool-core
-    implementation 'cn.hutool:hutool-core:5.7.13'
-    // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy
-    implementation 'org.codehaus.groovy:groovy:3.0.9'
-    // https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-jsr223
-    implementation 'org.codehaus.groovy:groovy-jsr223:3.0.9'
-
-
+    // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
