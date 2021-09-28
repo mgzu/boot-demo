@@ -11,7 +11,6 @@ import com.example.demo.fsm.enums.OrderEventEnum;
 import com.example.demo.fsm.enums.OrderStateEnum;
 import com.example.demo.fsm.enums.ServiceType;
 import com.example.demo.fsm.event.CreateEvent;
-import com.example.demo.fsm.processor.AbstractStateProcessor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
@@ -27,7 +26,7 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
     @Resource
     private UserChecker userChecker;
     @Resource
-    private UnfinishChecker unfinshChecker;
+    private UnFinishChecker unfinishChecker;
 
     @Override
     public Checkable getCheckable(StateContext<CreateOrderContext> context) {
@@ -44,14 +43,9 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
 
             @Override
             public List<Checker> getAsyncChecker() {
-                return Arrays.asList(userChecker, unfinshChecker);
+                return Arrays.asList(userChecker, unfinishChecker);
             }
         };
-    }
-
-    @Override
-    public ServiceResult<String> check(StateContext<CreateOrderContext> context) {
-        return null;
     }
 
     @Override
@@ -63,7 +57,7 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
     public ServiceResult<String> action(String nextState, StateContext<CreateOrderContext> context) throws Exception {
         CreateEvent createEvent = (CreateEvent) context.getOrderStateEvent();
         // 促销信息信息
-        String promtionInfo = this.doPromotion();
+        String promotionInfo = this.doPromotion();
         return null;
     }
 

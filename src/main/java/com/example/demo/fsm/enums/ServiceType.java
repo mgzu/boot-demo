@@ -5,5 +5,8 @@ package com.example.demo.fsm.enums;
  * @since 2021-09-26
  */
 public class ServiceType {
-    public static final String TAKEOFF_CAR = "";
+    private ServiceType() {
+    }
+
+    public static final int TAKEOFF_CAR = 0;
 }

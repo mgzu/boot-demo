@@ -1,8 +1,7 @@
-package com.example.demo.fsm.annotation;
+package com.example.demo.fsm.context;
 
 
 import com.example.demo.fsm.ServiceResult;
-import com.example.demo.fsm.context.StateContext;
 import com.example.demo.fsm.checker.Checkable;
 
 /**
@@ -18,12 +17,7 @@ public interface StateActionStep<T, C> {
     Checkable getCheckable(StateContext<C> context);
 
     /**
-     * 校验
-     */
-    ServiceResult<T> check(StateContext<C> context);
-
-    /**
-     * 获取当前状态处理器处理完毕后，所处于的下一个状态
+     *
      */
     String getNextState(StateContext<C> context);
 
