@@ -1,7 +1,7 @@
 package com.example.demo.framework.util;
 
 import com.example.demo.framework.Dict;
-import com.example.demo.framework.constants.DictConstant;
+import com.example.demo.framework.constants.DictConstants;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -23,18 +23,11 @@ public class DictUtil {
     public static List<Dict> typeConvert(List<Dict> dicts) {
         dicts.forEach(i -> {
             switch (i.getDictType()) {
-                case DictConstant.DICT_TYPE_INT:
-                    i.setValue(Integer.parseInt(i.getValue().toString()));
-                    break;
-                case DictConstant.DICT_TYPE_DECIMAL:
-                    i.setValue(new BigDecimal(i.getValue().toString()));
-                    break;
-                case DictConstant.DICT_TYPE_BOOL:
-                    i.setValue(Boolean.parseBoolean(i.getValue().toString()));
-                    break;
-                default:
-                    // 其它都当做 string 处理
-                    break;
+                case DictConstants.DICT_TYPE_INT -> i.setValue(Integer.parseInt(i.getValue().toString()));
+                case DictConstants.DICT_TYPE_DECIMAL -> i.setValue(new BigDecimal(i.getValue().toString()));
+                case DictConstants.DICT_TYPE_BOOL -> i.setValue(Boolean.parseBoolean(i.getValue().toString()));
+                default -> throw new RuntimeException("字典类型不支持");
+                // 其它都当做 string 处理
             }
         });
         return dicts;

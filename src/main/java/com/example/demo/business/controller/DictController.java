@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.business.controller;
 
 import com.example.demo.framework.Dict;
 import com.example.demo.framework.Result;

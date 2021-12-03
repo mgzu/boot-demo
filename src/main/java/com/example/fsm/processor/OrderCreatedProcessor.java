@@ -4,14 +4,13 @@ package com.example.fsm.processor;
 import com.example.fsm.OrderInfo;
 import com.example.fsm.ServiceResult;
 import com.example.fsm.annotation.OrderProcessor;
-import com.example.demo.fsm.checker.*;
 import com.example.fsm.checker.*;
 import com.example.fsm.context.CreateOrderContext;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.enums.OrderEventEnum;
 import com.example.fsm.enums.OrderStateEnum;
 import com.example.fsm.enums.ServiceType;
-import com.example.fsm.event.CreateEvent;
+import com.example.fsm.event.OrderStateEvent;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.annotation.Resource;
@@ -56,7 +55,8 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
 
     @Override
     public ServiceResult<String> action(String nextState, StateContext<CreateOrderContext> context) throws Exception {
-        CreateEvent createEvent = (CreateEvent) context.getOrderStateEvent();
+        CreateOrderContext createOrderContext = context.getContext();
+        OrderStateEvent orderStateEvent = createOrderContext.getOrderStateEvent();
         // 促销信息信息
         String promotionInfo = this.doPromotion();
         return null;
@@ -81,10 +81,7 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
     @Override
     public boolean filter(StateContext<CreateOrderContext> context) {
         OrderInfo orderInfo = (OrderInfo) context.getFsmOrder();
-        if (orderInfo.getServiceType() == ServiceType.TAKEOFF_CAR) {
-            return true;
-        }
-        return false;
+        return orderInfo.getServiceType() == ServiceType.TAKEOFF_CAR;
     }
 
     /**

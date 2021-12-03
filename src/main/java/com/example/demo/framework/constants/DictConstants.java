@@ -4,8 +4,8 @@ package com.example.demo.framework.constants;
  * @author MaGuangZu
  * @since 2021-09-28
  */
-public class DictConstant {
-    private DictConstant() {
+public class DictConstants {
+    private DictConstants() {
     }
 
     /**

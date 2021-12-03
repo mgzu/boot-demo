@@ -1,14 +1,14 @@
 package com.example.demo.framework;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.http.HttpStatus;
 
 /**
  * @author MaGuangZu
  * @since 2021-09-27
  */
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Setter
 @Getter
