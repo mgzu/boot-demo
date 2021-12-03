@@ -28,7 +28,8 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
     @Override
     public <T> ServiceResult<T> sendEvent(OrderStateEvent orderStateEvent) throws Exception {
         FsmOrder fsmOrder = null;
-        if (orderStateEvent.newCreate()) {
+        // 非新创建的订单，需要从数据库中查询订单信息
+        if (!orderStateEvent.newCreate()) {
             fsmOrder = this.fsmOrderService.getFsmOrder(orderStateEvent.getOrderId());
             if (fsmOrder == null) {
                 throw new FsmException(ErrorCodeEnum.ORDER_NOT_FOUND);
@@ -40,7 +41,7 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
     @Override
     public <T> ServiceResult<T> sendEvent(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) throws Exception {
         // 构造当前事件上下文
-        StateContext context = this.getStateContext(orderStateEvent, fsmOrder);
+        StateContext<?> context = this.getStateContext(orderStateEvent, fsmOrder);
         // 获取当前事件处理器
         StateProcessor stateProcessor = this.getStateProcessor(context);
         // 执行处理逻辑

@@ -1,4 +1,7 @@
 server:
   port: 8090
 
+logging:
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} %p %X{X-Request-Id} %c{1}[%line]: %m%n'
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -72,6 +73,14 @@ public class DefaultStateProcessRegistry implements BeanPostProcessor, StateProc
 
     @Override
     public List<AbstractStateProcessor> acquireStateProcess(String orderState, String eventType, String bizCode, String sceneId) {
-        return null;
+        Map<String, Map<String, List<AbstractStateProcessor>>> stateTransformEventEnumMap = stateProcessMap.get(orderState);
+        if (stateTransformEventEnumMap == null) {
+            return Collections.emptyList();
+        }
+        Map<String, List<AbstractStateProcessor>> processorMap = stateTransformEventEnumMap.get(eventType);
+        if (processorMap == null) {
+            return Collections.emptyList();
+        }
+        return processorMap.getOrDefault(bizCode + "@" + sceneId, Collections.emptyList());
     }
 }

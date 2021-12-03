@@ -17,6 +17,6 @@ public class CreateEvent implements OrderStateEvent {
 
     @Override
     public boolean newCreate() {
-        return false;
+        return true;
     }
 }
