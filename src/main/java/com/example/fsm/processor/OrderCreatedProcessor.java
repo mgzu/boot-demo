@@ -4,7 +4,9 @@ package com.example.fsm.processor;
 import com.example.fsm.OrderInfo;
 import com.example.fsm.ServiceResult;
 import com.example.fsm.annotation.OrderProcessor;
-import com.example.fsm.checker.*;
+import com.example.fsm.checker.Checkable;
+import com.example.fsm.checker.Checker;
+import com.example.fsm.checker.CreateParamChecker;
 import com.example.fsm.context.CreateOrderContext;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.enums.OrderEventEnum;
@@ -23,10 +25,10 @@ import java.util.List;
 public class OrderCreatedProcessor extends AbstractStateProcessor<String, CreateOrderContext> {
     @Resource
     private CreateParamChecker createParamChecker;
-    @Resource
-    private UserChecker userChecker;
-    @Resource
-    private UnFinishChecker unfinishChecker;
+//    @Resource
+//    private UserChecker userChecker;
+//    @Resource
+//    private UnFinishChecker unfinishChecker;
 
     @Override
     public Checkable getCheckable(StateContext<CreateOrderContext> context) {
@@ -43,7 +45,8 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
 
             @Override
             public List<Checker> getAsyncChecker() {
-                return Arrays.asList(userChecker, unfinishChecker);
+                return Collections.emptyList();
+//                return Arrays.asList(userChecker, unfinishChecker);
             }
         };
     }
@@ -59,7 +62,7 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
         OrderStateEvent orderStateEvent = createOrderContext.getOrderStateEvent();
         // 促销信息信息
         String promotionInfo = this.doPromotion();
-        return null;
+        return new ServiceResult<>(true);
     }
 
     @Override

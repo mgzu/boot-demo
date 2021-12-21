@@ -59,11 +59,33 @@ public class CheckerExecutor {
                 }
             }
         }
-        return new ServiceResult<>();
+        return new ServiceResult<>(true);
     }
 
     public <T, C> ServiceResult<T> serialCheck(List<Checker<T, C>> syncChecker, StateContext<C> context) {
-        return null;
+        if (!CollectionUtils.isEmpty(syncChecker)) {
+            List<ServiceResult<T>> resultList = Collections.synchronizedList(new ArrayList<>(syncChecker.size()));
+            try {
+                for (Checker<T, C> c : syncChecker) {
+                    executor.execute(() -> {
+                        ServiceResult<T> result = c.check(context);
+                        if (c.needRelease()) {
+                            c.release(context, result);
+                        }
+                        resultList.add(result);
+                    });
+                }
+            } catch (Exception e) {
+                log.error("parallelCheck executor.submit error.", e);
+                throw new FsmException(e.getCause());
+            }
+            for (ServiceResult<T> result : resultList) {
+                if (!result.isSuccess()) {
+                    return result;
+                }
+            }
+        }
+        return new ServiceResult<>(true);
     }
 
     /**

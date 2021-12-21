@@ -10,6 +10,6 @@ public class OrderStateEnum {
     private OrderStateEnum() {
     }
 
-    public static final String NEW = "";
-    public static final String INIT = "";
+    public static final String NEW = "NEW";
+    public static final String INIT = "INIT";
 }

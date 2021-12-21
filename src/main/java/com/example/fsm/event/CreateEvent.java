@@ -1,18 +1,38 @@
 package com.example.fsm.event;
 
+import lombok.Builder;
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @author MaGuangZu
  * @since 2021-09-26
  */
+@Builder
 public class CreateEvent implements OrderStateEvent {
+
+    @NotNull
+    private String orderId;
+    @NotNull
+    private String eventType;
+
     @Override
-    public String getEventType() {
-        return null;
+    @NotNull
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(@NotNull String orderId) {
+        this.orderId = orderId;
     }
 
     @Override
-    public String getOrderId() {
-        return null;
+    @NotNull
+    public String getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(@NotNull String eventType) {
+        this.eventType = eventType;
     }
 
     @Override

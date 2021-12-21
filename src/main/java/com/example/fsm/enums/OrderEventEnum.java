@@ -10,5 +10,5 @@ public class OrderEventEnum {
     private OrderEventEnum() {
     }
 
-    public static final String CREATE = "";
+    public static final String CREATE = "CREATE";
 }
