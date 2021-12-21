@@ -1,9 +1,9 @@
 package com.example.fsm.engine;
 
-
 import com.example.fsm.annotation.OrderProcessor;
 import com.example.fsm.processor.AbstractStateProcessor;
 import com.example.fsm.processor.StateProcessor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
@@ -71,6 +71,7 @@ public class DefaultStateProcessRegistry implements BeanPostProcessor, StateProc
         processorMap.get(bizCodeAndSceneId).add(processor);
     }
 
+    @NotNull
     @Override
     public List<AbstractStateProcessor> acquireStateProcess(String orderState, String eventType, String bizCode, String sceneId) {
         Map<String, Map<String, List<AbstractStateProcessor>>> stateTransformEventEnumMap = stateProcessMap.get(orderState);

@@ -11,7 +11,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-public class StateContext<C> {
+public abstract class StateContext<C> {
     /**
      * 订单操作事件
      */

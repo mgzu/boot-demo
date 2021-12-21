@@ -4,6 +4,7 @@ import com.example.fsm.OrderInfo;
 import com.example.fsm.ServiceResult;
 import com.example.fsm.context.CreateOrderContext;
 import com.example.fsm.context.StateContext;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,8 +13,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CreateParamChecker implements Checker<OrderInfo, CreateOrderContext> {
+    @NotNull
     @Override
     public ServiceResult<OrderInfo> check(StateContext<CreateOrderContext> context) {
-        return null;
+        ServiceResult<OrderInfo> result = new ServiceResult<>();
+        result.setData(context.getContext().getOrderInfo());
+        result.setSuccess(true);
+        return result;
     }
 }

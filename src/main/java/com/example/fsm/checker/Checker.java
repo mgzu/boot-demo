@@ -2,11 +2,13 @@ package com.example.fsm.checker;
 
 import com.example.fsm.ServiceResult;
 import com.example.fsm.context.StateContext;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 状态机校验器
  */
 public interface Checker<T, C> {
+    @NotNull
     ServiceResult<T> check(StateContext<C> context);
 
     /**

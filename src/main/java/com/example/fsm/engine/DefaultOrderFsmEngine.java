@@ -3,13 +3,16 @@ package com.example.fsm.engine;
 
 import com.example.fsm.FsmOrder;
 import com.example.fsm.ServiceResult;
+import com.example.fsm.context.CreateOrderContext;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.enums.ErrorCodeEnum;
+import com.example.fsm.enums.OrderEventEnum;
 import com.example.fsm.event.OrderStateEvent;
 import com.example.fsm.exception.FsmException;
 import com.example.fsm.processor.AbstractStateProcessor;
 import com.example.fsm.processor.StateProcessor;
 import com.example.fsm.service.FsmOrderService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -25,8 +28,9 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
     @Autowired
     private StateProcessRegistry stateProcessorRegistry;
 
+    @NotNull
     @Override
-    public <T> ServiceResult<T> sendEvent(OrderStateEvent orderStateEvent) throws Exception {
+    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent) throws Exception {
         FsmOrder fsmOrder = null;
         // 非新创建的订单，需要从数据库中查询订单信息
         if (!orderStateEvent.newCreate()) {
@@ -38,8 +42,11 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
         return sendEvent(orderStateEvent, fsmOrder);
     }
 
+    @NotNull
     @Override
-    public <T> ServiceResult<T> sendEvent(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) throws Exception {
+    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent,
+                                          @NotNull FsmOrder fsmOrder) throws Exception {
+        Objects.requireNonNull(fsmOrder);
         // 构造当前事件上下文
         StateContext<?> context = this.getStateContext(orderStateEvent, fsmOrder);
         // 获取当前事件处理器
@@ -48,6 +55,7 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
         return stateProcessor.action(context);
     }
 
+    @NotNull
     private <T> StateProcessor<T, ?> getStateProcessor(StateContext<?> context) {
         OrderStateEvent stateEvent = context.getOrderStateEvent();
         FsmOrder fsmOrder = context.getFsmOrder();
@@ -77,8 +85,12 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
         return processorResult.get(0);
     }
 
+    @NotNull
     private StateContext<?> getStateContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
-        StateContext<?> context = new StateContext(orderStateEvent, fsmOrder);
+        StateContext<?> context = switch (orderStateEvent.getEventType()) {
+            case OrderEventEnum.CREATE -> new CreateOrderContext(orderStateEvent, fsmOrder);
+            default -> throw new FsmException(ErrorCodeEnum.UN_SUPPORT_EVENT);
+        };
         return context;
     }
 }
