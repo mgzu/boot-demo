@@ -27,6 +27,12 @@ public class ServiceResult<T> {
         this.message = message;
     }
 
+    public ServiceResult(String message, boolean success, T data) {
+        this.message = message;
+        this.success = success;
+        this.data = data;
+    }
+
     public String getMessage() {
         return message;
     }
