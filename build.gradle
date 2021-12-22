@@ -33,6 +33,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.hibernate.validator:hibernate-validator'
     implementation 'org.codehaus.groovy:groovy-jsr223'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
     // tool
     // https://mvnrepository.com/artifact/cn.hutool/hutool-core
@@ -44,7 +45,8 @@ dependencies {
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
 }
 
 java {
