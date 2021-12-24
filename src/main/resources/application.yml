@@ -1,6 +1,13 @@
 server:
   port: 8090
 
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/test_db
+    username: postgres
+    password: 123456
+
 logging:
   pattern:
     console: '%d{yyyy-MM-dd HH:mm:ss} %p %X{X-Request-Id} %c{1}[%line]: %m%n'
