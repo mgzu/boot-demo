@@ -1,7 +1,8 @@
 package com.example.fsm.processor;
 
 
-import com.example.fsm.OrderInfo;
+import com.example.demo.business.entity.bo.OrderBo;
+import com.example.demo.business.repository.OrderRepository;
 import com.example.fsm.ServiceResult;
 import com.example.fsm.annotation.OrderProcessor;
 import com.example.fsm.checker.Checkable;
@@ -9,26 +10,35 @@ import com.example.fsm.checker.Checker;
 import com.example.fsm.checker.CreateParamChecker;
 import com.example.fsm.context.CreateOrderContext;
 import com.example.fsm.context.StateContext;
-import com.example.fsm.enums.OrderEventEnum;
-import com.example.fsm.enums.OrderStateEnum;
-import com.example.fsm.enums.ServiceType;
+import com.example.fsm.enums.*;
 import com.example.fsm.event.OrderStateEvent;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 @Slf4j
-@OrderProcessor(state = OrderStateEnum.INIT, event = OrderEventEnum.CREATE, bizCode = {"CHEAP", "POPULAR"}, sceneId = "H5")
+@OrderProcessor(
+        state = OrderStateEnum.INIT,
+        event = OrderEventEnum.CREATE,
+        bizCode = {
+                BizCodeEnum.FBA,
+                BizCodeEnum.CARGO,
+        },
+        sceneId = SceneIdEnum.H5
+)
 public class OrderCreatedProcessor extends AbstractStateProcessor<String, CreateOrderContext> {
-    @Resource
+
+    @Autowired
     private CreateParamChecker createParamChecker;
-//    @Resource
+    //    @Resource
 //    private UserChecker userChecker;
 //    @Resource
 //    private UnFinishChecker unfinishChecker;
+    @Autowired
+    private OrderRepository orderInfoRepository;
 
     @Override
     public Checkable getCheckable(StateContext<CreateOrderContext> context) {
@@ -67,11 +77,12 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
 
     @Override
     public ServiceResult<String> save(String nextState, StateContext<CreateOrderContext> context) throws Exception {
-        OrderInfo orderInfo = context.getContext().getOrderInfo();
+        OrderBo orderInfo = context.getContext().getOrderInfo();
         // 更新状态
         orderInfo.setOrderState(nextState);
         // 持久化
 //        this.updateOrderInfo(orderInfo);
+        orderInfoRepository.save(orderInfo);
         log.info("save BUSINESS order success, userId:{}, orderId:{}", orderInfo.getUserId(), orderInfo.getOrderId());
         return new ServiceResult<>(orderInfo.getOrderId(), "business下单成功");
     }
@@ -83,7 +94,7 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
 
     @Override
     public boolean filter(StateContext<CreateOrderContext> context) {
-        OrderInfo orderInfo = (OrderInfo) context.getFsmOrder();
+        OrderBo orderInfo = context.getContext().getOrderInfo();
         return orderInfo.getServiceType() == ServiceType.TAKEOFF_CAR;
     }
 

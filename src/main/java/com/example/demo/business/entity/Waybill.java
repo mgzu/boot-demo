@@ -1,12 +1,14 @@
 package com.example.demo.business.entity;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * @author MaGuangZu
  * @since 2021-12-02
  */
-@Data
+@Setter
+@Getter
 public class Waybill {
 
 }

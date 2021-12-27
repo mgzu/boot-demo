@@ -1,7 +1,7 @@
 package com.example.fsm.context;
 
+import com.example.demo.business.entity.bo.OrderBo;
 import com.example.fsm.FsmOrder;
-import com.example.fsm.OrderInfo;
 import com.example.fsm.event.OrderStateEvent;
 
 /**
@@ -10,23 +10,23 @@ import com.example.fsm.event.OrderStateEvent;
  */
 public class CreateOrderContext extends StateContext<CreateOrderContext> {
 
-    private OrderInfo orderInfo;
+    private OrderBo orderInfo;
 
     public CreateOrderContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
         super(orderStateEvent, fsmOrder);
         setContext(this);
-        setOrderInfo((OrderInfo) fsmOrder);
+        setOrderInfo((OrderBo) fsmOrder);
     }
 
     public void setEstimatePriceInfo(String price) {
 
     }
 
-    public OrderInfo getOrderInfo() {
+    public OrderBo getOrderInfo() {
         return orderInfo;
     }
 
-    public void setOrderInfo(OrderInfo orderInfo) {
+    public void setOrderInfo(OrderBo orderInfo) {
         this.orderInfo = orderInfo;
     }
 }
