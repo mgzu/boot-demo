@@ -12,6 +12,7 @@ import com.example.fsm.exception.FsmException;
 import com.example.fsm.processor.AbstractStateProcessor;
 import com.example.fsm.processor.StateProcessor;
 import com.example.fsm.service.FsmOrderService;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,12 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@RequiredArgsConstructor
 @Component
 public class DefaultOrderFsmEngine implements OrderFsmEngine {
-    @Autowired
-    private FsmOrderService fsmOrderService;
-    @Autowired
-    private StateProcessRegistry stateProcessorRegistry;
+
+    private final FsmOrderService fsmOrderService;
+
+    private final StateProcessRegistry stateProcessorRegistry;
 
     @NotNull
     @Override
