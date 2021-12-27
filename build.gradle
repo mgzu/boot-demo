@@ -28,6 +28,11 @@ configurations {
     }
 }
 
+ext {
+    hutoolVersion = '5.7.17'
+    mapstructVersion = '1.5.0.Beta2'
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -39,11 +44,13 @@ dependencies {
 
     // tool
     // https://mvnrepository.com/artifact/cn.hutool/hutool-core
-    implementation 'cn.hutool:hutool-core:5.7.17'
+    implementation "cn.hutool:hutool-core:${hutoolVersion}"
 
     // dev
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
