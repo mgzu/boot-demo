@@ -31,7 +31,7 @@ public class OrderController {
     @GetMapping
     public void get() throws Exception {
         FsmOrder order = OrderBo.builder()
-                .orderId(IdUtil.simpleUUID())
+                .id(IdUtil.simpleUUID())
                 .orderState(OrderStateEnum.INIT)
                 .bizCode(BizCodeEnum.FBA)
                 .sceneId(SceneIdEnum.H5)
