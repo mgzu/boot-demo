@@ -1,11 +1,17 @@
 package com.example.demo.business.entity;
 
 import com.example.fsm.FsmOrder;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Transient;
 
 /**
  * @author MaGuangZu
@@ -18,12 +24,7 @@ import javax.persistence.*;
 @Getter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity(name = "t_order")
-public class Order implements FsmOrder {
-
-    @Id
-    @Column(nullable = false)
-    @NotNull
-    private String orderId;
+public class Order extends AuditableEntity implements FsmOrder {
 
     @NotNull
     private String orderState;
@@ -35,4 +36,8 @@ public class Order implements FsmOrder {
     @NotNull
     private String sceneId;
 
+    @Override
+    public String getOrderId() {
+        return this.getId();
+    }
 }

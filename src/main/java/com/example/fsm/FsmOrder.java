@@ -9,7 +9,6 @@ public interface FsmOrder {
     /**
      * 订单ID
      */
-    @NotNull
     String getOrderId();
 
     /**

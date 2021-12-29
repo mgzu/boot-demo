@@ -1,24 +1,27 @@
-package com.example.demo.business.entity.bo;
+package com.example.demo.business.entity;
 
-import com.example.demo.business.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
 /**
  * @author MaGuangZu
- * @since 2021-09-26
+ * @since 2021-12-29
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder(toBuilder = true)
 @Setter
 @Getter
-public class OrderBo extends Order {
+@MappedSuperclass
+public class PersistableEntity {
 
-    private String userId;
-    private int serviceType;
+    @Id
+    private String id;
 
 }
