@@ -1,1 +1,8 @@
 rootProject.name = 'boot-demo'
+
+//include 'framework-common'
+include 'framework-web'
+include 'framework-fsm-core'
+include 'framework-fsm-business'
+//include 'spring-boot-starter-fsm'
+include 'business-web'
