@@ -1,0 +1,14 @@
+dependencies {
+    api project(':framework-web')
+    api project(':framework-fsm-business')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.postgresql:postgresql'
+    implementation 'org.hibernate.validator:hibernate-validator'
+    implementation 'org.codehaus.groovy:groovy-jsr223'
+
+    // test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
