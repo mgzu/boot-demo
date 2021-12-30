@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-@EntityScan(basePackages = "com.example.business.entity.**")
+@EntityScan(basePackages = "com.example.**.entity.**")
 @RestController
 @SpringBootApplication
 public class DemoApplication {
