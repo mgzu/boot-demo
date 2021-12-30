@@ -2,6 +2,7 @@ package com.example.framework.util;
 
 import com.example.framework.Dict;
 import com.example.framework.constants.DictConstants;
+import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,9 +11,8 @@ import java.util.List;
  * @author MaGuangZu
  * @since 2021-09-28
  */
+@UtilityClass
 public class DictUtil {
-    private DictUtil() {
-    }
 
     /**
      * 字典值转换

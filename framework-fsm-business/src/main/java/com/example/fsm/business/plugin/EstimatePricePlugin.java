@@ -24,13 +24,12 @@ import lombok.extern.slf4j.Slf4j;
         },
         sceneId = SceneIdEnum.H5
 )
-public class EstimatePricePlugin implements PluginHandler<String, CreateOrderContext> {
+public class EstimatePricePlugin implements PluginHandler<Void, CreateOrderContext> {
     @Override
-    public ServiceResult action(StateContext<CreateOrderContext> context) throws Exception {
+    public ServiceResult<Void> action(StateContext<CreateOrderContext> context) throws Exception {
         log.info("EstimatePricePlugin action");
-//        String price = priceSerive.getPrice();
         String price = "";
         context.getContext().setEstimatePriceInfo(price);
-        return new ServiceResult(true);
+        return new ServiceResult<>(true);
     }
 }
