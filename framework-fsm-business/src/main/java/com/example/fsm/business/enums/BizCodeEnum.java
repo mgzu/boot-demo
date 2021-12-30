@@ -1,14 +1,15 @@
 package com.example.fsm.business.enums;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * 业务代码枚举类
  *
  * @author MaGuangZu
  * @since 2021-12-21
  */
+@UtilityClass
 public class BizCodeEnum {
-    private BizCodeEnum() {
-    }
 
     public static final String FBA = "FBA";
     public static final String CARGO = "CARGO";

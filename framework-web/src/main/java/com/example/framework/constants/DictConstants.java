@@ -1,12 +1,13 @@
 package com.example.framework.constants;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * @author MaGuangZu
  * @since 2021-09-28
  */
+@UtilityClass
 public class DictConstants {
-    private DictConstants() {
-    }
 
     /**
      * 字符串类型
