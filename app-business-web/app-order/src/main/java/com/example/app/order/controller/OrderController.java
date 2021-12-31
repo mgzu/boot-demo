@@ -1,13 +1,14 @@
-package com.example.fsm.business.controller;
+package com.example.app.order.controller;
 
 import cn.hutool.core.util.IdUtil;
+import com.example.framework.controller.BaseController;
+import com.example.fsm.FsmOrder;
 import com.example.fsm.business.entity.bo.OrderBo;
 import com.example.fsm.business.enums.BizCodeEnum;
 import com.example.fsm.business.enums.OrderEventEnum;
 import com.example.fsm.business.enums.OrderStateEnum;
 import com.example.fsm.business.enums.SceneIdEnum;
 import com.example.fsm.business.event.CreateEvent;
-import com.example.fsm.FsmOrder;
 import com.example.fsm.engine.OrderFsmEngine;
 import com.example.fsm.event.OrderStateEvent;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("order")
 @RestController
-public class OrderController {
+public class OrderController extends BaseController {
 
     private final OrderFsmEngine orderFsmEngine;
 

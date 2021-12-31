@@ -1,6 +1,7 @@
-package com.example.fsm.business.controller;
+package com.example.app.waybill.controller;
 
 import cn.hutool.core.util.IdUtil;
+import com.example.framework.controller.BaseController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("waybill")
 @RestController
-public class WaybillController {
+public class WaybillController extends BaseController {
 
     @GetMapping
     public void get() {

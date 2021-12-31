@@ -1,4 +1,4 @@
-package com.example.fsm.business.controller;
+package com.example.framework.controller;
 
 import com.example.framework.Dict;
 import com.example.framework.Result;
