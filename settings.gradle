@@ -1,12 +1,11 @@
 rootProject.name = 'boot-demo'
 
-//include 'framework-common'
+include 'framework-common'
 include 'framework-web'
 include 'framework-fsm-core'
-include 'framework-fsm-business'
 //include 'spring-boot-starter-fsm'
-include 'app-business-web'
+include 'app-web-business'
 
-file("${rootDir}/app-business-web").eachDirMatch(~/app.*/) {
-    include "app-business-web:${it.name}"
+file("${rootDir}/app-web-business").eachDirMatch(~/app.*/) {
+    include "app-web-business:${it.name}"
 }
