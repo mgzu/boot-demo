@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.domain.Persistable;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -19,9 +22,15 @@ import javax.persistence.MappedSuperclass;
 @Setter
 @Getter
 @MappedSuperclass
-public class PersistableEntity {
+public class PersistableEntity implements Persistable<String> {
 
     @Id
+    @GeneratedValue(generator = "snowFlakeId")
+    @GenericGenerator(name = "snowFlakeId", strategy = "com.example.framework.web.config.jpa.id.SnowflakeIdGenerator")
     private String id;
 
+    @Override
+    public boolean isNew() {
+        return id == null;
+    }
 }

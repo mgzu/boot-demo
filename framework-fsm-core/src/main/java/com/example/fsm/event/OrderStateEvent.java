@@ -10,8 +10,6 @@ import org.jetbrains.annotations.Nullable;
 public interface OrderStateEvent {
     /**
      * 订单状态事件
-     *
-     * @see {@link com.example.fsm.enums.OrderEventEnum} for more details
      */
     @NotNull
     String getEventType();
@@ -19,7 +17,6 @@ public interface OrderStateEvent {
     /**
      * 订单ID
      */
-    @NotNull
     String getOrderId();
 
     /**

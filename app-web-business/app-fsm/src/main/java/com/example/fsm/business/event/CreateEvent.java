@@ -11,18 +11,16 @@ import org.jetbrains.annotations.NotNull;
 @Builder
 public class CreateEvent implements OrderStateEvent {
 
-    @NotNull
     private String orderId;
     @NotNull
     private String eventType;
 
     @Override
-    @NotNull
     public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(@NotNull String orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
