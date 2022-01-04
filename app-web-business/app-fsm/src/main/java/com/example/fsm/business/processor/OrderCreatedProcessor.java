@@ -1,11 +1,13 @@
 package com.example.fsm.business.processor;
 
 import com.example.app.common.entity.bo.OrderBo;
+import com.example.app.order.entity.Order;
 import com.example.fsm.ServiceResult;
 import com.example.fsm.annotation.OrderProcessor;
 import com.example.fsm.business.checker.CreateParamChecker;
 import com.example.fsm.business.context.CreateOrderContext;
 import com.example.fsm.business.enums.*;
+import com.example.fsm.business.mapstruct.OrderMapper;
 import com.example.fsm.business.repository.OrderRepository;
 import com.example.fsm.checker.Checkable;
 import com.example.fsm.checker.Checker;

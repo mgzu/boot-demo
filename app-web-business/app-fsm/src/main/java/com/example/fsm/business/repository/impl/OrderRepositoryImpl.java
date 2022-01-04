@@ -28,6 +28,8 @@ public class OrderRepositoryImpl extends SimpleJpaRepository<Order, String> impl
     @Override
     public <S extends Order> S save(@NotNull S entity) {
         Order order = OrderMapper.INSTANCE.toOrder(entity);
-        return (S) super.save(order);
+        super.save(order);
+        entity.setId(order.getId());
+        return (S) order;
     }
 }

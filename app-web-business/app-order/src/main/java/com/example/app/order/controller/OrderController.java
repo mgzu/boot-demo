@@ -1,6 +1,5 @@
 package com.example.app.order.controller;
 
-import cn.hutool.core.util.IdUtil;
 import com.example.app.common.entity.bo.OrderBo;
 import com.example.framework.web.controller.BaseController;
 import com.example.fsm.FsmOrder;
@@ -32,7 +31,6 @@ public class OrderController extends BaseController {
     @GetMapping
     public void get() throws Exception {
         FsmOrder order = OrderBo.builder()
-                .id(IdUtil.simpleUUID())
                 .orderState(OrderStateEnum.INIT)
                 .bizCode(BizCodeEnum.FBA)
                 .sceneId(SceneIdEnum.H5)
@@ -42,7 +40,5 @@ public class OrderController extends BaseController {
                 .orderId(order.getOrderId())
                 .build();
         orderFsmEngine.sendEvent(event, order);
-        String id = IdUtil.simpleUUID();
-        log.info(id);
     }
 }
