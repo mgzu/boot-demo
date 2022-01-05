@@ -1,5 +1,4 @@
 plugins {
-    id 'org.springframework.boot' version "${springBootVersion}"
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
@@ -33,7 +32,6 @@ ext {
 }
 
 subprojects {
-    apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'java'
 
@@ -43,6 +41,12 @@ subprojects {
         }
         mavenLocal()
         mavenCentral()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+        }
     }
 
     dependencies {
