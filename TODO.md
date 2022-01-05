@@ -30,5 +30,5 @@
 > 去除需要改为 save 前，使用 mapstruct 来转换，再 save
 
 * [x] JPA ID 填充
-* [ ] gradle 配置调整
 * [ ] 单元测试
+* [ ] gradle 配置调整
