@@ -4,8 +4,8 @@ include 'framework-common'
 include 'framework-web'
 include 'framework-fsm-core'
 //include 'spring-boot-starter-fsm'
-include 'app-web-business'
+//include 'app-web-business'
 
-file("${rootDir}/app-web-business").eachDirMatch(~/app.*/) {
+file("${rootDir}/app-web-business").eachDir {
     include "app-web-business:${it.name}"
 }
