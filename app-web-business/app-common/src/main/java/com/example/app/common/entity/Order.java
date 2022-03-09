@@ -1,4 +1,4 @@
-package com.example.app.order.entity;
+package com.example.app.common.entity;
 
 import com.example.framework.web.entity.AuditableEntity;
 import com.example.fsm.FsmOrder;

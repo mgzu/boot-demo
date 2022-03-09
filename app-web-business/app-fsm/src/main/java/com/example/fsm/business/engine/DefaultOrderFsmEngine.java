@@ -1,11 +1,11 @@
 package com.example.fsm.business.engine;
 
-
-import com.example.fsm.business.context.CreateOrderContext;
-import com.example.fsm.business.enums.ErrorCodeEnum;
-import com.example.fsm.business.enums.OrderEventEnum;
+import cn.hutool.core.util.ClassUtil;
+import cn.hutool.core.util.ReflectUtil;
 import com.example.fsm.FsmOrder;
 import com.example.fsm.ServiceResult;
+import com.example.fsm.annotation.FsmEngine;
+import com.example.fsm.business.enums.ErrorCodeEnum;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.engine.OrderFsmEngine;
 import com.example.fsm.engine.StateProcessRegistry;
@@ -15,14 +15,18 @@ import com.example.fsm.processor.AbstractStateProcessor;
 import com.example.fsm.processor.StateProcessor;
 import com.example.fsm.service.FsmOrderService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import javax.annotation.PostConstruct;
+import java.lang.reflect.Constructor;
+import java.util.*;
 
+@Slf4j
+@FsmEngine(scanBasePackage = "com.example")
 @RequiredArgsConstructor
 @Component
 public class DefaultOrderFsmEngine implements OrderFsmEngine {
@@ -30,6 +34,37 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
     private final FsmOrderService fsmOrderService;
 
     private final StateProcessRegistry stateProcessorRegistry;
+
+    private final Map<String, Class<? extends StateContext<?>>> contextMap = new HashMap<>();
+
+    @PostConstruct
+    public void init() {
+        Class<? extends DefaultOrderFsmEngine> klass = this.getClass();
+        String packageName;
+        FsmEngine annotation = klass.getAnnotation(FsmEngine.class);
+        if (annotation == null) {
+            packageName = klass.getPackageName();
+        } else {
+            packageName = annotation.scanBasePackage();
+        }
+        Set<Class<?>> classSet = ClassUtil.scanPackage(packageName, clazz -> {
+            Class<?> superclass = clazz.getSuperclass();
+            if (superclass == null) {
+                return false;
+            }
+            return clazz.getSuperclass().equals(StateContext.class);
+        });
+        classSet.forEach(clazz -> {
+            log.debug("class name: {}", clazz.getName());
+            Constructor<?>[] constructors = ReflectUtil.getConstructors(clazz);
+            Arrays.stream(constructors).forEach(constructor -> {
+                if (constructor.getParameterCount() == 2) {
+                    contextMap.put(constructor.getParameterTypes()[0].getName(), (Class<? extends StateContext<?>>) constructor.getDeclaringClass());
+                    log.debug("declaring class name: {}", constructor.getDeclaringClass());
+                }
+            });
+        });
+    }
 
     @NotNull
     @Override
@@ -47,8 +82,7 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
 
     @NotNull
     @Override
-    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent,
-                                          @NotNull FsmOrder fsmOrder) throws Exception {
+    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent, @NotNull FsmOrder fsmOrder) throws Exception {
         Objects.requireNonNull(fsmOrder);
         // 构造当前事件上下文
         StateContext<?> context = this.getStateContext(orderStateEvent, fsmOrder);
@@ -59,12 +93,11 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
     }
 
     @NotNull
-    private <T> StateProcessor<T, ?> getStateProcessor(StateContext<?> context) {
+    private <T, C> StateProcessor<T, C> getStateProcessor(StateContext<C> context) {
         OrderStateEvent stateEvent = context.getOrderStateEvent();
         FsmOrder fsmOrder = context.getFsmOrder();
         // 根据状态+事件对象获取所对应的业务处理器集合
-        List<AbstractStateProcessor> processorList = stateProcessorRegistry.acquireStateProcess(fsmOrder.getOrderState(),
-                stateEvent.getEventType(), fsmOrder.getBizCode(), fsmOrder.getSceneId());
+        List<AbstractStateProcessor> processorList = stateProcessorRegistry.acquireStateProcess(fsmOrder.getOrderState(), stateEvent.getEventType(), fsmOrder.getBizCode(), fsmOrder.getSceneId());
         if (processorList == null) {
             // 订单状态发生改变
             if (!Objects.isNull(stateEvent.orderState()) && !stateEvent.orderState().equals(fsmOrder.getOrderState())) {
@@ -88,12 +121,10 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
         return processorResult.get(0);
     }
 
+    @SneakyThrows
     @NotNull
     private StateContext<?> getStateContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
-        StateContext<?> context = switch (orderStateEvent.getEventType()) {
-            case OrderEventEnum.CREATE -> new CreateOrderContext(orderStateEvent, fsmOrder);
-            default -> throw new FsmException(ErrorCodeEnum.UN_SUPPORT_EVENT);
-        };
-        return context;
+        Class<? extends StateContext<?>> klass = contextMap.get(orderStateEvent.getClass().getName());
+        return klass.getDeclaredConstructor(orderStateEvent.getClass(), FsmOrder.class).newInstance(orderStateEvent, fsmOrder);
     }
 }

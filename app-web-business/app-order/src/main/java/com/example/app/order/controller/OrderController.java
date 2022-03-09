@@ -8,6 +8,7 @@ import com.example.fsm.business.enums.OrderEventEnum;
 import com.example.fsm.business.enums.OrderStateEnum;
 import com.example.fsm.business.enums.SceneIdEnum;
 import com.example.fsm.business.event.CreateEvent;
+import com.example.fsm.business.event.ReturnEvent;
 import com.example.fsm.engine.OrderFsmEngine;
 import com.example.fsm.event.OrderStateEvent;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,20 @@ public class OrderController extends BaseController {
                 .build();
         OrderStateEvent event = CreateEvent.builder()
                 .eventType(OrderEventEnum.CREATE)
+                .orderId(order.getOrderId())
+                .build();
+        orderFsmEngine.sendEvent(event, order);
+    }
+
+    @GetMapping("/return")
+    public void returnOrder() throws Exception {
+        FsmOrder order = OrderBo.builder()
+                .orderState(OrderStateEnum.INIT)
+                .bizCode(BizCodeEnum.FBA)
+                .sceneId(SceneIdEnum.H5)
+                .build();
+        OrderStateEvent event = ReturnEvent.builder()
+                .eventType(OrderEventEnum.RETURN)
                 .orderId(order.getOrderId())
                 .build();
         orderFsmEngine.sendEvent(event, order);

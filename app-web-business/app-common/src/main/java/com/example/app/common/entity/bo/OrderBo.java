@@ -1,6 +1,6 @@
 package com.example.app.common.entity.bo;
 
-import com.example.app.order.entity.Order;
+import com.example.app.common.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

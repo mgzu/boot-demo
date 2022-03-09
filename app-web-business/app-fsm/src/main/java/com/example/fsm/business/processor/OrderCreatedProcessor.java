@@ -1,7 +1,7 @@
 package com.example.fsm.business.processor;
 
+import com.example.app.common.entity.Order;
 import com.example.app.common.entity.bo.OrderBo;
-import com.example.app.order.entity.Order;
 import com.example.fsm.ServiceResult;
 import com.example.fsm.annotation.OrderProcessor;
 import com.example.fsm.business.checker.CreateParamChecker;
@@ -40,7 +40,7 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
 //    @Resource
 //    private UnFinishChecker unfinishChecker;
     @Autowired
-    private OrderRepository orderInfoRepository;
+    private OrderRepository orderRepository;
 
     @Override
     public Checkable getCheckable(StateContext<CreateOrderContext> context) {
@@ -84,8 +84,9 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
         orderInfo.setOrderState(nextState);
         // 持久化
 //        this.updateOrderInfo(orderInfo);
-        orderInfoRepository.save(orderInfo);
-        log.info("save BUSINESS order success, userId:{}, orderId:{}", orderInfo.getUserId(), orderInfo.getOrderId());
+        Order order = OrderMapper.INSTANCE.toOrder(orderInfo);
+        orderRepository.save(order);
+        log.info("save BUSINESS order success, userId:{}, orderId:{}", orderInfo.getUserId(), order.getOrderId());
         return new ServiceResult<>(orderInfo.getOrderId(), "business下单成功");
     }
 

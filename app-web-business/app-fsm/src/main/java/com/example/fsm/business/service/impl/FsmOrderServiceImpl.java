@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class FsmOrderServiceImpl implements FsmOrderService {
 
-    private final OrderRepository orderInfoRepository;
+    private final OrderRepository orderRepository;
 
     @Override
     public FsmOrder getFsmOrder(String orderId) {
-        return orderInfoRepository.getById(orderId);
+        return orderRepository.getById(orderId);
     }
 }

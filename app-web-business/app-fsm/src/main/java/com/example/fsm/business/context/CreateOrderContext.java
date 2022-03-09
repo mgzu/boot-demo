@@ -2,8 +2,8 @@ package com.example.fsm.business.context;
 
 import com.example.app.common.entity.bo.OrderBo;
 import com.example.fsm.FsmOrder;
+import com.example.fsm.business.event.CreateEvent;
 import com.example.fsm.context.StateContext;
-import com.example.fsm.event.OrderStateEvent;
 
 /**
  * @author MaGuangZu
@@ -13,9 +13,8 @@ public class CreateOrderContext extends StateContext<CreateOrderContext> {
 
     private OrderBo orderInfo;
 
-    public CreateOrderContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
+    public CreateOrderContext(CreateEvent orderStateEvent, FsmOrder fsmOrder) {
         super(orderStateEvent, fsmOrder);
-        setContext(this);
         setOrderInfo((OrderBo) fsmOrder);
     }
 
