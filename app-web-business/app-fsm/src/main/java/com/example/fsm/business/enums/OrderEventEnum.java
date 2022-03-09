@@ -12,4 +12,5 @@ import lombok.experimental.UtilityClass;
 public class OrderEventEnum {
 
     public static final String CREATE = "CREATE";
+    public static final String RETURN = "RETURN";
 }

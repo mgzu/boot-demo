@@ -1,6 +1,8 @@
 package com.example.fsm.business.mapstruct;
 
-import com.example.app.order.entity.Order;
+import com.example.app.common.entity.Order;
+import com.example.app.common.entity.bo.OrderBo;
+import com.example.fsm.FsmOrder;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,5 +15,7 @@ public interface OrderMapper {
 
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-    Order toOrder(Order order);
+    Order toOrder(FsmOrder order);
+
+    Order toOrder(OrderBo order);
 }

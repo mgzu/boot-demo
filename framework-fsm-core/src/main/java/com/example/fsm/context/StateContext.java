@@ -25,8 +25,9 @@ public abstract class StateContext<C> {
      */
     private C context;
 
-    public StateContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
+    protected StateContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
         this.orderStateEvent = orderStateEvent;
         this.fsmOrder = fsmOrder;
+        setContext((C) this);
     }
 }
