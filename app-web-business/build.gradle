@@ -2,8 +2,13 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}"
 }
 
-dependencies {
+ext {
+    openapiVersion = '1.6.8'
+}
 
+dependencies {
+    implementation "org.springdoc:springdoc-openapi-ui:${openapiVersion}"
+    implementation "org.springdoc:springdoc-openapi-webmvc-core:${openapiVersion}"
 }
 
 compileKotlin {
