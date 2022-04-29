@@ -27,7 +27,7 @@ configurations {
 }
 
 ext {
-    hutoolVersion = '5.7.17'
+    hutoolVersion = '5.7.22'
     mapstructVersion = '1.5.0.Beta2'
 }
 
