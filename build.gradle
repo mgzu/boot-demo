@@ -23,7 +23,7 @@ configurations {
 
 ext {
     hutoolVersion = '5.7.22'
-    mapstructVersion = '1.5.0.Beta2'
+    mapstructVersion = '1.5.2.Final'
     bizlogSdkVersion = '3.0.0'
 }
 
