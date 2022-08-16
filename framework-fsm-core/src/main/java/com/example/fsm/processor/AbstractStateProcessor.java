@@ -6,10 +6,9 @@ import com.example.fsm.checker.CheckerExecutor;
 import com.example.fsm.context.StateActionStep;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.plugin.PluginExecutor;
+import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.Resource;
 
 /**
  * 状态机处理器抽象类
