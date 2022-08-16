@@ -25,6 +25,7 @@ ext {
     hutoolVersion = '5.8.5'
     mapstructVersion = '1.5.2.Final'
     bizlogSdkVersion = '3.0.0'
+    openapiVersion = '1.6.9'
 }
 
 subprojects {
