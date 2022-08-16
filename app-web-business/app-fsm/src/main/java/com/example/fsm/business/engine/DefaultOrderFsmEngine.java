@@ -14,6 +14,7 @@ import com.example.fsm.exception.FsmException;
 import com.example.fsm.processor.AbstractStateProcessor;
 import com.example.fsm.processor.StateProcessor;
 import com.example.fsm.service.FsmOrderService;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,6 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.PostConstruct;
 import java.lang.reflect.Constructor;
 import java.util.*;
 
