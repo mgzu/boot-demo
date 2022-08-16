@@ -1,5 +1,5 @@
 plugins {
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
     id 'java'
 }
 
@@ -9,15 +9,10 @@ allprojects {
 
     repositories {
         maven {
-            url 'https://maven.aliyun.com/repository/public/'
+            url 'https://repo.spring.io/milestone'
         }
-        mavenLocal()
         mavenCentral()
     }
-}
-
-repositories {
-    mavenCentral()
 }
 
 configurations {
@@ -29,6 +24,7 @@ configurations {
 ext {
     hutoolVersion = '5.7.22'
     mapstructVersion = '1.5.0.Beta2'
+    bizlogSdkVersion = '3.0.0'
 }
 
 subprojects {
@@ -37,9 +33,8 @@ subprojects {
 
     repositories {
         maven {
-            url 'https://maven.aliyun.com/repository/public/'
+            url 'https://repo.spring.io/milestone'
         }
-        mavenLocal()
         mavenCentral()
     }
 
@@ -55,6 +50,8 @@ subprojects {
         // tool
         // https://mvnrepository.com/artifact/cn.hutool/hutool-core
         implementation "cn.hutool:hutool-core:${hutoolVersion}"
+        // https://mvnrepository.com/artifact/io.github.mouzt/bizlog-sdk
+        implementation "io.github.mouzt:bizlog-sdk:${bizlogSdkVersion}"
 
         // dev
         compileOnly 'org.projectlombok:lombok'
