@@ -3,11 +3,11 @@ package com.example.framework.web.interceptor
 import cn.hutool.core.util.IdUtil
 import cn.hutool.core.util.StrUtil
 import com.example.framework.web.constants.WebConstants
+import jakarta.servlet.http.HttpServletRequest
+import jakarta.servlet.http.HttpServletResponse
 import lombok.extern.slf4j.Slf4j
 import org.slf4j.MDC
 import org.springframework.web.servlet.HandlerInterceptor
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
 /**
  * request id interceptor
