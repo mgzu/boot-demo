@@ -16,7 +16,7 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author MaGuangZu
@@ -38,7 +38,7 @@ public class AuditableEntity extends PersistableEntity {
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Nullable
-    private Date createdDate;
+    private LocalDateTime createdDate;
 
     @LastModifiedBy
     @Nullable
@@ -47,24 +47,6 @@ public class AuditableEntity extends PersistableEntity {
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Nullable
-    private Date lastModifiedDate;
-
-//    public Optional<LocalDateTime> getCreatedDate() {
-//        return null == createdDate ? Optional.empty()
-//                : Optional.of(LocalDateTime.ofInstant(createdDate.toInstant(), ZoneId.systemDefault()));
-//    }
-//
-//    public void setCreatedDate(LocalDateTime createdDate) {
-//        this.createdDate = Date.from(createdDate.atZone(ZoneId.systemDefault()).toInstant());
-//    }
-//
-//    public Optional<LocalDateTime> getLastModifiedDate() {
-//        return null == lastModifiedDate ? Optional.empty()
-//                : Optional.of(LocalDateTime.ofInstant(lastModifiedDate.toInstant(), ZoneId.systemDefault()));
-//    }
-//
-//    public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
-//        this.lastModifiedDate = Date.from(lastModifiedDate.atZone(ZoneId.systemDefault()).toInstant());
-//    }
+    private LocalDateTime lastModifiedDate;
 
 }
