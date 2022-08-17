@@ -1,5 +1,6 @@
 package com.example.fsm.business.processor;
 
+import com.example.app.common.constants.BizLogConstants;
 import com.example.app.common.entity.Order;
 import com.example.app.common.entity.bo.OrderBo;
 import com.example.fsm.ServiceResult;
@@ -11,11 +12,13 @@ import com.example.fsm.business.mapstruct.OrderMapper;
 import com.example.fsm.business.repository.OrderRepository;
 import com.example.fsm.checker.Checkable;
 import com.example.fsm.checker.Checker;
+import com.example.fsm.checker.CheckerExecutor;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.event.OrderStateEvent;
+import com.example.fsm.plugin.PluginExecutor;
 import com.example.fsm.processor.AbstractStateProcessor;
+import com.mzt.logapi.starter.annotation.LogRecord;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,15 +35,17 @@ import java.util.List;
         sceneId = SceneIdEnum.H5
 )
 public class OrderCreatedProcessor extends AbstractStateProcessor<String, CreateOrderContext> {
+    public OrderCreatedProcessor(CheckerExecutor checkerExecutor, PluginExecutor pluginExecutor,
+                                 CreateParamChecker createParamChecker, OrderRepository orderRepository) {
+        super(checkerExecutor, pluginExecutor);
+        this.createParamChecker = createParamChecker;
+        this.orderRepository = orderRepository;
+    }
 
-    @Autowired
-    private CreateParamChecker createParamChecker;
-    //    @Resource
-//    private UserChecker userChecker;
-//    @Resource
+    private final CreateParamChecker createParamChecker;
+    //    private UserChecker userChecker;
 //    private UnFinishChecker unfinishChecker;
-    @Autowired
-    private OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     @Override
     public Checkable getCheckable(StateContext<CreateOrderContext> context) {
@@ -77,6 +82,7 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
         return new ServiceResult<>(true);
     }
 
+    @LogRecord(success = "{{#context.context.orderInfo.orderId}} 下单成功", type = BizLogConstants.TYPE_ORDER, bizNo = "{{#context.context.orderInfo.orderId}}")
     @Override
     public ServiceResult<String> save(String nextState, StateContext<CreateOrderContext> context) throws Exception {
         OrderBo orderInfo = context.getContext().getOrderInfo();

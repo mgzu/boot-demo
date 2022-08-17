@@ -6,20 +6,22 @@ import com.example.fsm.checker.CheckerExecutor;
 import com.example.fsm.context.StateActionStep;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.plugin.PluginExecutor;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 /**
  * 状态机处理器抽象类
  */
 @Slf4j
-@Component
 public abstract class AbstractStateProcessor<T, C> implements StateProcessor<T, C>, StateActionStep<T, C> {
-    @Resource
-    private CheckerExecutor checkerExecutor;
-    @Resource
-    private PluginExecutor pluginExecutor;
+
+    public AbstractStateProcessor(final CheckerExecutor checkerExecutor, final PluginExecutor pluginExecutor) {
+        this.checkerExecutor = checkerExecutor;
+        this.pluginExecutor = pluginExecutor;
+    }
+
+    private final CheckerExecutor checkerExecutor;
+
+    private final PluginExecutor pluginExecutor;
 
     @Override
     public final ServiceResult<T> action(StateContext<C> context) throws Exception {
