@@ -5,14 +5,12 @@ import com.example.fsm.engine.StatePluginRegistry;
 import com.example.fsm.plugin.PluginHandler;
 import com.example.fsm.processor.StateProcessor;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -26,14 +24,15 @@ public class DefaultStatePluginRegistry implements BeanPostProcessor, StatePlugi
     private static Map<String, Map<String, Map<String, List<PluginHandler>>>> statePluginMap = new ConcurrentHashMap<>();
 
     @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(@NotNull Object bean, @NotNull String beanName) throws BeansException {
         if (bean instanceof PluginHandler && bean.getClass().isAnnotationPresent(ProcessorPlugin.class)) {
             ProcessorPlugin annotation = bean.getClass().getAnnotation(ProcessorPlugin.class);
             String[] states = annotation.state();
             String event = annotation.event();
             String[] bizCodes = annotation.bizCode().length == 0 ? new String[]{"#"} : annotation.bizCode();
             String[] sceneIds = annotation.sceneId().length == 0 ? new String[]{"#"} : annotation.sceneId();
-            initProcessMap(states, event, bizCodes, sceneIds, statePluginMap, (PluginHandler) bean);
+            initProcessMap(states, event, bizCodes, sceneIds, statePluginMap, (PluginHandler) Optional
+                    .ofNullable(AopProxyUtils.getSingletonTarget(bean)).orElse(bean));
         }
         return bean;
     }
