@@ -3,6 +3,8 @@ plugins {
 }
 
 dependencies {
+    api project(':framework-common')
+
     implementation 'org.springframework.boot:spring-boot-starter'
 
     // test

@@ -13,11 +13,12 @@ import com.example.fsm.business.mapstruct.OrderMapper;
 import com.example.fsm.business.repository.OrderRepository;
 import com.example.fsm.checker.Checkable;
 import com.example.fsm.checker.Checker;
+import com.example.fsm.checker.CheckerExecutor;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.event.OrderStateEvent;
+import com.example.fsm.plugin.PluginExecutor;
 import com.example.fsm.processor.AbstractStateProcessor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,8 +27,13 @@ import java.util.List;
 @OrderProcessor(state = OrderStateEnum.INIT, event = OrderEventEnum.RETURN, bizCode = {BizCodeEnum.FBA, BizCodeEnum.CARGO,}, sceneId = SceneIdEnum.H5)
 public class OrderReturnProcessor extends AbstractStateProcessor<String, ReturnOrderContext> {
 
-    @Autowired
-    private OrderRepository orderRepository;
+    public OrderReturnProcessor(CheckerExecutor checkerExecutor, PluginExecutor pluginExecutor,
+                                OrderRepository orderRepository) {
+        super(checkerExecutor, pluginExecutor);
+        this.orderRepository = orderRepository;
+    }
+
+    private final OrderRepository orderRepository;
 
     @Override
     public Checkable getCheckable(StateContext<ReturnOrderContext> context) {
