@@ -54,7 +54,7 @@ class RequestIdInterceptor : HandlerInterceptor {
         if (StrUtil.isNotBlank(requestId)) {
             return requestId
         }
-        requestId = IdUtil.fastUUID()
+        requestId = IdUtil.fastSimpleUUID()
         return requestId
     }
 }
