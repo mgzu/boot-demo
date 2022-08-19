@@ -4,6 +4,7 @@ import com.example.fsm.FsmOrder;
 import com.example.fsm.business.repository.OrderRepository;
 import com.example.fsm.service.FsmOrderService;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,7 +18,7 @@ public class FsmOrderServiceImpl implements FsmOrderService {
     private final OrderRepository orderRepository;
 
     @Override
-    public FsmOrder getFsmOrder(String orderId) {
-        return orderRepository.getById(orderId);
+    public FsmOrder getFsmOrder(@NotNull String orderId) {
+        return orderRepository.getReferenceById(orderId);
     }
 }
