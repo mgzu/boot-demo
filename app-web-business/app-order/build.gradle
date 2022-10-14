@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     api project(':framework-web')
+    api project(':framework-log')
     api project(':app-web-business:app-fsm')
 
     implementation 'org.springframework.boot:spring-boot-starter'
