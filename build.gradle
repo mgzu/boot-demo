@@ -1,5 +1,5 @@
 plugins {
-    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
     id 'java'
 }
 
@@ -22,10 +22,12 @@ configurations {
 }
 
 ext {
-    hutoolVersion = '5.8.5'
+    hutoolVersion = '5.8.8'
     mapstructVersion = '1.5.2.Final'
-    bizlogSdkVersion = '3.0.0'
-    openapiVersion = '1.6.9'
+    bizlogSdkVersion = '3.0.1'
+    easyRulesVersion = '4.1.0'
+    // docs
+    openapiVersion = '1.6.11'
 }
 
 subprojects {
@@ -53,6 +55,9 @@ subprojects {
         implementation "cn.hutool:hutool-core:${hutoolVersion}"
         // https://mvnrepository.com/artifact/io.github.mouzt/bizlog-sdk
         implementation "io.github.mouzt:bizlog-sdk:${bizlogSdkVersion}"
+        // https://mvnrepository.com/artifact/org.jeasy/easy-rules-core
+        implementation "org.jeasy:easy-rules-core:${easyRulesVersion}"
+        implementation "org.jeasy:easy-rules-spel:${easyRulesVersion}"
 
         // dev
         compileOnly 'org.projectlombok:lombok'
