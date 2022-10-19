@@ -19,7 +19,7 @@ open class LogRecordConfiguration {
             val user = BaseUser()
             user.userId = "1640600092347"
             Optional.of(user)
-                .map { item -> OperatorDO(item.userId) }
+                .map { item: BaseUser -> OperatorDO(item.userId) }
                 .orElseThrow { IllegalArgumentException("user is null") }
         }
     }

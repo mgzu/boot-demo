@@ -7,4 +7,7 @@ import com.mzt.logapi.beans.Operator
  * @since 2022-08-19
  */
 open class OperatorDO(operator: String) : Operator() {
+    init {
+        operatorId = operator
+    }
 }
