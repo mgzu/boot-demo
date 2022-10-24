@@ -5,12 +5,14 @@ import com.example.fsm.engine.StatePluginRegistry;
 import com.example.fsm.plugin.PluginHandler;
 import com.example.fsm.processor.StateProcessor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.aop.framework.AopProxyUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -31,8 +33,7 @@ public class DefaultStatePluginRegistry implements BeanPostProcessor, StatePlugi
             String event = annotation.event();
             String[] bizCodes = annotation.bizCode().length == 0 ? new String[]{"#"} : annotation.bizCode();
             String[] sceneIds = annotation.sceneId().length == 0 ? new String[]{"#"} : annotation.sceneId();
-            initProcessMap(states, event, bizCodes, sceneIds, statePluginMap, (PluginHandler) Optional
-                    .ofNullable(AopProxyUtils.getSingletonTarget(bean)).orElse(bean));
+            initProcessMap(states, event, bizCodes, sceneIds, statePluginMap, (PluginHandler) bean);
         }
         return bean;
     }

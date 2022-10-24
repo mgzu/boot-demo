@@ -5,6 +5,8 @@ import com.example.fsm.ServiceResult;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.exception.FsmException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -21,10 +23,11 @@ import java.util.concurrent.Future;
  * 校验器的执行器
  */
 @Slf4j
+@Order(Ordered.HIGHEST_PRECEDENCE)
 @Component
 public class CheckerExecutor {
 
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     /**
      * 执行并行校验器，

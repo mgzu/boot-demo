@@ -5,16 +5,19 @@ import com.example.fsm.checker.Checkable;
 import com.example.fsm.checker.CheckerExecutor;
 import com.example.fsm.context.StateActionStep;
 import com.example.fsm.context.StateContext;
+import com.example.fsm.exception.FsmException;
 import com.example.fsm.plugin.PluginExecutor;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * 状态机处理器抽象类
  */
+@Getter
 @Slf4j
 public abstract class AbstractStateProcessor<T, C> implements StateProcessor<T, C>, StateActionStep<T, C> {
 
-    public AbstractStateProcessor(final CheckerExecutor checkerExecutor, final PluginExecutor pluginExecutor) {
+    protected AbstractStateProcessor(CheckerExecutor checkerExecutor, PluginExecutor pluginExecutor) {
         this.checkerExecutor = checkerExecutor;
         this.pluginExecutor = pluginExecutor;
     }
@@ -24,24 +27,24 @@ public abstract class AbstractStateProcessor<T, C> implements StateProcessor<T, 
     private final PluginExecutor pluginExecutor;
 
     @Override
-    public final ServiceResult<T> action(StateContext<C> context) throws Exception {
+    public final ServiceResult<T> action(StateContext<C> context) throws FsmException {
         ServiceResult<T> result;
         Checkable checkable = this.getCheckable(context);
         try {
             // 参数校验器
-            result = checkerExecutor.serialCheck(checkable.getParamChecker(), context);
+            result = this.getCheckerExecutor().serialCheck(checkable.getParamChecker(), context);
             if (!result.isSuccess()) {
                 return result;
             }
             // 数据准备
             this.prepare(context);
             // 串行校验器
-            result = checkerExecutor.serialCheck(checkable.getSyncChecker(), context);
+            result = this.getCheckerExecutor().serialCheck(checkable.getSyncChecker(), context);
             if (!result.isSuccess()) {
                 return result;
             }
             // 并行校验器
-            result = checkerExecutor.parallelCheck(checkable.getAsyncChecker(), context);
+            result = this.getCheckerExecutor().parallelCheck(checkable.getAsyncChecker(), context);
             if (!result.isSuccess()) {
                 return result;
             }
@@ -53,7 +56,7 @@ public abstract class AbstractStateProcessor<T, C> implements StateProcessor<T, 
                 return result;
             }
             // 在action和save之间执行插件逻辑
-            this.pluginExecutor.parallelExecutor(context);
+            this.getPluginExecutor().parallelExecutor(context);
             // 持久化
             result = this.save(nextState, context);
             if (!result.isSuccess()) {
@@ -64,7 +67,7 @@ public abstract class AbstractStateProcessor<T, C> implements StateProcessor<T, 
             return result;
         } catch (Exception e) {
             log.error("状态机处理器异常", e);
-            throw e;
+            throw new FsmException(e.getCause());
         }
     }
 

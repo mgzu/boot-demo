@@ -68,7 +68,7 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
 
     @NotNull
     @Override
-    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent) throws Exception {
+    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent) throws FsmException {
         FsmOrder fsmOrder = null;
         // 非新创建的订单，需要从数据库中查询订单信息
         if (!orderStateEvent.newCreate()) {
@@ -82,7 +82,7 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
 
     @NotNull
     @Override
-    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent, @NotNull FsmOrder fsmOrder) throws Exception {
+    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent,FsmOrder fsmOrder) throws FsmException {
         Objects.requireNonNull(fsmOrder);
         // 构造当前事件上下文
         StateContext<?> context = this.getStateContext(orderStateEvent, fsmOrder);
@@ -98,9 +98,9 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
         FsmOrder fsmOrder = context.getFsmOrder();
         // 根据状态+事件对象获取所对应的业务处理器集合
         List<AbstractStateProcessor> processorList = stateProcessorRegistry.acquireStateProcess(fsmOrder.getOrderState(), stateEvent.getEventType(), fsmOrder.getBizCode(), fsmOrder.getSceneId());
-        if (processorList == null) {
+        if (processorList.isEmpty()) {
             // 订单状态发生改变
-            if (!Objects.isNull(stateEvent.orderState()) && !stateEvent.orderState().equals(fsmOrder.getOrderState())) {
+            if (stateEvent.orderState() != null && !Objects.equals(stateEvent.orderState(), fsmOrder.getOrderState())) {
                 throw new FsmException(ErrorCodeEnum.ORDER_STATE_NOT_MATCH);
             }
             throw new FsmException(ErrorCodeEnum.NOT_FOUND_PROCESSOR);

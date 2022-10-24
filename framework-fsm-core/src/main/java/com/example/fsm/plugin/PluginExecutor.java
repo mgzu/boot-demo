@@ -7,6 +7,8 @@ import com.example.fsm.engine.StatePluginRegistry;
 import com.example.fsm.exception.FsmException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -21,10 +23,11 @@ import java.util.concurrent.Future;
  * @since 2021-09-26
  */
 @Slf4j
+@Order(Ordered.HIGHEST_PRECEDENCE)
 @Component
 public class PluginExecutor {
 
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Autowired
     private StatePluginRegistry statePluginRegistry;
