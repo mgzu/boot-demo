@@ -24,8 +24,8 @@ import org.springframework.data.domain.Persistable;
 public class PersistableEntity implements Persistable<String> {
 
     @Id
-    @GeneratedValue(generator = "snowFlakeId")
-    @GenericGenerator(name = "snowFlakeId", strategy = "com.example.framework.web.config.jpa.id.SnowflakeIdGenerator")
+    @GeneratedValue(generator = "snowflakeId")
+    @GenericGenerator(name = "snowflakeId", strategy = "com.example.framework.web.config.jpa.id.SnowflakeIdGenerator")
     private String id;
 
     @Override
