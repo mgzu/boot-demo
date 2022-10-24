@@ -49,6 +49,7 @@ subprojects {
 
     dependencies {
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+        implementation 'org.jetbrains.kotlin:kotlin-reflect'
 
         // tool
         // https://mvnrepository.com/artifact/cn.hutool/hutool-core
