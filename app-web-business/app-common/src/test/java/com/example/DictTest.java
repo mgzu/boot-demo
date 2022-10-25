@@ -12,10 +12,10 @@ import java.util.List;
  * @author MaGuangZu
  * @since 2021-09-27
  */
-public class DictTest extends BaseTest {
+class DictTest extends BaseTest {
 
     @Test
-    public void Test() throws JsonProcessingException {
+    void test() throws JsonProcessingException {
         List<Dict> dicts = new ArrayList<>();
         addDict("string", "123", dicts);
         addDict("int", "123", dicts);
@@ -23,17 +23,11 @@ public class DictTest extends BaseTest {
         addDict("decimal", "1.333333333333333333333333", dicts);
         dicts.forEach(i -> {
             switch (i.getDictType()) {
-                case "int":
-                    i.setValue(Integer.parseInt(i.getValue().toString()));
-                    break;
-                case "decimal":
-                    i.setValue(new BigDecimal(i.getValue().toString()));
-                    break;
-                case "bool":
-                    i.setValue(Boolean.parseBoolean(i.getValue().toString()));
-                    break;
-                default:
-                    break;
+                case "int" -> i.setValue(Integer.parseInt(i.getValue().toString()));
+                case "decimal" -> i.setValue(new BigDecimal(i.getValue().toString()));
+                case "bool" -> i.setValue(Boolean.parseBoolean(i.getValue().toString()));
+                default -> {
+                }
             }
         });
 

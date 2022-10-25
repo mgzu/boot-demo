@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import javax.script.*;
 
-public class FormulaTest {
+class FormulaTest {
 
     private static final int FOR_I = 100000;
 
-    @Test
-    public void testGroovy() throws ScriptException {
+//    @Test
+    void testGroovy() throws ScriptException {
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("groovy");
         Compilable compilable = (Compilable) engine;
 
@@ -32,8 +32,8 @@ public class FormulaTest {
         }
     }
 
-    @Test
-    public void testJsEngine() throws ScriptException {
+//    @Test
+    void testJsEngine() throws ScriptException {
         ScriptEngine engine = new ScriptEngineManager().getEngineByName("javascript");
         Compilable compilable = (Compilable) engine;
 
