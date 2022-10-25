@@ -2,19 +2,25 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}"
 }
 
-dependencies {
-    implementation "org.springdoc:springdoc-openapi-ui:${openapiVersion}"
-    implementation "org.springdoc:springdoc-openapi-webmvc-core:${openapiVersion}"
-}
+subprojects {
+    dependencies {
+        implementation "org.springdoc:springdoc-openapi-ui:${openapiVersion}"
+        implementation "org.springdoc:springdoc-openapi-webmvc-core:${openapiVersion}"
 
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17
+        // test
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
     }
-}
 
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17
+    compileKotlin {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_17
+        }
+    }
+
+    compileTestKotlin {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_17
+        }
     }
 }
