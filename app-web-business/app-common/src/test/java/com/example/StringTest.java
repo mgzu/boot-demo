@@ -8,10 +8,10 @@ import org.junit.jupiter.api.Test;
  * @since 2021-12-22
  */
 @Slf4j
-public class StringTest extends BaseTest {
+class StringTest extends BaseTest {
 
     @Test
-    public void trimWhiteSpaceTest() {
+    void trimWhiteSpaceTest() {
         log.info("test begin");
         log.info("{}", Character.isWhitespace(' '));
         log.info("{}", "         abc        ".strip());
