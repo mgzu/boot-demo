@@ -10,7 +10,7 @@ import java.util.*
  * @author MaGuangZu
  * @since 2022-08-19
  */
-class LogRecordDto(page: Int, size: Int, sort: Sort?) : PageRequest(page, size, sort), Serializable {
+class LogRecordDto(page: Int, size: Int, sort: Sort) : PageRequest(page, size, sort), Serializable {
     var id: String? = null
     var tenant: String? = null
     var type: @Length(max = 200, message = "type max length is 200") String? = null
