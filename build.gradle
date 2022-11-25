@@ -11,8 +11,9 @@ allprojects {
 
     repositories {
         maven {
-            url 'https://repo.spring.io/milestone'
+            url 'https://maven.aliyun.com/repository/public/'
         }
+        mavenLocal()
         mavenCentral()
     }
 }
@@ -32,8 +33,9 @@ subprojects {
 
     repositories {
         maven {
-            url 'https://repo.spring.io/milestone'
+            url 'https://maven.aliyun.com/repository/public/'
         }
+        mavenLocal()
         mavenCentral()
     }
 
