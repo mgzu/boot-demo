@@ -13,6 +13,9 @@ allprojects {
         maven {
             url 'https://maven.aliyun.com/repository/public/'
         }
+        maven {
+            url 'https://maven.aliyun.com/repository/spring/'
+        }
         mavenLocal()
         mavenCentral()
     }
@@ -34,6 +37,9 @@ subprojects {
     repositories {
         maven {
             url 'https://maven.aliyun.com/repository/public/'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/spring/'
         }
         mavenLocal()
         mavenCentral()
