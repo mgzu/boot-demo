@@ -1,6 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
-    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'org.springframework.boot'
 }
 
 dependencies {

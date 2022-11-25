@@ -19,7 +19,7 @@ allprojects {
 
 ext {
     hutoolVersion = '5.8.8'
-    mapstructVersion = '1.5.2.Final'
+    mapstructVersion = '1.5.3.Final'
     bizlogSdkVersion = '3.0.1'
     easyRulesVersion = '4.1.0'
     // docs
@@ -77,6 +77,10 @@ subprojects {
     java {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+
+        toolchain {
+            vendor = JvmVendorSpec.BELLSOFT
+        }
     }
 
     test {
