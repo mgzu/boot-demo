@@ -6,8 +6,8 @@ spring:
     include: common
 
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/test_db
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/test_db
     username: postgres
     password: 123456
 
