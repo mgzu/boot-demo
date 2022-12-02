@@ -7,6 +7,6 @@ import lombok.Data;
  * @since 2022-08-19
  */
 @Data
-public class BaseUser  {
+public class BaseUser {
     private String userId;
 }
