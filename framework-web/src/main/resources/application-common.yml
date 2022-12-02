@@ -7,6 +7,9 @@ spring:
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
     open-in-view: true
 
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+
 logging:
   pattern:
     console: '%d{yyyy-MM-dd HH:mm:ss} %p %X{X-Request-Id} %c{1}[%line]: %m%n'
