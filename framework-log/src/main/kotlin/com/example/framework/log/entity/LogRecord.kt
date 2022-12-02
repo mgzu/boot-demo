@@ -2,11 +2,11 @@ package com.example.framework.log.entity
 
 import com.example.framework.web.entity.PersistableEntity
 import com.mzt.logapi.beans.CodeVariableType
+import jakarta.persistence.Access
+import jakarta.persistence.AccessType
 import jakarta.persistence.Entity
 import jakarta.persistence.Transient
 import jakarta.validation.constraints.NotBlank
-import lombok.Getter
-import lombok.Setter
 import org.hibernate.validator.constraints.Length
 import java.util.*
 
@@ -14,8 +14,7 @@ import java.util.*
  * @author MaGuangZu
  * @since 2022-08-19
  */
-@Setter
-@Getter
+@Access(AccessType.FIELD)
 @Entity(name = "t_log_record")
 class LogRecord : PersistableEntity() {
     /**
