@@ -2,6 +2,7 @@ package com.example.app.common.entity;
 
 import com.example.framework.web.entity.AuditableEntity;
 import com.example.fsm.FsmOrder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -26,18 +27,22 @@ import org.jetbrains.annotations.NotNull;
 @Entity(name = "t_order")
 public class Order extends AuditableEntity implements FsmOrder {
 
+    private String orderId;
+
     @NotNull
     private String orderState;
 
-    @Transient
     @NotNull
     private String bizCode;
-    @Transient
+
     @NotNull
     private String sceneId;
 
+    @Transient
+    @JsonIgnore
     @Override
-    public String getOrderId() {
-        return this.getId();
+    public boolean isNew() {
+        // TODO: OrderStateEnum.NEW;
+        return this.getOrderState().equals("NEW");
     }
 }
