@@ -27,7 +27,7 @@ public class PersistableEntity implements Persistable<String>, Serializable {
 
     @Id
     @GeneratedValue(generator = "snowflakeId")
-    @GenericGenerator(name = "snowflakeId", strategy = "com.example.framework.web.config.jpa.id.SnowflakeIdGenerator")
+    @GenericGenerator(name = "snowflakeId", strategy = "com.example.framework.web.configure.jpa.id.SnowflakeIdGenerator")
     protected String id;
 
     @Transient

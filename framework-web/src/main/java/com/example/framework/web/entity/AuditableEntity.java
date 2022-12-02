@@ -1,5 +1,6 @@
 package com.example.framework.web.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Temporal;
@@ -35,6 +36,7 @@ public class AuditableEntity extends PersistableEntity {
     @Nullable
     private String createdBy;
 
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Nullable
@@ -44,6 +46,7 @@ public class AuditableEntity extends PersistableEntity {
     @Nullable
     private String lastModifiedBy;
 
+//    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
     @Nullable

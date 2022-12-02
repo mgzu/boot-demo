@@ -1,4 +1,4 @@
-package com.example.framework.web.config
+package com.example.framework.web.configure
 
 import cn.hutool.core.util.StrUtil
 import com.example.framework.web.constants.WebConstants
