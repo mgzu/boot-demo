@@ -22,11 +22,13 @@ public class JsonConfigure {
 
     @Value("${spring.jackson.date-format:yyyy-MM-dd HH:mm:ss}")
     private String pattern;
+    @Value("${spring.jackson.time-zone:GMT+8}")
+    private String timeZone;
 
     @Bean
     public Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilder() {
         return builder -> {
-            TimeZone tz = TimeZone.getTimeZone("UTC");
+            TimeZone tz = TimeZone.getTimeZone(timeZone);
             DateFormat df = new SimpleDateFormat(pattern);
             df.setTimeZone(tz);
             builder.failOnEmptyBeans(false)
