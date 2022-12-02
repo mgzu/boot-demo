@@ -1,6 +1,8 @@
 package com.example.framework.log.mapstruct;
 
-import org.mapstruct.*;
+import org.mapstruct.Builder;
+import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import java.io.Serializable;

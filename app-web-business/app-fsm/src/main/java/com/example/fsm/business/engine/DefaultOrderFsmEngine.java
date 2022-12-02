@@ -82,7 +82,7 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
 
     @NotNull
     @Override
-    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent,FsmOrder fsmOrder) throws FsmException {
+    public <T> ServiceResult<T> sendEvent(@NotNull OrderStateEvent orderStateEvent, FsmOrder fsmOrder) throws FsmException {
         Objects.requireNonNull(fsmOrder);
         // 构造当前事件上下文
         StateContext<?> context = this.getStateContext(orderStateEvent, fsmOrder);

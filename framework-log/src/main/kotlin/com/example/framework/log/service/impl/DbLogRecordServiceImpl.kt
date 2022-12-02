@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional
 open class DbLogRecordServiceImpl : ILogRecordService {
     @Resource
     private val logRecordRepository: LogRecordRepository? = null
+
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     override fun record(logRecord: LogRecord) {
         logRecordRepository!!.save(LogRecordMapper.INSTANCE.toDbLogRecord(logRecord))
