@@ -1,6 +1,7 @@
 package com.example.app.order.configure;
 
-import org.jeasy.rules.api.*;
+import org.jeasy.rules.api.RulesEngine;
+import org.jeasy.rules.api.RulesEngineParameters;
 import org.jeasy.rules.core.DefaultRulesEngine;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

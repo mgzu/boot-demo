@@ -20,7 +20,7 @@ public class RulesRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         Map<String, Rule> beans = SpringContextUtil.applicationContext.getBeansOfType(Rule.class);
         // 根据 ruleName 分组
-        beans.forEach((beanName, bean) -> GlobeRules.rulesMap.compute(bean.getName(), (key, rules) -> {
+        beans.forEach((beanName, bean) -> GlobalRules.rulesMap.compute(bean.getName(), (key, rules) -> {
             if (rules == null) {
                 rules = new Rules();
             }
