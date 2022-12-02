@@ -1,4 +1,4 @@
-package com.example.framework.web.config.jpa.id;
+package com.example.framework.web.configure.jpa.id;
 
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.util.IdUtil;

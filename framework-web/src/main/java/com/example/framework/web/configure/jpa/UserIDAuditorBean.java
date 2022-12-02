@@ -1,4 +1,4 @@
-package com.example.framework.web.config.jpa;
+package com.example.framework.web.configure.jpa;
 
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Configuration;
