@@ -13,5 +13,6 @@ include 'framework-fsm-core'
 include 'framework-log'
 
 file("${rootDir}/app-web-business").eachDir {
-    include "app-web-business:${it.name}"
+    if (it.name != "build")
+        include "app-web-business:${it.name}"
 }
