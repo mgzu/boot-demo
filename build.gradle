@@ -22,12 +22,13 @@ allprojects {
 }
 
 ext {
-    hutoolVersion = '5.8.8'
+    hutoolVersion = '5.8.11'
     mapstructVersion = '1.5.3.Final'
-    bizlogSdkVersion = '3.0.1'
+    bizlogSdkVersion = '3.0.3'
     easyRulesVersion = '4.1.0'
+    guavaVersion = '31.1-jre'
     // docs
-    openapiVersion = '1.6.11'
+    openapiVersion = '2.0.2'
 }
 
 subprojects {
@@ -63,17 +64,20 @@ subprojects {
         // https://mvnrepository.com/artifact/org.jeasy/easy-rules-core
         implementation "org.jeasy:easy-rules-core:${easyRulesVersion}"
         implementation "org.jeasy:easy-rules-spel:${easyRulesVersion}"
+        // https://mvnrepository.com/artifact/com.google.guava/guava
+        implementation "com.google.guava:guava:${guavaVersion}"
+        implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 
         // dev
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
-        compileOnly "org.mapstruct:mapstruct:${mapstructVersion}"
         annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
         // test
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testCompileOnly 'org.projectlombok:lombok'
         testAnnotationProcessor 'org.projectlombok:lombok'
+        testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     }
 
     configurations {
