@@ -37,6 +37,7 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
 
     private final Map<String, Class<? extends StateContext<?>>> contextMap = new HashMap<>();
 
+    @SuppressWarnings("unchecked")
     @PostConstruct
     public void init() {
         Class<? extends DefaultOrderFsmEngine> klass = this.getClass();
