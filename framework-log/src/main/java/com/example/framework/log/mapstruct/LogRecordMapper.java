@@ -20,6 +20,12 @@ public interface LogRecordMapper {
 
     com.mzt.logapi.beans.LogRecord toLogRecord(com.example.framework.log.entity.LogRecord logRecord);
 
+    /**
+     * 解决 Serializable 与 String 互相映射的问题
+     *
+     * @param value 实现 Serializable 接口的对象
+     * @return 字符串
+     */
     default String map(Serializable value) {
         if (value == null) {
             return null;
