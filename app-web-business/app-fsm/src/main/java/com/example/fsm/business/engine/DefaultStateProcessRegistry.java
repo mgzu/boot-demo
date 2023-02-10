@@ -63,7 +63,7 @@ public class DefaultStateProcessRegistry implements BeanPostProcessor, StateProc
         // getBizCode and getSceneId
         Map<String, List<E>> processorMap = stateTransformEventEnumMap.get(event);
         String bizCodeAndSceneId = bizCode + "@" + sceneId;
-        processorMap.computeIfAbsent(orderStateEnum, key -> new CopyOnWriteArrayList<>());
+        processorMap.computeIfAbsent(bizCodeAndSceneId, key -> new CopyOnWriteArrayList<>());
         processorMap.get(bizCodeAndSceneId).add(processor);
     }
 
