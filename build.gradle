@@ -24,7 +24,7 @@ allprojects {
 ext {
     hutoolVersion = '5.8.11'
     mapstructVersion = '1.5.3.Final'
-    bizlogSdkVersion = '3.0.3'
+    bizlogSdkVersion = '3.0.4'
     easyRulesVersion = '4.1.0'
     guavaVersion = '31.1-jre'
     // docs

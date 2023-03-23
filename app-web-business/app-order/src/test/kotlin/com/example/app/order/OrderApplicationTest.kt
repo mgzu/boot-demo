@@ -18,4 +18,29 @@ class OrderApplicationTest {
             .exchange()
             .expectStatus().isOk
     }
+
+    @Test
+    fun orderTest(@Autowired webClient: WebTestClient) {
+        webClient
+            .get().uri("/order")
+            .exchange()
+            .expectStatus().isOk
+    }
+
+    @Test
+    fun `test actuator`(@Autowired webClient: WebTestClient) {
+        webClient
+            .get().uri("/actuator/health")
+            .exchange()
+            .expectStatus().isOk
+    }
+
+    @Test
+    fun `test actuator health`(@Autowired webClient: WebTestClient) {
+        webClient
+            .get().uri("/actuator/health")
+            .exchange()
+            .expectStatus().isOk
+            .expectBody().json("{\"status\":\"UP\"}")
+    }
 }
