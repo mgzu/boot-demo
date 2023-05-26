@@ -7,12 +7,12 @@ pluginManagement {
 
 rootProject.name = 'boot-demo'
 
-include 'framework-common'
-include 'framework-web'
-include 'framework-fsm-core'
-include 'framework-log'
+include ':framework-common'
+include ':framework-web'
+include ':framework-fsm-core'
+include ':framework-log'
 
 file("${rootDir}/app-web-business").eachDir {
     if (it.name != "build")
-        include "app-web-business:${it.name}"
+        include ":app-web-business:${it.name}"
 }
