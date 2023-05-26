@@ -8,16 +8,4 @@ subprojects {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
     }
-
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17
-        }
-    }
-
-    compileTestKotlin {
-        kotlinOptions {
-            jvmTarget = JavaVersion.VERSION_17
-        }
-    }
 }
