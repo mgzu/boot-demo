@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder(toBuilder = true)
+@SuperBuilder
 @Setter
 @Getter
 @EntityListeners(AuditingEntityListener.class)
