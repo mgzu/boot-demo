@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Access(AccessType.FIELD)
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder(toBuilder = true)
+@SuperBuilder
 @Setter
 @Getter
 @MappedSuperclass
