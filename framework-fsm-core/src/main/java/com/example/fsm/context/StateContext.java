@@ -1,5 +1,6 @@
 package com.example.fsm.context;
 
+import com.example.framework.common.util.CastUtil;
 import com.example.fsm.FsmOrder;
 import com.example.fsm.event.OrderStateEvent;
 import lombok.Getter;
@@ -25,10 +26,9 @@ public abstract class StateContext<C> {
 	 */
 	private C context;
 
-	@SuppressWarnings("unchecked")
 	protected StateContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
 		this.orderStateEvent = orderStateEvent;
 		this.fsmOrder = fsmOrder;
-		this.context = (C) this;
+		this.context = CastUtil.fakeCast(this);
 	}
 }
