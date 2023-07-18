@@ -23,6 +23,6 @@ public interface StatePluginRegistry {
      * @return 符合条件的插件列表
      */
     @NotNull
-    List<PluginHandler> acquireStatePlugin(String orderState, String eventType, String bizCode, String sceneId);
+    List<PluginHandler<?, ?>> acquireStatePlugin(String orderState, String eventType, String bizCode, String sceneId);
 
 }

@@ -23,29 +23,29 @@ public class DefaultStatePluginRegistry implements BeanPostProcessor, StatePlugi
      * 第二层key是订单状态对应的事件，一个状态可以有多个事件。
      * 第三层key是具体场景code，场景下对应的多个处理器，需要后续进行过滤选择出一个具体的执行。
      */
-    private static final Map<String, Map<String, Map<String, List<PluginHandler>>>> statePluginMap = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, Map<String, List<PluginHandler<?, ?>>>>> statePluginMap = new ConcurrentHashMap<>();
 
     @Override
     public Object postProcessAfterInitialization(@NotNull Object bean, @NotNull String beanName) throws BeansException {
-        if (bean instanceof PluginHandler pluginHandler
+        if (bean instanceof PluginHandler<?, ?> pluginHandler
                 && bean.getClass().isAnnotationPresent(ProcessorPlugin.class)) {
             ProcessorPlugin annotation = bean.getClass().getAnnotation(ProcessorPlugin.class);
             String[] states = annotation.state();
             String event = annotation.event();
             String[] bizCodes = annotation.bizCode().length == 0 ? new String[]{"#"} : annotation.bizCode();
             String[] sceneIds = annotation.sceneId().length == 0 ? new String[]{"#"} : annotation.sceneId();
-            initProcessMap(states, event, bizCodes, sceneIds, statePluginMap, pluginHandler);
+            initProcessMap(states, event, bizCodes, sceneIds, pluginHandler);
         }
         return bean;
     }
 
-    private <E extends StateProcessor> void initProcessMap(String[] states, String event, String[] bizCodes, String[] sceneIds,
-                                                           Map<String, Map<String, Map<String, List<E>>>> map, E processor) {
+    private <E extends PluginHandler<?, ?>> void initProcessMap(String[] states, String event, String[] bizCodes,
+                                                                String[] sceneIds, E processor) {
         for (String bizCode : bizCodes) {
             for (String sceneId : sceneIds) {
                 Arrays.asList(states)
                         .parallelStream()
-                        .forEach(orderStateEnum -> registerStateHandlers(orderStateEnum, event, bizCode, sceneId, map, processor));
+                        .forEach(orderStateEnum -> registerStateHandlers(orderStateEnum, event, bizCode, sceneId, processor));
             }
         }
     }
@@ -53,15 +53,15 @@ public class DefaultStatePluginRegistry implements BeanPostProcessor, StatePlugi
     /**
      * 初始化状态机处理器
      */
-    public <E extends StateProcessor> void registerStateHandlers(String orderStateEnum, String event, String bizCode, String sceneId,
-                                                                 Map<String, Map<String, Map<String, List<E>>>> map, E processor) {
+    public <E extends PluginHandler<?, ?>> void registerStateHandlers(String orderStateEnum, String event, String bizCode,
+                                                                      String sceneId, E processor) {
         // state维度
-        map.computeIfAbsent(orderStateEnum, key -> new ConcurrentHashMap<>());
-        Map<String, Map<String, List<E>>> stateTransformEventEnumMap = map.get(orderStateEnum);
+        statePluginMap.computeIfAbsent(orderStateEnum, key -> new ConcurrentHashMap<>());
+        Map<String, Map<String, List<PluginHandler<?, ?>>>> stateTransformEventEnumMap = statePluginMap.get(orderStateEnum);
         // event维度
         stateTransformEventEnumMap.computeIfAbsent(event, key -> new ConcurrentHashMap<>());
         // getBizCode and getSceneId
-        Map<String, List<E>> processorMap = stateTransformEventEnumMap.get(event);
+        Map<String, List<PluginHandler<?, ?>>> processorMap = stateTransformEventEnumMap.get(event);
         String bizCodeAndSceneId = bizCode + "@" + sceneId;
         processorMap.computeIfAbsent(bizCodeAndSceneId, key -> new CopyOnWriteArrayList<>());
         processorMap.get(bizCodeAndSceneId).add(processor);
@@ -69,12 +69,12 @@ public class DefaultStatePluginRegistry implements BeanPostProcessor, StatePlugi
 
     @NotNull
     @Override
-    public List<PluginHandler> acquireStatePlugin(String orderState, String eventType, String bizCode, String sceneId) {
-        Map<String, Map<String, List<PluginHandler>>> stateTransformEventEnumMap = statePluginMap.get(orderState);
+    public List<PluginHandler<?, ?>> acquireStatePlugin(String orderState, String eventType, String bizCode, String sceneId) {
+        Map<String, Map<String, List<PluginHandler<?, ?>>>> stateTransformEventEnumMap = statePluginMap.get(orderState);
         if (stateTransformEventEnumMap == null) {
             return Collections.emptyList();
         }
-        Map<String, List<PluginHandler>> processorMap = stateTransformEventEnumMap.get(eventType);
+        Map<String, List<PluginHandler<?, ?>>> processorMap = stateTransformEventEnumMap.get(eventType);
         if (processorMap == null) {
             return Collections.emptyList();
         }

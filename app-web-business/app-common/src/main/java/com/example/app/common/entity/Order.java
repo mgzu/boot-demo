@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder(toBuilder = true)
+@SuperBuilder
 @Setter
 @Getter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

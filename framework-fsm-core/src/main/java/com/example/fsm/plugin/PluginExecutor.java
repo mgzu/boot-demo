@@ -27,33 +27,33 @@ import java.util.concurrent.Future;
 @Component
 public class PluginExecutor {
 
-    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+	private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    @Autowired
-    private StatePluginRegistry statePluginRegistry;
+	@Autowired
+	private StatePluginRegistry statePluginRegistry;
 
-    public <C> void parallelExecutor(StateContext<C> context) {
-        FsmOrder fsmOrder = context.getFsmOrder();
-        List<PluginHandler> handlerList = statePluginRegistry.acquireStatePlugin(fsmOrder.getOrderState(),
-                context.getOrderStateEvent().getEventType(), fsmOrder.getBizCode(), fsmOrder.getSceneId());
-        if (!handlerList.isEmpty()) {
-            List<Future<ServiceResult>> resultList = Collections.synchronizedList(new ArrayList<>());
-            for (PluginHandler handler : handlerList) {
-                Future<ServiceResult> result = executor.submit(() -> handler.action(context));
-                resultList.add(result);
-            }
-            for (Future<ServiceResult> future : resultList) {
-                ServiceResult sr;
-                try {
-                    sr = future.get();
-                } catch (Exception e) {
-                    log.error("parallelCheck executor.submit error.", e);
-                    throw new FsmException(e.getCause());
-                }
-                if (!sr.isSuccess()) {
-                    throw new FsmException(sr.getMessage());
-                }
-            }
-        }
-    }
+	public <C, T> void parallelExecutor(StateContext<C> context) {
+		FsmOrder fsmOrder = context.getFsmOrder();
+		List<PluginHandler<?, ?>> handlerList = statePluginRegistry.acquireStatePlugin(fsmOrder.getOrderState(),
+			context.getOrderStateEvent().getEventType(), fsmOrder.getBizCode(), fsmOrder.getSceneId());
+		if (!handlerList.isEmpty()) {
+			List<Future<ServiceResult<T>>> resultList = Collections.synchronizedList(new ArrayList<>());
+			for (PluginHandler handler : handlerList) {
+				@SuppressWarnings("unchecked") Future<ServiceResult<T>> result = executor.submit(() -> handler.action(context));
+				resultList.add(result);
+			}
+			for (Future<ServiceResult<T>> future : resultList) {
+				ServiceResult<T> sr;
+				try {
+					sr = future.get();
+				} catch (Exception e) {
+					log.error("parallelCheck executor.submit error.", e);
+					throw new FsmException(e.getCause());
+				}
+				if (!sr.isSuccess()) {
+					throw new FsmException(sr.getMessage());
+				}
+			}
+		}
+	}
 }

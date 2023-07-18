@@ -23,5 +23,5 @@ public interface StateProcessRegistry {
      * @return 符合条件的处理器
      */
     @NotNull
-    List<AbstractStateProcessor> acquireStateProcess(String orderState, String eventType, String bizCode, String sceneId);
+    List<AbstractStateProcessor<?, ?>> acquireStateProcess(String orderState, String eventType, String bizCode, String sceneId);
 }

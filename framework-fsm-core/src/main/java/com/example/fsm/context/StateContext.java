@@ -12,22 +12,23 @@ import lombok.Setter;
 @Setter
 @Getter
 public abstract class StateContext<C> {
-    /**
-     * 订单操作事件
-     */
-    private OrderStateEvent orderStateEvent;
-    /**
-     * 状态机需要的订单基本信息
-     */
-    private FsmOrder fsmOrder;
-    /**
-     * 业务可定义的上下文泛型对象
-     */
-    private C context;
+	/**
+	 * 订单操作事件
+	 */
+	private OrderStateEvent orderStateEvent;
+	/**
+	 * 状态机需要的订单基本信息
+	 */
+	private FsmOrder fsmOrder;
+	/**
+	 * 业务可定义的上下文泛型对象
+	 */
+	private C context;
 
-    protected StateContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
-        this.orderStateEvent = orderStateEvent;
-        this.fsmOrder = fsmOrder;
-        setContext((C) this);
-    }
+	@SuppressWarnings("unchecked")
+	protected StateContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
+		this.orderStateEvent = orderStateEvent;
+		this.fsmOrder = fsmOrder;
+		this.context = (C) this;
+	}
 }
