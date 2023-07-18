@@ -8,5 +8,7 @@ import org.jetbrains.annotations.NotNull;
  * @since 2021-09-26
  */
 public interface FsmOrderService {
+
     FsmOrder getFsmOrder(@NotNull String orderId);
+
 }

@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@SuperBuilder(toBuilder = true)
+@SuperBuilder
 @Setter
 @Getter
 public class OrderBo extends Order {
