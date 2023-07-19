@@ -32,14 +32,14 @@ public class PluginExecutor {
 	@Autowired
 	private StatePluginRegistry statePluginRegistry;
 
-	public <C, T> void parallelExecutor(StateContext<C> context) {
+	public <T, C> void parallelExecutor(StateContext<C> context) {
 		FsmOrder fsmOrder = context.getFsmOrder();
-		List<PluginHandler<?, ?>> handlerList = statePluginRegistry.acquireStatePlugin(fsmOrder.getOrderState(),
+		List<PluginHandler<T, C>> handlerList = statePluginRegistry.acquireStatePlugin(fsmOrder.getOrderState(),
 			context.getOrderStateEvent().getEventType(), fsmOrder.getBizCode(), fsmOrder.getSceneId());
 		if (!handlerList.isEmpty()) {
 			List<Future<ServiceResult<T>>> resultList = Collections.synchronizedList(new ArrayList<>());
-			for (PluginHandler handler : handlerList) {
-				@SuppressWarnings("unchecked") Future<ServiceResult<T>> result = executor.submit(() -> handler.action(context));
+			for (PluginHandler<T, C> handler : handlerList) {
+				Future<ServiceResult<T>> result = executor.submit(() -> handler.action(context));
 				resultList.add(result);
 			}
 			for (Future<ServiceResult<T>> future : resultList) {
@@ -48,6 +48,7 @@ public class PluginExecutor {
 					sr = future.get();
 				} catch (Exception e) {
 					log.error("parallelCheck executor.submit error.", e);
+					Thread.currentThread().interrupt();
 					throw new FsmException(e.getCause());
 				}
 				if (!sr.isSuccess()) {

@@ -13,15 +13,15 @@ import java.util.List;
  */
 public interface StateProcessRegistry {
 
-    /**
-     * 根据条件获取状态处理器
-     *
-     * @param orderState 订单状态
-     * @param eventType  事件类型
-     * @param bizCode    业务代码
-     * @param sceneId    场景ID
-     * @return 符合条件的处理器
-     */
-    @NotNull
-    List<AbstractStateProcessor<?, ?>> acquireStateProcess(String orderState, String eventType, String bizCode, String sceneId);
+	/**
+	 * 根据条件获取状态处理器
+	 *
+	 * @param orderState 订单状态
+	 * @param eventType  事件类型
+	 * @param bizCode    业务代码
+	 * @param sceneId    场景ID
+	 * @return 符合条件的处理器
+	 */
+	@NotNull
+	<T, C> List<AbstractStateProcessor<T, C>> acquireStateProcess(String orderState, String eventType, String bizCode, String sceneId);
 }

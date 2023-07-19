@@ -3,6 +3,7 @@ package com.example.fsm.context;
 
 import com.example.fsm.ServiceResult;
 import com.example.fsm.checker.Checkable;
+import com.example.fsm.exception.FsmException;
 
 /**
  * 状态迁移动作处理步骤
@@ -24,12 +25,12 @@ public interface StateActionStep<T, C> {
     /**
      * 状态动作方法，主要状态迁移逻辑
      */
-    ServiceResult<T> action(String nextState, StateContext<C> context) throws Exception;
+    ServiceResult<T> action(String nextState, StateContext<C> context) throws FsmException;
 
     /**
      * 状态数据持久化
      */
-    ServiceResult<T> save(String nextState, StateContext<C> context) throws Exception;
+    ServiceResult<T> save(String nextState, StateContext<C> context) throws FsmException;
 
     /**
      * 状态迁移成功，持久化后执行的后续处理
