@@ -1,9 +1,9 @@
 package com.example.fsm.business.engine;
 
+import com.example.framework.common.util.CastUtil;
 import com.example.fsm.annotation.OrderProcessor;
 import com.example.fsm.engine.StateProcessRegistry;
 import com.example.fsm.processor.AbstractStateProcessor;
-import com.example.fsm.processor.StateProcessor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+@SuppressWarnings("DuplicatedCode")
 @Component
 public class DefaultStateProcessRegistry implements BeanPostProcessor, StateProcessRegistry {
 	/**
@@ -39,8 +40,8 @@ public class DefaultStateProcessRegistry implements BeanPostProcessor, StateProc
 		return bean;
 	}
 
-	private <E extends AbstractStateProcessor<?, ?>> void initProcessMap(String[] states, String event, String[] bizCodes,
-																		 String[] sceneIds, E processor) {
+	private <T, C, E extends AbstractStateProcessor<T, C>> void initProcessMap(
+		String[] states, String event, String[] bizCodes, String[] sceneIds, E processor) {
 		for (String bizCode : bizCodes) {
 			for (String sceneId : sceneIds) {
 				Arrays.asList(states)
@@ -53,8 +54,8 @@ public class DefaultStateProcessRegistry implements BeanPostProcessor, StateProc
 	/**
 	 * 初始化状态机处理器
 	 */
-	public <E extends AbstractStateProcessor<?, ?>> void registerStateHandlers(String orderStateEnum, String event, String bizCode,
-																			   String sceneId, E processor) {
+	public <T, C, E extends AbstractStateProcessor<T, C>> void registerStateHandlers(String orderStateEnum, String event, String bizCode,
+																					 String sceneId, E processor) {
 		// state维度
 		stateProcessMap.computeIfAbsent(orderStateEnum, key -> new ConcurrentHashMap<>());
 		Map<String, Map<String, List<AbstractStateProcessor<?, ?>>>> stateTransformEventEnumMap = stateProcessMap.get(orderStateEnum);
@@ -69,7 +70,8 @@ public class DefaultStateProcessRegistry implements BeanPostProcessor, StateProc
 
 	@NotNull
 	@Override
-	public List<AbstractStateProcessor<?, ?>> acquireStateProcess(String orderState, String eventType, String bizCode, String sceneId) {
+	public <T, C> List<AbstractStateProcessor<T, C>> acquireStateProcess(String orderState, String eventType,
+																		 String bizCode, String sceneId) {
 		Map<String, Map<String, List<AbstractStateProcessor<?, ?>>>> stateTransformEventEnumMap = stateProcessMap.get(orderState);
 		if (stateTransformEventEnumMap == null) {
 			return Collections.emptyList();
@@ -78,6 +80,7 @@ public class DefaultStateProcessRegistry implements BeanPostProcessor, StateProc
 		if (processorMap == null) {
 			return Collections.emptyList();
 		}
-		return processorMap.getOrDefault(bizCode + "@" + sceneId, Collections.emptyList());
+		List<AbstractStateProcessor<?, ?>> processorList = processorMap.getOrDefault(bizCode + "@" + sceneId, Collections.emptyList());
+		return CastUtil.fakeCast(processorList);
 	}
 }

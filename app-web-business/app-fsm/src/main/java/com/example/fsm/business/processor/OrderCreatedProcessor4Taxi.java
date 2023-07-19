@@ -9,16 +9,20 @@ import com.example.fsm.business.repository.OrderRepository;
 import com.example.fsm.checker.CheckerExecutor;
 import com.example.fsm.plugin.PluginExecutor;
 
-@OrderProcessor(state = OrderStateEnum.INIT, event = OrderEventEnum.CREATE, bizCode = "TAXI")
+@OrderProcessor(
+	state = OrderStateEnum.INIT,
+	event = OrderEventEnum.CREATE,
+	bizCode = "TAXI"
+)
 public class OrderCreatedProcessor4Taxi extends OrderCreatedProcessor {
 
-    public OrderCreatedProcessor4Taxi(CheckerExecutor checkerExecutor, PluginExecutor pluginExecutor,
-                                      CreateParamChecker createParamChecker, OrderRepository orderRepository) {
-        super(checkerExecutor, pluginExecutor, createParamChecker, orderRepository);
-    }
+	public OrderCreatedProcessor4Taxi(CheckerExecutor checkerExecutor, PluginExecutor pluginExecutor,
+									  CreateParamChecker createParamChecker, OrderRepository orderRepository) {
+		super(checkerExecutor, pluginExecutor, createParamChecker, orderRepository);
+	}
 
-    @Override
-    protected String doPromotion() {
-        return "taxt1";
-    }
+	@Override
+	protected String doPromotion() {
+		return "taxt1";
+	}
 }

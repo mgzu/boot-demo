@@ -9,7 +9,9 @@ import com.example.fsm.context.StateContext;
  * @since 2022-03-08
  */
 public class ReturnOrderContext extends StateContext<ReturnOrderContext> {
-    public ReturnOrderContext(ReturnEvent stateEvent, FsmOrder fsmOrder) {
-        super(stateEvent, fsmOrder);
-    }
+
+	public ReturnOrderContext(ReturnEvent stateEvent, FsmOrder fsmOrder) {
+		super(stateEvent, fsmOrder);
+	}
+
 }
