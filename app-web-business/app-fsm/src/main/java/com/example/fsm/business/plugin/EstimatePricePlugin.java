@@ -11,6 +11,7 @@ import com.example.fsm.context.StateContext;
 import com.example.fsm.exception.FsmException;
 import com.example.fsm.plugin.PluginHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 预估价插件
@@ -26,8 +27,9 @@ import lombok.extern.slf4j.Slf4j;
         sceneId = SceneIdEnum.H5
 )
 public class EstimatePricePlugin implements PluginHandler<Void, CreateOrderContext> {
+    @NotNull
     @Override
-    public ServiceResult<Void> action(StateContext<CreateOrderContext> context) throws FsmException {
+    public ServiceResult<Void> action(@NotNull StateContext<CreateOrderContext> context) throws FsmException {
         log.info("EstimatePricePlugin action");
         String price = "";
         context.getContext().setEstimatePriceInfo(price);

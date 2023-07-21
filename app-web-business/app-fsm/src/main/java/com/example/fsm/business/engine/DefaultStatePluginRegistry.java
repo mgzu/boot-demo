@@ -16,7 +16,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-@SuppressWarnings("DuplicatedCode")
 @Component
 public class DefaultStatePluginRegistry implements BeanPostProcessor, StatePluginRegistry {
 	/**
@@ -26,6 +25,7 @@ public class DefaultStatePluginRegistry implements BeanPostProcessor, StatePlugi
 	 */
 	private static final Map<String, Map<String, Map<String, List<PluginHandler<?, ?>>>>> statePluginMap = new ConcurrentHashMap<>();
 
+	@SuppressWarnings("DuplicatedCode")
 	@Override
 	public Object postProcessAfterInitialization(@NotNull Object bean, @NotNull String beanName) throws BeansException {
 		if (bean instanceof PluginHandler<?, ?> pluginHandler

@@ -9,6 +9,7 @@ import com.example.fsm.exception.FsmException;
 import com.example.fsm.plugin.PluginExecutor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * 状态机处理器抽象类
@@ -26,8 +27,9 @@ public abstract class AbstractStateProcessor<T, C> implements StateProcessor<T, 
 
     private final PluginExecutor pluginExecutor;
 
-    @Override
-    public final ServiceResult<T> action(StateContext<C> context) throws FsmException {
+    @NotNull
+	@Override
+    public final ServiceResult<T> action(@NotNull StateContext<C> context) throws FsmException {
         ServiceResult<T> result;
         Checkable checkable = this.getCheckable(context);
         try {
