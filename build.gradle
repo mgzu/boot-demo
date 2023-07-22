@@ -1,99 +1,98 @@
 import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
-    id 'org.springframework.boot' version "${springBootVersion}" apply false
-    id 'org.graalvm.buildtools.native' version "${nativeBuildToolsVersion}" apply false
-    id 'java'
+	id 'org.springframework.boot' version "${springBootVersion}" apply false
+	id 'org.graalvm.buildtools.native' version "${nativeBuildToolsVersion}" apply false
 }
 
 allprojects {
-    group = 'com.example'
-    version = '0.0.1-SNAPSHOT'
+	apply plugin: 'java'
 
-    repositories {
-        maven {
-            url 'https://maven.aliyun.com/repository/public/'
-        }
-        maven {
-            url 'https://maven.aliyun.com/repository/spring/'
-        }
-        mavenLocal()
-        mavenCentral()
-    }
+	group = 'com.example'
+	version = '0.0.1-SNAPSHOT'
+
+	repositories {
+		maven {
+			url 'https://maven.aliyun.com/repository/public/'
+		}
+		maven {
+			url 'https://maven.aliyun.com/repository/spring/'
+		}
+		mavenLocal()
+		mavenCentral()
+	}
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 ext {
-    hutoolVersion = '5.8.11'
-    mapstructVersion = '1.5.3.Final'
-    bizlogSdkVersion = '3.0.4'
-    easyRulesVersion = '4.1.0'
-    guavaVersion = '31.1-jre'
-    // docs
-    openapiVersion = '2.0.2'
+	// https://mvnrepository.com/artifact/cn.hutool/hutool-core
+	hutoolVersion = '5.8.20'
+	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct
+	mapstructVersion = '1.5.5.Final'
+	// https://mvnrepository.com/artifact/io.github.mouzt/bizlog-sdk
+	bizlogSdkVersion = '3.0.6'
+	// https://mvnrepository.com/artifact/org.jeasy/easy-rules-core
+	easyRulesVersion = '4.1.0'
+	// https://mvnrepository.com/artifact/com.google.guava/guava
+	guavaVersion = '32.1.1-jre'
+	// docs
+	openapiVersion = '2.1.0'
 }
 
 subprojects {
-    apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'java'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'java-library'
 
-    repositories {
-        maven {
-            url 'https://maven.aliyun.com/repository/public/'
-        }
-        maven {
-            url 'https://maven.aliyun.com/repository/spring/'
-        }
-        mavenLocal()
-        mavenCentral()
-    }
+	repositories {
+		maven {
+			url 'https://maven.aliyun.com/repository/public/'
+		}
+		maven {
+			url 'https://maven.aliyun.com/repository/spring/'
+		}
+		mavenLocal()
+		mavenCentral()
+	}
 
-    dependencyManagement {
-        imports {
-            mavenBom SpringBootPlugin.BOM_COORDINATES
-        }
-    }
+	dependencyManagement {
+		imports {
+			mavenBom SpringBootPlugin.BOM_COORDINATES
+		}
+	}
 
-    dependencies {
-        implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-        implementation 'org.jetbrains.kotlin:kotlin-reflect'
+	dependencies {
+		// kotlin optional
+		implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+		implementation 'org.jetbrains.kotlin:kotlin-reflect'
 
-        // tool
-        // https://mvnrepository.com/artifact/cn.hutool/hutool-core
-        implementation "cn.hutool:hutool-core:${hutoolVersion}"
-        // https://mvnrepository.com/artifact/io.github.mouzt/bizlog-sdk
-        implementation "io.github.mouzt:bizlog-sdk:${bizlogSdkVersion}"
-        // https://mvnrepository.com/artifact/org.jeasy/easy-rules-core
-        implementation "org.jeasy:easy-rules-core:${easyRulesVersion}"
-        implementation "org.jeasy:easy-rules-spel:${easyRulesVersion}"
-        // https://mvnrepository.com/artifact/com.google.guava/guava
-        implementation "com.google.guava:guava:${guavaVersion}"
-        implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+		// tool
+		implementation "cn.hutool:hutool-core:${hutoolVersion}"
+		implementation "com.google.guava:guava:${guavaVersion}"
+		implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+		implementation 'org.hibernate.validator:hibernate-validator'
 
-        // dev
-        compileOnly 'org.projectlombok:lombok'
-        annotationProcessor 'org.projectlombok:lombok'
-        annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+		// dev
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+		annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
-        // test
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
-        testCompileOnly 'org.projectlombok:lombok'
-        testAnnotationProcessor 'org.projectlombok:lombok'
-        testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-    }
+		// test
+		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testCompileOnly 'org.projectlombok:lombok'
+		testAnnotationProcessor 'org.projectlombok:lombok'
+		testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+	}
 
-    configurations {
-        compileOnly {
-            extendsFrom annotationProcessor
-        }
-    }
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
 
-    java {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    test {
-        useJUnitPlatform()
-    }
+	test {
+		useJUnitPlatform()
+	}
 
 }
