@@ -1,11 +1,9 @@
 package com.example.fsm.business.engine;
 
-import cn.hutool.core.util.ClassUtil;
-import cn.hutool.core.util.ReflectUtil;
-import com.example.framework.common.util.CastUtil;
 import com.example.fsm.FsmOrder;
 import com.example.fsm.ServiceResult;
 import com.example.fsm.annotation.FsmEngine;
+import com.example.fsm.business.context.StateContextFactory;
 import com.example.fsm.business.enums.ErrorCodeEnum;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.engine.OrderFsmEngine;
@@ -15,7 +13,6 @@ import com.example.fsm.exception.FsmException;
 import com.example.fsm.processor.AbstractStateProcessor;
 import com.example.fsm.processor.StateProcessor;
 import com.example.fsm.service.FsmOrderService;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +20,9 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.lang.reflect.Constructor;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @FsmEngine(scanBasePackage = "com.example")
@@ -35,45 +33,6 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
 	private final FsmOrderService fsmOrderService;
 
 	private final StateProcessRegistry stateProcessorRegistry;
-
-	private final Map<String, Constructor<?>> contextMap = new HashMap<>();
-
-	@PostConstruct
-	public void init() {
-		Class<? extends DefaultOrderFsmEngine> klass = this.getClass();
-		String packageName;
-		FsmEngine annotation = klass.getAnnotation(FsmEngine.class);
-		if (annotation == null) {
-			packageName = klass.getPackageName();
-		} else {
-			packageName = annotation.scanBasePackage();
-		}
-		Set<Class<?>> classSet = ClassUtil.scanPackage(packageName, clazz -> {
-			Class<?> superclass = clazz.getSuperclass();
-			if (superclass == null) {
-				return false;
-			}
-			return clazz.getSuperclass().equals(StateContext.class);
-		});
-		classSet.forEach(clazz -> {
-			log.debug("class name: {}", clazz.getName());
-			Constructor<?>[] constructors = ReflectUtil.getConstructorsDirectly(clazz);
-			for (Constructor<?> constructor : constructors) {
-				if (constructor.getParameterCount() == 2) {
-					// TODO: parameter type 0 should be OrderStateEvent, parameter type 1 should be FsmOrder
-					String clazzName = constructor.getParameterTypes()[0].getName();
-					if (contextMap.containsKey(clazzName)) {
-						log.error(clazz.getName() + " found more context class: " + constructor.getDeclaringClass()
-							+ ",class: " + contextMap.get(clazzName).getDeclaringClass());
-						throw new FsmException(ErrorCodeEnum.FOUND_MORE_CONTEXT);
-					} else {
-						contextMap.put(clazzName, constructor);
-						log.debug("declaring class name: {}", constructor.getDeclaringClass());
-					}
-				}
-			}
-		});
-	}
 
 	@NotNull
 	@Override
@@ -133,8 +92,6 @@ public class DefaultOrderFsmEngine implements OrderFsmEngine {
 	@SneakyThrows
 	@NotNull
 	private <C> StateContext<C> getStateContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
-		Constructor<?> constructor = contextMap.get(orderStateEvent.getClass().getName());
-		Object object = constructor.newInstance(orderStateEvent, fsmOrder);
-		return CastUtil.fakeCast(object);
+		return StateContextFactory.create(orderStateEvent, fsmOrder);
 	}
 }

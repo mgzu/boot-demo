@@ -29,6 +29,6 @@ public abstract class StateContext<C> {
 	protected StateContext(OrderStateEvent orderStateEvent, FsmOrder fsmOrder) {
 		this.orderStateEvent = orderStateEvent;
 		this.fsmOrder = fsmOrder;
-		this.context = CastUtil.fakeCast(this);
+		this.context = CastUtil.safeFakeCast(this);
 	}
 }

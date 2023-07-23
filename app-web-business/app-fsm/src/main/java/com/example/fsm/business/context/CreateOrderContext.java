@@ -11,22 +11,22 @@ import com.example.fsm.context.StateContext;
  */
 public class CreateOrderContext extends StateContext<CreateOrderContext> {
 
-    private OrderBo orderInfo;
+	private OrderBo orderInfo;
 
-    public CreateOrderContext(CreateEvent orderStateEvent, FsmOrder fsmOrder) {
-        super(orderStateEvent, fsmOrder);
-        setOrderInfo((OrderBo) fsmOrder);
-    }
+	public CreateOrderContext(CreateEvent event, FsmOrder fsmOrder) {
+		super(event, fsmOrder);
+		setOrderInfo((OrderBo) fsmOrder);
+	}
 
-    public void setEstimatePriceInfo(String price) {
+	public void setEstimatePriceInfo(String price) {
 
-    }
+	}
 
-    public OrderBo getOrderInfo() {
-        return orderInfo;
-    }
+	public OrderBo getOrderInfo() {
+		return orderInfo;
+	}
 
-    public void setOrderInfo(OrderBo orderInfo) {
-        this.orderInfo = orderInfo;
-    }
+	public void setOrderInfo(OrderBo orderInfo) {
+		this.orderInfo = orderInfo;
+	}
 }
