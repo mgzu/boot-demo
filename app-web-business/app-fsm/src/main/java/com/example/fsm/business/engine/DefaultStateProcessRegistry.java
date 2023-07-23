@@ -81,6 +81,6 @@ public class DefaultStateProcessRegistry implements BeanPostProcessor, StateProc
 			return Collections.emptyList();
 		}
 		List<AbstractStateProcessor<?, ?>> processorList = processorMap.getOrDefault(bizCode + "@" + sceneId, Collections.emptyList());
-		return CastUtil.fakeCast(processorList);
+		return CastUtil.safeFakeCast(processorList);
 	}
 }

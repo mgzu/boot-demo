@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-@EnableLogRecord(tenant = "123")
+@EnableLogRecord(tenant = "temp")
 @EnableTransactionManagement
 @EntityScan(basePackages = {"com.example"})
 @EnableJpaRepositories(basePackages = {"com.example"})

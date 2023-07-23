@@ -10,7 +10,7 @@ import lombok.experimental.UtilityClass;
 public class CastUtil {
 
 	@SuppressWarnings("unchecked")
-	public static <T> T fakeCast(Object o) {
+	public static <T> T safeFakeCast(Object o) {
 		return (T) o;
 	}
 

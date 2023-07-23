@@ -80,6 +80,6 @@ public class DefaultStatePluginRegistry implements BeanPostProcessor, StatePlugi
 			return Collections.emptyList();
 		}
 		List<PluginHandler<?, ?>> pluginHandlerList = pluginHandlerMap.getOrDefault(bizCode + "@" + sceneId, Collections.emptyList());
-		return CastUtil.fakeCast(pluginHandlerList);
+		return CastUtil.safeFakeCast(pluginHandlerList);
 	}
 }
