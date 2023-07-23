@@ -2,7 +2,6 @@ package com.example.fsm.business.engine;
 
 import com.example.fsm.FsmOrder;
 import com.example.fsm.ServiceResult;
-import com.example.fsm.annotation.FsmEngine;
 import com.example.fsm.business.context.StateContextFactory;
 import com.example.fsm.business.enums.ErrorCodeEnum;
 import com.example.fsm.context.StateContext;
@@ -25,7 +24,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Slf4j
-@FsmEngine(scanBasePackage = "com.example")
 @RequiredArgsConstructor
 @Component
 public class DefaultOrderFsmEngine implements OrderFsmEngine {
