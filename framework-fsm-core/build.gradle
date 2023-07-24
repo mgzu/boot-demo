@@ -8,3 +8,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
 
 }
+
+kotlin {
+	jvmToolchain(17)
+}

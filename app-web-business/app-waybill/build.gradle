@@ -14,3 +14,7 @@ dependencies {
 
 	testApi project(':framework-test')
 }
+
+kotlin {
+	jvmToolchain(17)
+}

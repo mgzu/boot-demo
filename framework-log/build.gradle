@@ -12,3 +12,7 @@ dependencies {
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter'
 	}
 }
+
+kotlin {
+	jvmToolchain(17)
+}

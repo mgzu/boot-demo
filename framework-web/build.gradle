@@ -11,3 +11,7 @@ dependencies {
     implementation 'com.h2database:h2'
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}"
 }
+
+kotlin {
+	jvmToolchain(17)
+}
