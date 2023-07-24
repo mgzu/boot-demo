@@ -1,10 +1,8 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}" apply false
+	id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}" apply false
 }
 
 subprojects {
-    dependencies {
-		// test
-		testImplementation 'org.springframework.boot:spring-boot-starter-webflux'
+	dependencies {
 	}
 }
