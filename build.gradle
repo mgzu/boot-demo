@@ -6,8 +6,6 @@ plugins {
 }
 
 allprojects {
-	apply plugin: 'java'
-
 	group = 'com.example'
 	version = '0.0.1-SNAPSHOT'
 
@@ -21,9 +19,6 @@ allprojects {
 		mavenLocal()
 		mavenCentral()
 	}
-
-	sourceCompatibility = JavaVersion.VERSION_17
-	targetCompatibility = JavaVersion.VERSION_17
 }
 
 ext {
@@ -38,11 +33,17 @@ ext {
 	// https://mvnrepository.com/artifact/com.google.guava/guava
 	guavaVersion = '32.1.1-jre'
 	// docs
-    // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
 	openapiVersion = '2.1.0'
 }
 
+ignoreNoSourceProject = ext.ignoreNoSourceProject.split(",")
+
 subprojects {
+	if (ignoreNoSourceProject.contains(project.name)) {
+		return
+	}
+
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'java'
 
@@ -95,5 +96,8 @@ subprojects {
 	test {
 		useJUnitPlatform()
 	}
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 
 }
