@@ -1,6 +1,5 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
-	id 'me.champeau.jmh' version "0.7.1"
 }
 
 dependencies {
@@ -16,11 +15,6 @@ dependencies {
 	testApi project(':framework-test')
 	testImplementation "org.openjdk.jmh:jmh-core:${jmhVersion}"
 	testImplementation "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
-
-	// jmh
-	jmh "org.openjdk.jmh:jmh-core:${jmhVersion}"
-	jmh "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
-	jmhAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
 }
 
 kotlin {
