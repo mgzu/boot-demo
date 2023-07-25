@@ -25,25 +25,19 @@ open class DbLogRecordServiceImpl : ILogRecordService {
     }
 
     override fun queryLog(bizNo: String, type: String): List<LogRecord> {
-        val logRecord = com.example.framework.log.entity.LogRecord()
-        logRecord.bizNo = bizNo
-        logRecord.type = type
-        return logRecordRepository!!.findAll(Example.of(logRecord))
-            .stream().map { logRecordDb: com.example.framework.log.entity.LogRecord? ->
-                LogRecordMapper.INSTANCE.toLogRecord(logRecordDb)
-            }
-            .toList()
-    }
+		val logRecord = com.example.framework.log.entity.LogRecord()
+		logRecord.bizNo = bizNo
+		logRecord.type = type
+		val logRecordList = logRecordRepository!!.findAll(Example.of(logRecord))
+		return LogRecordMapper.INSTANCE.toLogRecordList(logRecordList)
+	}
 
     override fun queryLogByBizNo(bizNo: String, type: String, subType: String): List<LogRecord> {
-        val logRecord = com.example.framework.log.entity.LogRecord()
-        logRecord.bizNo = bizNo
-        logRecord.type = type
-        logRecord.subType = subType
-        return logRecordRepository!!.findAll(Example.of(logRecord))
-            .stream().map { logRecordDb: com.example.framework.log.entity.LogRecord? ->
-                LogRecordMapper.INSTANCE.toLogRecord(logRecordDb)
-            }
-            .toList()
-    }
+		val logRecord = com.example.framework.log.entity.LogRecord()
+		logRecord.bizNo = bizNo
+		logRecord.type = type
+		logRecord.subType = subType
+		val logRecordList = logRecordRepository!!.findAll(Example.of(logRecord))
+		return LogRecordMapper.INSTANCE.toLogRecordList(logRecordList)
+	}
 }

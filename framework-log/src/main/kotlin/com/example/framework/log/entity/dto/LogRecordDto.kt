@@ -11,14 +11,22 @@ import java.util.*
  * @since 2022-08-19
  */
 class LogRecordDto(page: Int, size: Int, sort: Sort) : PageRequest(page, size, sort), Serializable {
-    var id: String? = null
-    var tenant: String? = null
-    var type: @Length(max = 200, message = "type max length is 200") String? = null
-    var subType: String? = null
-    var bizNo: @Length(max = 200, message = "bizNo max length is 200") String? = null
-    var operator: @Length(max = 63, message = "operator max length 63") String? = null
-    var action: @Length(max = 511, message = "operator max length 511") String? = null
-    var fail = false
-    var createTime: Date? = null
-    var extra: String? = null
+	var id: String? = null
+	var tenant: String? = null
+
+	@Length(max = 200)
+	var type: String? = null
+	var subType: String? = null
+
+	@Length(max = 200)
+	var bizNo: String? = null
+
+	@Length(max = 63)
+	var operator: String? = null
+
+	@Length(max = 511)
+	var action: String? = null
+	var fail = false
+	var createTime: Date? = null
+	var extra: String? = null
 }
