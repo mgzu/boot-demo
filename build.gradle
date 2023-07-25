@@ -35,6 +35,8 @@ ext {
 	// docs
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
 	openapiVersion = '2.1.0'
+	// https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
+	jmhVersion = '1.36'
 }
 
 ignoreNoSourceProject = ext.ignoreNoSourceProject.split(",")

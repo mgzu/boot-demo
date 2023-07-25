@@ -1,9 +1,8 @@
 package com.example.framework.log.entity
 
 import cn.hutool.core.util.RandomUtil
-import com.example.framework.log.BaseCase
 import com.example.framework.log.entity.dto.LogRecordDto
-import jakarta.validation.ConstraintViolation
+import com.example.framework.testsupport.BaseCase
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.data.domain.Sort
@@ -54,16 +53,6 @@ class EntityValidationTest : BaseCase() {
 		validateResult = validate(Locale.US, record)
 		validateResult(lengthInvalidMessageEn, validateResult)
 		Assertions.assertEquals(4, validateResult.size)
-	}
-
-	private fun <T> validateResult(collection: Collection<String>, validateResult: Set<ConstraintViolation<T>>) {
-		validateResult.stream().map { Assertions.assertTrue(collection.contains(it.message)) }
-	}
-
-	private fun <T> printResult(validateResult: Set<ConstraintViolation<T>>) {
-		if (validateResult.isNotEmpty()) {
-			validateResult.forEach { println(it) }
-		}
 	}
 
 	@Test

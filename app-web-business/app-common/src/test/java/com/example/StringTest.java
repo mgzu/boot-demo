@@ -1,6 +1,8 @@
 package com.example;
 
+import com.example.framework.testsupport.BaseCase;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -8,14 +10,12 @@ import org.junit.jupiter.api.Test;
  * @since 2021-12-22
  */
 @Slf4j
-class StringTest extends BaseTest {
+class StringTest extends BaseCase {
 
-    @Test
-    void trimWhiteSpaceTest() {
-        log.info("test begin");
-        log.info("{}", Character.isWhitespace(' '));
-        log.info("{}", "         abc        ".strip());
-        log.info("test end");
-    }
+	@Test
+	void trimWhiteSpaceTest() {
+		Assertions.assertTrue(Character.isWhitespace(' '));
+		Assertions.assertFalse(Character.isWhitespace(' '));
+	}
 
 }

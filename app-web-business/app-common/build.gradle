@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
+	id 'me.champeau.jmh' version "0.7.1"
 }
 
 dependencies {
@@ -10,6 +11,16 @@ dependencies {
 	api 'org.springframework.boot:spring-boot-starter-data-jpa'
 	api "org.jeasy:easy-rules-core:${easyRulesVersion}"
 	api "org.jeasy:easy-rules-spel:${easyRulesVersion}"
+
+	// test
+	testApi project(':framework-test')
+	testImplementation "org.openjdk.jmh:jmh-core:${jmhVersion}"
+	testImplementation "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
+
+	// jmh
+	jmh "org.openjdk.jmh:jmh-core:${jmhVersion}"
+	jmh "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
+	jmhAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
 }
 
 kotlin {
