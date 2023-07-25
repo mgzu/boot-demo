@@ -1,6 +1,6 @@
 package com.example.framework.web.util;
 
-import com.example.framework.web.Dict;
+import com.example.framework.web.entity.Dict;
 import com.example.framework.web.constants.DictConstants;
 import lombok.experimental.UtilityClass;
 

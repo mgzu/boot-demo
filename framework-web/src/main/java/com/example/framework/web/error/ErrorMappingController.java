@@ -1,6 +1,6 @@
 package com.example.framework.web.error;
 
-import com.example.framework.web.Result;
+import com.example.framework.web.entity.Result;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
