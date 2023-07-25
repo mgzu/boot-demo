@@ -1,4 +1,4 @@
-package com.example.bearchmark;
+package com.example.framework.testsupport.bearchmark;
 
 import javax.script.*;
 
