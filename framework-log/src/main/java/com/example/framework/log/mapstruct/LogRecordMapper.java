@@ -6,6 +6,7 @@ import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author MaGuangZu
@@ -14,22 +15,24 @@ import java.io.Serializable;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, builder = @Builder(disableBuilder = true))
 public interface LogRecordMapper {
 
-    LogRecordMapper INSTANCE = Mappers.getMapper(LogRecordMapper.class);
+	LogRecordMapper INSTANCE = Mappers.getMapper(LogRecordMapper.class);
 
-    com.example.framework.log.entity.LogRecord toDbLogRecord(com.mzt.logapi.beans.LogRecord logRecord);
+	com.example.framework.log.entity.LogRecord toDbLogRecord(com.mzt.logapi.beans.LogRecord logRecord);
 
-    com.mzt.logapi.beans.LogRecord toLogRecord(com.example.framework.log.entity.LogRecord logRecord);
+	com.mzt.logapi.beans.LogRecord toLogRecord(com.example.framework.log.entity.LogRecord logRecord);
 
-    /**
-     * 解决 Serializable 与 String 互相映射的问题
-     *
-     * @param value 实现 Serializable 接口的对象
-     * @return 字符串
-     */
-    default String map(Serializable value) {
-        if (value == null) {
-            return null;
-        }
-        return value.toString();
-    }
+	List<com.mzt.logapi.beans.LogRecord> toLogRecordList(List<com.example.framework.log.entity.LogRecord> logRecordList);
+
+	/**
+	 * 解决 Serializable 与 String 互相映射的问题
+	 *
+	 * @param value 实现 Serializable 接口的对象
+	 * @return 字符串
+	 */
+	default String map(Serializable value) {
+		if (value == null) {
+			return null;
+		}
+		return value.toString();
+	}
 }
