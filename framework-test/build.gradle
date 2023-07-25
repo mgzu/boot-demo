@@ -1,10 +1,19 @@
 plugins {
-	id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}"
+	id 'org.jetbrains.kotlin.jvm'
+	id 'me.champeau.jmh'
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// jmh
+	testImplementation "org.openjdk.jmh:jmh-core:${jmhVersion}"
+	jmh "org.openjdk.jmh:jmh-core:${jmhVersion}"
+	testImplementation "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
+	jmh "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
+	testAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
+	jmhAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
 }
 
 kotlin {
