@@ -11,6 +11,9 @@ dependencies {
 	api("io.github.mouzt:bizlog-sdk:${bizlogSdkVersion}") {
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter'
 	}
+
+	// test
+	testApi project(':framework-test')
 }
 
 kotlin {

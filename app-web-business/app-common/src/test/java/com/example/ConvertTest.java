@@ -13,11 +13,11 @@ import java.util.List;
  * @author MaGuangZu
  * @since 2021-09-27
  */
-public class ConvertTest {
+class ConvertTest {
 
-    private List<String> list = new ArrayList<>();
+    private final List<String> list = new ArrayList<>();
 
-    private int forNum = 1000000;
+    private final int forNum = 1000000;
 
     @BeforeEach
     public void before() {
@@ -27,14 +27,14 @@ public class ConvertTest {
     }
 
     @Test
-    public void Test2() {
+	void Test2() {
         for (int i = 0; i < forNum; i++) {
             new BigDecimal(list.get(i));
         }
     }
 
     @Test
-    public void Test1() {
+	void Test1() {
         for (int i = 0; i < forNum; i++) {
             Convert.toBigDecimal(list.get(i));
         }
