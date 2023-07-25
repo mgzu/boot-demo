@@ -1,11 +1,8 @@
-package com.example.bearchmark;
+package com.example.framework.testsupport.bearchmark;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.concurrent.TimeUnit;
@@ -15,6 +12,8 @@ import java.util.concurrent.TimeUnit;
  * @since 2021-09-22
  */
 @Slf4j
+@Fork(3)
+@State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
 public class FormatBenchmark {
