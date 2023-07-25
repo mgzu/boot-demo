@@ -2,7 +2,7 @@ package com.example.app.order.controller;
 
 import cn.hutool.core.util.IdUtil;
 import com.example.app.common.entity.bo.OrderBo;
-import com.example.framework.web.Result;
+import com.example.framework.web.entity.Result;
 import com.example.framework.web.controller.BaseController;
 import com.example.fsm.FsmOrder;
 import com.example.fsm.business.enums.BizCodeEnum;
@@ -30,38 +30,39 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class OrderController extends BaseController {
 
-    private final OrderFsmEngine orderFsmEngine;
-    private final FsmOrderService orderService;
+	private final OrderFsmEngine orderFsmEngine;
+	private final FsmOrderService orderService;
 
-    @GetMapping
-    public Result<FsmOrder> get() {
-        FsmOrder order = OrderBo.builder()
-                .orderState(OrderStateEnum.INIT)
-                .bizCode(BizCodeEnum.FBA)
-                .sceneId(SceneIdEnum.H5)
-                .orderId(IdUtil.getSnowflake().nextIdStr())
-                .build();
-        log.info("order id:" + order.getOrderId());
-        OrderStateEvent event = CreateEvent.builder()
-                .eventType(OrderEventEnum.CREATE)
-                .orderId(order.getOrderId())
-                .build();
-        orderFsmEngine.sendEvent(event, order);
-        FsmOrder fsmOrder = orderService.getFsmOrder(order.getOrderId());
-        return Result.ok(fsmOrder);
-    }
+	@GetMapping
+	public Result<FsmOrder> get() {
+		FsmOrder order = OrderBo.builder()
+			.orderState(OrderStateEnum.INIT)
+			.bizCode(BizCodeEnum.FBA)
+			.sceneId(SceneIdEnum.H5)
+			.orderId(IdUtil.getSnowflake().nextIdStr())
+			.build();
+		log.info("order id:" + order.getOrderId());
+		OrderStateEvent event = CreateEvent.builder()
+			.eventType(OrderEventEnum.CREATE)
+			.orderId(order.getOrderId())
+			.build();
+		orderFsmEngine.sendEvent(event, order);
+		@SuppressWarnings("ConstantConditions") // order id is not null
+		FsmOrder fsmOrder = orderService.getFsmOrder(order.getOrderId());
+		return Result.ok(fsmOrder);
+	}
 
-    @GetMapping("/return")
-    public void returnOrder() {
-        FsmOrder order = OrderBo.builder()
-                .orderState(OrderStateEnum.INIT)
-                .bizCode(BizCodeEnum.FBA)
-                .sceneId(SceneIdEnum.H5)
-                .build();
-        OrderStateEvent event = ReturnEvent.builder()
-                .eventType(OrderEventEnum.RETURN)
-                .orderId(order.getOrderId())
-                .build();
-        orderFsmEngine.sendEvent(event, order);
-    }
+	@GetMapping("/return")
+	public void returnOrder() {
+		FsmOrder order = OrderBo.builder()
+			.orderState(OrderStateEnum.INIT)
+			.bizCode(BizCodeEnum.FBA)
+			.sceneId(SceneIdEnum.H5)
+			.build();
+		OrderStateEvent event = ReturnEvent.builder()
+			.eventType(OrderEventEnum.RETURN)
+			.orderId(order.getOrderId())
+			.build();
+		orderFsmEngine.sendEvent(event, order);
+	}
 }
