@@ -1,4 +1,4 @@
-package com.example.framework.web;
+package com.example.framework.web.entity;
 
 import lombok.*;
 import org.springframework.http.HttpStatus;

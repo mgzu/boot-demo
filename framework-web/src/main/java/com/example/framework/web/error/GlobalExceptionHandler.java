@@ -1,6 +1,6 @@
 package com.example.framework.web.error;
 
-import com.example.framework.web.Result;
+import com.example.framework.web.entity.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
