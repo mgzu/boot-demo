@@ -27,22 +27,21 @@ import org.jetbrains.annotations.NotNull;
 @Entity(name = "t_order")
 public class Order extends AuditableEntity implements FsmOrder {
 
-    private String orderId;
+	private String orderId;
 
-    @NotNull
-    private String orderState;
+	@NotNull
+	private String orderState;
 
-    @NotNull
-    private String bizCode;
+	@NotNull
+	private String bizCode;
 
-    @NotNull
-    private String sceneId;
+	@NotNull
+	private String sceneId;
 
-    @Transient
-    @JsonIgnore
-    @Override
-    public boolean isNew() {
-        // TODO: OrderStateEnum.NEW;
-        return this.getOrderState().equals("NEW");
-    }
+	@Transient
+	@JsonIgnore
+	@Override
+	public boolean isNew() {
+		return this.getOrderState().equals("NEW");
+	}
 }
