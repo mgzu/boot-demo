@@ -1,4 +1,4 @@
-package com.example.framework.testsupport.bearchmark;
+package com.example.framework.testsupport.benchmark;
 
 import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
