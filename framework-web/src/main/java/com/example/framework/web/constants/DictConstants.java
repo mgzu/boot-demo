@@ -1,16 +1,13 @@
 package com.example.framework.web.constants;
 
-import com.example.framework.web.validation.ValueValidator;
 import lombok.experimental.UtilityClass;
-
-import java.util.List;
 
 /**
  * @author MaGuangZu
  * @since 2021-09-28
  */
 @UtilityClass
-public class DictConstants implements ValueValidator {
+public class DictConstants {
 
 	/**
 	 * 字符串类型
