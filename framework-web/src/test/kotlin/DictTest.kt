@@ -1,9 +1,13 @@
 package com.example.framework.web.entity
 
 import com.example.framework.testsupport.BaseCase
+import com.example.framework.web.constants.DictConstants
 import com.fasterxml.jackson.core.JsonProcessingException
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.NullSource
+import org.junit.jupiter.params.provider.ValueSource
 
 /**
  * @author MaGuangZu
@@ -27,7 +31,6 @@ class DictTest : BaseCase() {
 				else -> {}
 			}
 		}
-		dicts.forEach { println(it) }
 		println(objectMapper.writeValueAsString(dicts))
 	}
 
@@ -38,18 +41,48 @@ class DictTest : BaseCase() {
 		dicts.add(dict)
 	}
 
-	private val invalidMessageEn = setOf("must be any of constant [string, int, decimal, bool]")
+	private val invalidMessage = setOf(
+		"must be any of constant [string, int, decimal, bool]",
+		"不能为null",
+	)
 
-	@Test
-	fun testValid() {
+	@ValueSource(
+		strings = [
+			DictConstants.DICT_TYPE_STRING,
+			DictConstants.DICT_TYPE_INT,
+			DictConstants.DICT_TYPE_DECIMAL,
+			DictConstants.DICT_TYPE_BOOL,
+		]
+	)
+	@ParameterizedTest
+	fun `test valid`(type: String) {
 		val dict = Dict()
-		dict.dictType = "unknown"
+		dict.dictType = type
 		dict.value = "unknown"
-		var result = validate(dict)
-		Assertions.assertEquals(1, result.size)
-		validateResult(invalidMessageEn, result)
-		dict.dictType = "string"
-		result = validate(dict)
+		val result = validate(dict)
 		Assertions.assertEquals(0, result.size)
 	}
+
+	@ValueSource(strings = ["unknown"])
+	@ParameterizedTest
+	fun `test in valid`(type: String) {
+		val dict = Dict()
+		dict.dictType = type
+		dict.value = "unknown"
+		val result = validate(dict)
+		Assertions.assertEquals(1, result.size)
+		validateResult(invalidMessage, result)
+	}
+
+	@NullSource
+	@ParameterizedTest
+	fun `test in valid by null`(type: String?) {
+		val dict = Dict()
+		dict.dictType = type
+		dict.value = "unknown"
+		val result = validate(dict)
+		Assertions.assertEquals(2, result.size)
+		validateResult(invalidMessage, result)
+	}
+
 }
