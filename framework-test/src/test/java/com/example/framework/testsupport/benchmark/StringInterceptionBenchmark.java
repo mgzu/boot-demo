@@ -1,6 +1,5 @@
 package com.example.framework.testsupport.benchmark;
 
-import cn.hutool.core.util.StrUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
@@ -18,28 +17,27 @@ import java.util.concurrent.TimeUnit;
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
-public class FormatBenchmark extends JmhBaseCase {
+public class StringInterceptionBenchmark extends JmhBaseCase {
 
 	public static void main(String[] args) throws RunnerException, IOException {
 		getRunner(MethodHandles.lookup().lookupClass().getSimpleName()).run();
 	}
 
+	String boxNo = "15GLLWZ1LU002";
+
 	@Benchmark
 	public void test1(Blackhole bh) {
-		String format = String.format("%s%s%s", "a", "b", "c");
-		bh.consume(format);
+		bh.consume(boxNo.replaceAll("[A-Z0-9]+U(0*)", ""));
 	}
 
 	@Benchmark
 	public void test2(Blackhole bh) {
-		String format = "a" + "b" + "c";
-		bh.consume(format);
+		bh.consume(boxNo.split("U")[0]);
 	}
 
 	@Benchmark
 	public void test3(Blackhole bh) {
-		String format = StrUtil.format("{}{}{}", "a", "b", "c");
-		bh.consume(format);
+		bh.consume(boxNo.substring(boxNo.lastIndexOf("U") + 1));
 	}
 
 }

@@ -1,0 +1,4 @@
+Benchmark                          Mode  Cnt    Score   Error  Units
+StringInterceptionBenchmark.test1  avgt   15  302.183 ± 2.014  ns/op
+StringInterceptionBenchmark.test2  avgt   15   59.328 ± 1.009  ns/op
+StringInterceptionBenchmark.test3  avgt   15   12.758 ± 0.036  ns/op

@@ -3,6 +3,7 @@ package com.example.framework.testsupport.benchmark;
 import lombok.extern.slf4j.Slf4j;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.infra.Blackhole;
+import org.openjdk.jmh.runner.RunnerException;
 import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
@@ -10,13 +11,19 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import javax.script.*;
+import java.io.IOException;
+import java.lang.invoke.MethodHandles;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @State(Scope.Thread)
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
-public class FormulaBenchmark {
+public class FormulaBenchmark extends JmhBaseCase {
+
+	public static void main(String[] args) throws RunnerException, IOException {
+		getRunner(MethodHandles.lookup().lookupClass().getSimpleName()).run();
+	}
 
 	ScriptEngine engine = new ScriptEngineManager().getEngineByName("kotlin");
 	Compilable compilable = (Compilable) engine;
