@@ -1,5 +1,8 @@
 package com.example.framework.testsupport
 
+import cn.hutool.core.io.resource.ResourceUtil
+import cn.hutool.core.text.csv.CsvReader
+import cn.hutool.core.text.csv.CsvUtil
 import com.fasterxml.jackson.databind.ObjectMapper
 import jakarta.validation.ConstraintViolation
 import jakarta.validation.Validation
@@ -7,6 +10,7 @@ import jakarta.validation.Validator
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator
 import org.hibernate.validator.spi.messageinterpolation.LocaleResolverContext
 import org.junit.jupiter.api.Assertions
+import java.nio.charset.StandardCharsets
 import java.util.*
 import java.util.Locale.LanguageRange
 import java.util.function.Supplier
@@ -63,5 +67,11 @@ open class BaseCase {
 		if (validateResult.isNotEmpty()) {
 			validateResult.forEach { println(it) }
 		}
+	}
+
+	var reader: CsvReader = CsvUtil.getReader()
+
+	fun <T> readCsvList(path: String, clazz: Class<T>): List<T> {
+		return reader.read(ResourceUtil.getReader(path, StandardCharsets.UTF_8), clazz)
 	}
 }
