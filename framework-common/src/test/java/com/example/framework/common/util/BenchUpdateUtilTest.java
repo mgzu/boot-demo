@@ -2,6 +2,7 @@ package com.example.framework.common.util;
 
 import com.example.framework.common.entity.Product;
 import com.example.framework.common.options.BenchUpdateOptions;
+import com.example.framework.testsupport.BaseCase;
 import com.google.common.collect.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,30 +13,12 @@ import java.util.List;
  * @author MaGuangZu
  * @since 2023-07-28
  */
-class BenchUpdateUtilTest {
+class BenchUpdateUtilTest extends BaseCase {
 
 	@Test
-	void test1() {
-		List<Product> oldList = Lists.newArrayList();
-		oldList.add(Product.builder().id("id2")
-			.name("1")
-			.build());
-		oldList.add(Product.builder().id("id3")
-			.name("123")
-			.build());
-		oldList.add(Product.builder().id("id4")
-			.name("1")
-			.build());
-		List<Product> newList = Lists.newArrayList();
-		newList.add(Product.builder().id("id1")
-			.name("123")
-			.build());
-		newList.add(Product.builder().id("id2")
-			.name("1")
-			.build());
-		newList.add(Product.builder().id("id4")
-			.name("12")
-			.build());
+	void testByDefaultOptions() {
+		List<Product> oldList = readCsvList("csv/old.csv", Product.class);
+		List<Product> newList = readCsvList("csv/new.csv", Product.class);
 		List<String> insertIdList = Lists.newArrayList();
 		List<String> deleteIdList = Lists.newArrayList();
 		List<String> updateIdList = Lists.newArrayList();
@@ -46,27 +29,9 @@ class BenchUpdateUtilTest {
 	}
 
 	@Test
-	void test2() {
-		List<Product> oldList = Lists.newArrayList();
-		oldList.add(Product.builder().id("id2")
-			.name("1")
-			.build());
-		oldList.add(Product.builder().id("id3")
-			.name("123")
-			.build());
-		oldList.add(Product.builder().id("id4")
-			.name("1")
-			.build());
-		List<Product> newList = Lists.newArrayList();
-		newList.add(Product.builder().id("id1")
-			.name("123")
-			.build());
-		newList.add(Product.builder().id("id2")
-			.name("1")
-			.build());
-		newList.add(Product.builder().id("id4")
-			.name("12")
-			.build());
+	void testByDefaultCustomOptions() {
+		List<Product> oldList = readCsvList("csv/old.csv", Product.class);
+		List<Product> newList = readCsvList("csv/new.csv", Product.class);
 		List<String> insertIdList = Lists.newArrayList();
 		List<String> deleteIdList = Lists.newArrayList();
 		List<String> updateIdList = Lists.newArrayList();
