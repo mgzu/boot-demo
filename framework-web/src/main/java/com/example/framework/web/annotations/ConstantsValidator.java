@@ -17,6 +17,7 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @NotNull
 public @interface ConstantsValidator {
+
 	String[] constants();
 
 	String message() default "must be any of constant {constants}";
