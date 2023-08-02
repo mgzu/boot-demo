@@ -24,10 +24,10 @@ public class StateContextFactory {
 
 	@NotNull
 	public static <C> StateContext<C> create(@NotNull OrderStateEvent orderStateEvent, @NotNull FsmOrder fsmOrder) {
-		String klassName = orderStateEvent.getClass().getName();
-		BiFunction<OrderStateEvent, FsmOrder, StateContext<?>> function = contextMap.get(klassName);
+		String clazzName = orderStateEvent.getClass().getName();
+		BiFunction<OrderStateEvent, FsmOrder, StateContext<?>> function = contextMap.get(clazzName);
 		if (function == null) {
-			throw new IllegalArgumentException("unsupported event class:" + klassName);
+			throw new IllegalArgumentException("unsupported event class:" + clazzName);
 		}
 		@SuppressWarnings("unchecked")
 		StateContext<C> context = (StateContext<C>) function.apply(orderStateEvent, fsmOrder);
