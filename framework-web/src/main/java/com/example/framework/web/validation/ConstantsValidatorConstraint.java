@@ -4,6 +4,7 @@ import com.example.framework.web.annotations.ConstantsValidator;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -20,6 +21,7 @@ public class ConstantsValidatorConstraint implements ConstraintValidator<Constan
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
-		return values.contains(value);
+		return Objects.nonNull(value) && values.contains(value);
 	}
+
 }
