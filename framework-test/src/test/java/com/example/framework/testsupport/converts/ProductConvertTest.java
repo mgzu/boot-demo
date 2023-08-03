@@ -1,8 +1,8 @@
 package com.example.framework.testsupport.converts;
 
-import cn.hutool.core.util.IdUtil;
 import com.example.framework.testsupport.entity.Product;
 import com.google.common.collect.Lists;
+import org.dromara.hutool.core.data.id.IdUtil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

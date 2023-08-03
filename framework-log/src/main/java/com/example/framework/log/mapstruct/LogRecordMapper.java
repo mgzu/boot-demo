@@ -12,7 +12,10 @@ import java.util.List;
  * @author MaGuangZu
  * @since 2021-12-27
  */
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, builder = @Builder(disableBuilder = true))
+@Mapper(
+	unmappedTargetPolicy = ReportingPolicy.IGNORE,
+	builder = @Builder(disableBuilder = true)
+)
 public interface LogRecordMapper {
 
 	LogRecordMapper INSTANCE = Mappers.getMapper(LogRecordMapper.class);

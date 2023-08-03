@@ -24,8 +24,8 @@ allprojects {
 }
 
 ext {
-	// https://mvnrepository.com/artifact/cn.hutool/hutool-core
-	hutoolVersion = '5.8.20'
+	// https://mvnrepository.com/artifact/org.dromara.hutool/hutool-core
+	hutoolVersion = '6.0.0-M5'
 	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct
 	mapstructVersion = '1.5.5.Final'
 	// https://mvnrepository.com/artifact/io.github.mouzt/bizlog-sdk
@@ -74,7 +74,7 @@ subprojects {
 		implementation 'org.jetbrains.kotlin:kotlin-reflect'
 
 		// tool
-		implementation "cn.hutool:hutool-core:${hutoolVersion}"
+		implementation "org.dromara.hutool:hutool-core:${hutoolVersion}"
 		implementation "com.google.guava:guava:${guavaVersion}"
 		implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 		implementation 'org.hibernate.validator:hibernate-validator'

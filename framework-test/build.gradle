@@ -6,7 +6,9 @@ plugins {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
 	testImplementation "org.jetbrains.kotlin:kotlin-scripting-jsr223:${kotlinVersion}"
+	testImplementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
 
 	// jmh
 	testImplementation "org.openjdk.jmh:jmh-core:${jmhVersion}"
