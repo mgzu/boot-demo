@@ -1,12 +1,13 @@
 package com.example.framework.testsupport
 
-import cn.hutool.core.io.resource.ResourceUtil
-import cn.hutool.core.text.csv.CsvReader
-import cn.hutool.core.text.csv.CsvUtil
+import com.fasterxml.jackson.databind.MappingIterator
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.csv.CsvMapper
+import com.fasterxml.jackson.dataformat.csv.CsvParser
 import jakarta.validation.ConstraintViolation
 import jakarta.validation.Validation
 import jakarta.validation.Validator
+import org.dromara.hutool.core.io.resource.ResourceUtil
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator
 import org.hibernate.validator.spi.messageinterpolation.LocaleResolverContext
 import org.junit.jupiter.api.Assertions
@@ -69,9 +70,20 @@ open class BaseCase {
 		}
 	}
 
-	var reader: CsvReader = CsvUtil.getReader()
+	private val csvMapper: CsvMapper = CsvMapper.builder()
+		.enable(CsvParser.Feature.SKIP_EMPTY_LINES)
+		.build()
 
 	fun <T> readCsvList(path: String, clazz: Class<T>): List<T> {
-		return reader.read(ResourceUtil.getReader(path, StandardCharsets.UTF_8), clazz)
+		val schema = csvMapper.typedSchemaFor(clazz)
+			.withHeader()
+			.withColumnReordering(true)
+
+		val iterator: MappingIterator<T> = csvMapper
+			.readerWithTypedSchemaFor(clazz)
+			.with(schema)
+			.readValues(ResourceUtil.getReader(path, StandardCharsets.UTF_8))
+		return iterator.readAll()
 	}
+
 }

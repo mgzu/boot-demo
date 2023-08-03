@@ -1,7 +1,7 @@
 package com.example;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.RandomUtil;
+import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.util.RandomUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

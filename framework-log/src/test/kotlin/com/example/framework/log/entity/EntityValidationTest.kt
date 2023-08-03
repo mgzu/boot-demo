@@ -1,8 +1,8 @@
 package com.example.framework.log.entity
 
-import cn.hutool.core.util.RandomUtil
 import com.example.framework.log.entity.dto.LogRecordDto
 import com.example.framework.testsupport.BaseCase
+import org.dromara.hutool.core.util.RandomUtil
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.data.domain.Sort

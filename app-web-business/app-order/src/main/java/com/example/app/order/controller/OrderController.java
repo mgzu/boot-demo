@@ -1,6 +1,5 @@
 package com.example.app.order.controller;
 
-import cn.hutool.core.util.IdUtil;
 import com.example.app.common.entity.bo.OrderBo;
 import com.example.framework.web.entity.Result;
 import com.example.framework.web.controller.BaseController;
@@ -16,6 +15,7 @@ import com.example.fsm.event.OrderStateEvent;
 import com.example.fsm.service.FsmOrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.data.id.IdUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

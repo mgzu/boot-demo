@@ -13,8 +13,9 @@ import java.util.*
  */
 @Configuration
 open class LogRecordConfiguration {
-    @Bean
-    open fun operatorGetService(): IOperatorGetService {
+
+	@Bean
+	open fun operatorGetService(): IOperatorGetService {
         return IOperatorGetService {
             val user = BaseUser()
             user.userId = "1640600092347"
