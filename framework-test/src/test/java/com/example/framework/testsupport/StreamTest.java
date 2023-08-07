@@ -1,12 +1,14 @@
 package com.example.framework.testsupport;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author MaGuangZu
@@ -19,16 +21,15 @@ class StreamTest {
 		List<String> list = Stream.of("123", "456")
 			.collect(Collectors.toList());
 		list.add("789");
-		Assertions.assertEquals(3, list.size());
-		Assertions.assertInstanceOf(ArrayList.class, list);
+		assertThat(list).hasSize(3).isInstanceOf(ArrayList.class);
 	}
 
 	@Test
 	void test2() {
 		List<String> collect = Stream.of("123", "456").toList();
 		//noinspection DataFlowIssue
-		Assertions.assertThrows(UnsupportedOperationException.class, () -> collect.add("789"));
-		Assertions.assertTrue(collect.getClass().getName().startsWith("java.util.ImmutableCollections$"));
+		assertThatThrownBy(() -> collect.add("789")).isInstanceOf(UnsupportedOperationException.class);
+		assertThat(collect.getClass().getName()).startsWith("java.util.ImmutableCollections$");
 	}
 
 }

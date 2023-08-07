@@ -3,7 +3,7 @@ package com.example.framework.web.entity
 import com.example.framework.testsupport.BaseCase
 import com.example.framework.web.constants.DictConstants
 import com.fasterxml.jackson.core.JsonProcessingException
-import org.junit.jupiter.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.NullSource
@@ -60,7 +60,7 @@ class DictTest : BaseCase() {
 		dict.dictType = type
 		dict.value = "unknown"
 		val result = validate(dict)
-		Assertions.assertEquals(0, result.size)
+		assertThat(result).hasSize(0)
 	}
 
 	@ValueSource(strings = ["unknown"])
@@ -70,7 +70,7 @@ class DictTest : BaseCase() {
 		dict.dictType = type
 		dict.value = "unknown"
 		val result = validate(dict)
-		Assertions.assertEquals(1, result.size)
+		assertThat(result).hasSize(1)
 		validateResult(invalidMessage, result)
 	}
 
@@ -81,7 +81,7 @@ class DictTest : BaseCase() {
 		dict.dictType = type
 		dict.value = "unknown"
 		val result = validate(dict)
-		Assertions.assertEquals(2, result.size)
+		assertThat(result).hasSize(2)
 		validateResult(invalidMessage, result)
 	}
 

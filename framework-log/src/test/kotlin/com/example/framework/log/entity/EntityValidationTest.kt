@@ -2,8 +2,8 @@ package com.example.framework.log.entity
 
 import com.example.framework.log.entity.dto.LogRecordDto
 import com.example.framework.testsupport.BaseCase
+import org.assertj.core.api.Assertions.assertThat
 import org.dromara.hutool.core.util.RandomUtil
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.springframework.data.domain.Sort
 import java.util.*
@@ -32,14 +32,14 @@ class EntityValidationTest : BaseCase() {
 		val record = LogRecord()
 		var validateResult = validate(record)
 		validateResult(nullInvalidMessageZh, validateResult)
-		Assertions.assertEquals(4, validateResult.size)
+		assertThat(validateResult).hasSize(4)
 
 		validateResult = validate(Locale.US, record)
 		validateResult(nullInvalidMessageEn, validateResult)
-		Assertions.assertEquals(4, validateResult.size)
+		assertThat(validateResult).hasSize(4)
 
 		val longLengthString = RandomUtil.randomString(1000)
-		Assertions.assertTrue(longLengthString.length > 511)
+		assertThat(longLengthString.length > 511).isTrue()
 
 		record.type = longLengthString
 		record.bizNo = longLengthString
@@ -48,21 +48,21 @@ class EntityValidationTest : BaseCase() {
 
 		validateResult = validate(record)
 		validateResult(lengthInvalidMessageZh, validateResult)
-		Assertions.assertEquals(4, validateResult.size)
+		assertThat(validateResult).hasSize(4)
 
 		validateResult = validate(Locale.US, record)
 		validateResult(lengthInvalidMessageEn, validateResult)
-		Assertions.assertEquals(4, validateResult.size)
+		assertThat(validateResult).hasSize(4)
 	}
 
 	@Test
 	fun `test record dto validation`() {
 		val recordDto = LogRecordDto(0, 10, Sort.unsorted())
 		var validateResult = validate(recordDto)
-		Assertions.assertEquals(0, validateResult.size)
+		assertThat(validateResult).hasSize(0)
 
 		val longLengthString = RandomUtil.randomString(1000)
-		Assertions.assertTrue(longLengthString.length > 511)
+		assertThat(longLengthString.length > 511).isTrue()
 
 		recordDto.type = longLengthString
 		recordDto.bizNo = longLengthString
@@ -71,11 +71,11 @@ class EntityValidationTest : BaseCase() {
 
 		validateResult = validate(recordDto)
 		validateResult(lengthInvalidMessageZh, validateResult)
-		Assertions.assertEquals(4, validateResult.size)
+		assertThat(validateResult).hasSize(4)
 
 		validateResult = validate(Locale.US, recordDto)
 		validateResult(lengthInvalidMessageEn, validateResult)
-		Assertions.assertEquals(4, validateResult.size)
+		assertThat(validateResult).hasSize(4)
 	}
 
 }

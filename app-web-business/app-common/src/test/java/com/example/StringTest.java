@@ -2,8 +2,9 @@ package com.example;
 
 import com.example.framework.testsupport.BaseCase;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 /**
  * @author MaGuangZu
@@ -14,8 +15,8 @@ class StringTest extends BaseCase {
 
 	@Test
 	void trimWhiteSpaceTest() {
-		Assertions.assertTrue(Character.isWhitespace(' '));
-		Assertions.assertFalse(Character.isWhitespace(' '));
+		assertThat(Character.isWhitespace(' ')).isTrue();
+		assertThat(Character.isWhitespace(' ')).isFalse();
 	}
 
 }
