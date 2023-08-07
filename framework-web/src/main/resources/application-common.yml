@@ -11,9 +11,14 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
 logging:
   pattern:
-    console: '%d{yyyy-MM-dd HH:mm:ss} %p %X{X-Request-Id} %c{1}[%line]: %m%n'
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
 
 springdoc:
   api-docs:
