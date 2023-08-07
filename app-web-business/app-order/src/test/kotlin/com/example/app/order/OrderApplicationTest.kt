@@ -1,6 +1,6 @@
 package com.example.app.order
 
-import org.junit.jupiter.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -41,7 +41,7 @@ class OrderApplicationTest {
 				status { isOk() }
 			}.andReturn()
 
-		Assertions.assertEquals("{\"status\":\"UP\"}", result.response.contentAsString)
+		assertThat(result.response.contentAsString).isEqualTo("{\"status\":\"UP\"}")
 	}
 
 }

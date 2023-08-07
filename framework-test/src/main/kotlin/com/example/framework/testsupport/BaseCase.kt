@@ -7,10 +7,10 @@ import com.fasterxml.jackson.dataformat.csv.CsvParser
 import jakarta.validation.ConstraintViolation
 import jakarta.validation.Validation
 import jakarta.validation.Validator
+import org.assertj.core.api.Assertions.assertThat
 import org.dromara.hutool.core.io.resource.ResourceUtil
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator
 import org.hibernate.validator.spi.messageinterpolation.LocaleResolverContext
-import org.junit.jupiter.api.Assertions
 import java.nio.charset.StandardCharsets
 import java.util.*
 import java.util.Locale.LanguageRange
@@ -61,7 +61,7 @@ open class BaseCase {
 	}
 
 	fun <T> validateResult(collection: Collection<String>, validateResult: Set<ConstraintViolation<T>>) {
-		validateResult.stream().forEach { Assertions.assertTrue(collection.contains(it.message)) }
+		validateResult.stream().forEach { assertThat(collection.contains(it.message)).isTrue() }
 	}
 
 	fun <T> printResult(validateResult: Set<ConstraintViolation<T>>) {
