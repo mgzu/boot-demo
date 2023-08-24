@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 /**
  * 校验器的执行器
@@ -94,37 +96,4 @@ public class CheckerExecutor {
 		return new ServiceResult<>(true);
 	}
 
-	/**
-	 * 执行checker的释放操作
-	 */
-	public <T, C> void releaseCheck(Checkable checkable, StateContext<C> context, ServiceResult<T> result) {
-		List<Checker<T, C>> checkers = new ArrayList<>();
-		checkers.addAll(checkable.getParamChecker());
-		checkers.addAll(checkable.getSyncChecker());
-		checkers.addAll(checkable.getAsyncChecker());
-		checkers.removeIf(checker -> !checker.needRelease());
-		if (!CollectionUtils.isEmpty(checkers)) {
-			if (checkers.size() == 1) {
-				checkers.get(0).release(context, result);
-				return;
-			}
-			CountDownLatch latch = new CountDownLatch(checkers.size());
-			for (Checker<T, C> checker : checkers) {
-				executor.execute(() -> {
-					try {
-						checker.release(context, result);
-					} finally {
-						latch.countDown();
-					}
-				});
-			}
-			try {
-				latch.await();
-			} catch (Exception e) {
-				log.error("releaseCheck latch.await error.", e);
-				Thread.currentThread().interrupt();
-				throw new FsmException(e.getCause());
-			}
-		}
-	}
 }
