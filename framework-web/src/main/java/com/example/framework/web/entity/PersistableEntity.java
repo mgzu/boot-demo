@@ -2,7 +2,10 @@ package com.example.framework.web.entity;
 
 import com.example.framework.web.configure.jpa.id.SnowflakeIdGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +20,6 @@ import java.io.Serializable;
  * @author MaGuangZu
  * @since 2021-12-29
  */
-@Access(AccessType.FIELD)
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
@@ -31,8 +33,8 @@ public class PersistableEntity implements Persistable<String>, Serializable {
 	@GenericGenerator(name = "snowflakeId", type = SnowflakeIdGenerator.class)
     protected String id;
 
+	@JsonIgnore
     @Transient
-    @JsonIgnore
     @Override
     public boolean isNew() {
         return id == null;
