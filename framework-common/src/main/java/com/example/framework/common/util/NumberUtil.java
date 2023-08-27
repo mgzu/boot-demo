@@ -11,13 +11,25 @@ import java.math.BigDecimal;
 @UtilityClass
 public class NumberUtil {
 
-	public boolean isInteger(String str, boolean ignoreDecimalsAreAllZero) {
-		BigDecimal decimal = new BigDecimal(str);
-		if (ignoreDecimalsAreAllZero) {
-			return decimal.remainder(BigDecimal.ONE).doubleValue() == 0;
-		} else {
-			return decimal.scale() == 0;
+	/**
+	 * Determines if the given string represents an integer number.
+	 *
+	 * @param stringNumber             the string to be checked
+	 * @param ignoreDecimalsAreAllZero a boolean indicating whether to ignore decimals that are all zero
+	 * @return true if the string represents an integer number, false otherwise
+	 */
+	public boolean isInteger(String stringNumber, boolean ignoreDecimalsAreAllZero) {
+		try {
+			BigDecimal decimal = new BigDecimal(stringNumber);
+			if (ignoreDecimalsAreAllZero) {
+				return decimal.remainder(BigDecimal.ONE).doubleValue() == 0;
+			} else {
+				return decimal.scale() == 0;
+			}
+		} catch (NumberFormatException | NullPointerException e) {
+			// ignore
 		}
+		return false;
 	}
 
 }
