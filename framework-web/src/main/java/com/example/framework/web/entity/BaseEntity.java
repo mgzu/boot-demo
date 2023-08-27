@@ -1,14 +1,12 @@
 package com.example.framework.web.entity;
 
-import jakarta.persistence.EntityListeners;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -29,24 +27,27 @@ import java.time.LocalDateTime;
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
-public class AuditableEntity extends PersistableEntity {
+public class BaseEntity extends PersistableEntity {
 
+	@NotNull
     @CreatedBy
-    @Nullable
+	@Column(nullable = false)
     private String createdBy;
 
+	@NotNull
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Nullable
+	@Column(nullable = false)
     private LocalDateTime createdDate;
 
+	@Nullable
     @LastModifiedBy
-    @Nullable
     private String lastModifiedBy;
 
+	@Nullable
     @LastModifiedDate
     @Temporal(TemporalType.TIMESTAMP)
-    @Nullable
     private LocalDateTime lastModifiedDate;
 
+	private String remark;
 }

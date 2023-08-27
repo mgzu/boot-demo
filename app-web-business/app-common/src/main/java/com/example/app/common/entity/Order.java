@@ -1,12 +1,9 @@
 package com.example.app.common.entity;
 
-import com.example.framework.web.entity.AuditableEntity;
+import com.example.framework.web.entity.BaseEntity;
 import com.example.fsm.FsmOrder;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Transient;
+import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,9 +20,8 @@ import org.jetbrains.annotations.NotNull;
 @SuperBuilder
 @Setter
 @Getter
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity(name = "t_order")
-public class Order extends AuditableEntity implements FsmOrder {
+public class Order extends BaseEntity implements FsmOrder {
 
 	private String orderId;
 
@@ -38,10 +34,4 @@ public class Order extends AuditableEntity implements FsmOrder {
 	@NotNull
 	private String sceneId;
 
-	@Transient
-	@JsonIgnore
-	@Override
-	public boolean isNew() {
-		return this.getOrderState().equals("NEW");
-	}
 }
