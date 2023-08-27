@@ -7,7 +7,6 @@ dependencies {
 	api project(':framework-web')
 	api project(':app-web-business:app-fsm')
 
-	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation "org.jetbrains.kotlin:kotlin-scripting-jsr223:${kotlinVersion}"
