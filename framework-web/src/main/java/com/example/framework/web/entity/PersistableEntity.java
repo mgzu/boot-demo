@@ -1,5 +1,6 @@
 package com.example.framework.web.entity;
 
+import com.example.framework.web.configure.jpa.id.SnowflakeIdGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,7 @@ public class PersistableEntity implements Persistable<String>, Serializable {
 
     @Id
     @GeneratedValue(generator = "snowflakeId")
-    @GenericGenerator(name = "snowflakeId", strategy = "com.example.framework.web.configure.jpa.id.SnowflakeIdGenerator")
+	@GenericGenerator(name = "snowflakeId", type = SnowflakeIdGenerator.class)
     protected String id;
 
     @Transient
