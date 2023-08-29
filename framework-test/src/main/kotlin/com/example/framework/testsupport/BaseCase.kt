@@ -61,7 +61,7 @@ open class BaseCase {
 	}
 
 	fun <T> validateResult(collection: Collection<String>, validateResult: Set<ConstraintViolation<T>>) {
-		validateResult.stream().forEach { assertThat(collection.contains(it.message)).isTrue() }
+		validateResult.stream().forEach { assertThat(collection).contains(it.message) }
 	}
 
 	fun <T> printResult(validateResult: Set<ConstraintViolation<T>>) {
