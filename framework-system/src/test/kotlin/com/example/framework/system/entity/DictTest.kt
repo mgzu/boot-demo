@@ -1,12 +1,13 @@
-package com.example.framework.web.entity
+package com.example.framework.system.entity
 
+import com.example.framework.system.constants.DictConstants
+import com.example.framework.system.util.DictUtil
 import com.example.framework.testsupport.BaseCase
-import com.example.framework.web.constants.DictConstants
 import com.fasterxml.jackson.core.JsonProcessingException
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
-import org.junit.jupiter.params.provider.NullSource
+import org.junit.jupiter.params.provider.NullAndEmptySource
 import org.junit.jupiter.params.provider.ValueSource
 
 /**
@@ -23,15 +24,8 @@ class DictTest : BaseCase() {
 		addDict("int", "123", dicts)
 		addDict("bool", "true", dicts)
 		addDict("decimal", "1.333333333333333333333333", dicts)
-		dicts.forEach {
-			when (it.dictType) {
-				"int" -> it.value = it.value.toString().toInt()
-				"decimal" -> it.value = it.value.toString().toBigDecimal()
-				"bool" -> it.value = it.value.toString().toBoolean()
-				else -> {}
-			}
-		}
-		println(objectMapper.writeValueAsString(dicts))
+		val toList = DictUtil.typeConvert(dicts)
+		println(objectMapper.writeValueAsString(toList))
 	}
 
 	private fun addDict(type: String?, value: String?, dicts: MutableList<Dict>) {
@@ -44,6 +38,7 @@ class DictTest : BaseCase() {
 	private val invalidMessage = setOf(
 		"must be any of constant [string, int, decimal, bool]",
 		"不能为null",
+		"不能为空"
 	)
 
 	@ValueSource(
@@ -65,7 +60,7 @@ class DictTest : BaseCase() {
 
 	@ValueSource(strings = ["unknown"])
 	@ParameterizedTest
-	fun `test in valid`(type: String) {
+	fun `test invalid`(type: String) {
 		val dict = Dict()
 		dict.dictType = type
 		dict.value = "unknown"
@@ -74,14 +69,15 @@ class DictTest : BaseCase() {
 		validateResult(invalidMessage, result)
 	}
 
-	@NullSource
+	@NullAndEmptySource
 	@ParameterizedTest
-	fun `test in valid by null`(type: String?) {
+	fun `test invalid by null or empty string`(type: String?) {
 		val dict = Dict()
 		dict.dictType = type
-		dict.value = "unknown"
+		dict.value = type
 		val result = validate(dict)
-		assertThat(result).hasSize(2)
+		assertThat(result).hasSizeBetween(2, 3)
+		printResult(result)
 		validateResult(invalidMessage, result)
 	}
 

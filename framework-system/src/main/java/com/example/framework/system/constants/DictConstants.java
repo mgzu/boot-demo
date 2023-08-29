@@ -1,4 +1,4 @@
-package com.example.framework.web.constants;
+package com.example.framework.system.constants;
 
 import lombok.experimental.UtilityClass;
 

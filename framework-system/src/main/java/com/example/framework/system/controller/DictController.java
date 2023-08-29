@@ -1,8 +1,9 @@
-package com.example.framework.web.controller;
+package com.example.framework.system.controller;
 
-import com.example.framework.web.entity.Dict;
+import com.example.framework.system.entity.Dict;
+import com.example.framework.web.controller.BaseController;
 import com.example.framework.web.entity.Result;
-import com.example.framework.web.util.DictUtil;
+import com.example.framework.system.util.DictUtil;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
