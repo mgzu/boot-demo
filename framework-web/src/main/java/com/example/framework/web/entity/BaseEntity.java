@@ -50,4 +50,10 @@ public class BaseEntity extends PersistableEntity {
     private LocalDateTime lastModifiedDate;
 
 	private String remark;
+
+	@NotNull
+	@Version
+	@Column(nullable = false)
+	private int versionLock;
+
 }
