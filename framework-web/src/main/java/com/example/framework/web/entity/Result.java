@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 @Setter
 @Getter
 public class Result<T> {
+
     /**
      * 是否成功
      */
@@ -31,18 +32,45 @@ public class Result<T> {
     private T data;
 
     public static <T> Result<T> ok() {
-        return Result.<T>builder().success(true).message(HttpStatus.OK.getReasonPhrase()).code(HttpStatus.OK.value()).build();
+		return Result.<T>builder()
+			.success(true)
+			.message(HttpStatus.OK.getReasonPhrase())
+			.code(HttpStatus.OK.value())
+			.build();
     }
 
     public static <T> Result<T> ok(T data) {
-        return Result.<T>builder().success(true).message(HttpStatus.OK.getReasonPhrase()).code(HttpStatus.OK.value()).data(data).build();
-    }
+		return Result.<T>builder()
+			.success(true)
+			.message(HttpStatus.OK.getReasonPhrase())
+			.code(HttpStatus.OK.value())
+			.data(data)
+			.build();
+	}
+
+	public static <T> Result<T> error() {
+		return Result.<T>builder()
+			.success(false)
+			.message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
+			.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+			.build();
+	}
 
     public static <T> Result<T> error(String message) {
-        return Result.<T>builder().success(false).message(message).code(HttpStatus.INTERNAL_SERVER_ERROR.value()).build();
+		return Result.<T>builder()
+			.success(false)
+			.message(message)
+			.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+			.build();
     }
 
     public static <T> Result<T> error(T data, String message) {
-        return Result.<T>builder().success(false).message(message).code(HttpStatus.INTERNAL_SERVER_ERROR.value()).data(data).build();
+		return Result.<T>builder()
+			.success(false)
+			.message(message)
+			.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+			.data(data)
+			.build();
     }
+
 }
