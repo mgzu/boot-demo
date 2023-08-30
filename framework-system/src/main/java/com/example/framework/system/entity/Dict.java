@@ -29,7 +29,7 @@ public class Dict extends BaseEntity {
 	@Column(nullable = false)
 	private String dictType;
 	@NotBlank
-	@Column(nullable = false)
+	@Column(name = "`VALUE`", nullable = false)
 	private String value;
 
 }
