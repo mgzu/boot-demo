@@ -17,14 +17,14 @@ public class GlobalExceptionHandler {
     public Result<Void> throwable(Throwable e) {
         String localizedMessage = e.getLocalizedMessage();
         log.error(localizedMessage, e);
-        return Result.error(localizedMessage);
+		return Result.error();
     }
 
     @ExceptionHandler({Exception.class})
     public Result<Void> exception(Exception e) {
         String localizedMessage = e.getLocalizedMessage();
         log.error(localizedMessage, e);
-        return Result.error(localizedMessage);
+		return Result.error();
     }
 
 }
