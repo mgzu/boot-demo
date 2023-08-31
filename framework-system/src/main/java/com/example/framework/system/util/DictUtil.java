@@ -38,8 +38,7 @@ public class DictUtil {
 			case DictConstants.DICT_TYPE_DECIMAL -> dictVo.setValue(new BigDecimal(dict.getValue()));
 			case DictConstants.DICT_TYPE_BOOL -> dictVo.setValue(Boolean.parseBoolean(dict.getValue()));
 			case DictConstants.DICT_TYPE_STRING -> dictVo.setValue(dict.getValue());
-			// 其它都当做 string 处理
-			default -> throw new IllegalArgumentException("不支持的字典类型：" + dict.getDictType());
+			default -> throw new IllegalArgumentException("Unsupported dict type：" + dict.getDictType());
 		}
 		return dictVo;
 	}
