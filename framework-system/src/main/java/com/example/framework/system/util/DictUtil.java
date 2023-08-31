@@ -58,6 +58,6 @@ public class DictUtil {
 		return dicts.stream()
 			.map(DictUtil::typeConvert)
 			.collect(Collectors.toList());
-    }
+	}
 
 }

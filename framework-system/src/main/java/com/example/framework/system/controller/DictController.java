@@ -1,9 +1,9 @@
 package com.example.framework.system.controller;
 
 import com.example.framework.system.entity.Dict;
+import com.example.framework.system.util.DictUtil;
 import com.example.framework.web.controller.BaseController;
 import com.example.framework.web.entity.Result;
-import com.example.framework.system.util.DictUtil;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,16 +18,17 @@ import java.util.List;
 @RestController
 public class DictController extends BaseController {
 
-    List<Dict> dicts = new ArrayList<>();
+	List<Dict> dicts = new ArrayList<>();
 
-    @PostMapping
-    public Result<Dict> add(@Validated @RequestBody Dict dict) {
-        dicts.add(dict);
-        return Result.ok();
-    }
+	@PostMapping
+	public Result<Dict> add(@Validated @RequestBody Dict dict) {
+		dicts.add(dict);
+		return Result.ok();
+	}
 
-    @GetMapping
-    public Result<Object> test() {
-        return Result.ok(DictUtil.typeConvert(dicts));
-    }
+	@GetMapping
+	public Result<Object> test() {
+		return Result.ok(DictUtil.typeConvert(dicts));
+	}
+
 }
