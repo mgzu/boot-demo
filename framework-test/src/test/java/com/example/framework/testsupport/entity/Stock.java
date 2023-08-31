@@ -5,20 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
-/**
- * @author MaGuangZu
- * @since 2023-07-26
- */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class Product {
+public class Stock {
 
 	private String id;
 	private String name;
-	private List<Stock> stocks;
 
 }
