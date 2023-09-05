@@ -6,9 +6,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Setter
 @Getter
+@DynamicInsert
 @Entity
 @Table
 public class Role extends BaseEntity {
@@ -22,6 +25,8 @@ public class Role extends BaseEntity {
 	@Column(nullable = false)
 	private Boolean superAdmin;
 
+	@ColumnDefault("0")
 	@Column(nullable = false)
 	private Integer orderPriority;
+
 }

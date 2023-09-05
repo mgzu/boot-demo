@@ -9,6 +9,8 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 /**
  * @author MaGuangZu
@@ -16,6 +18,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@DynamicInsert
 @Entity
 @Table
 public class Dict extends BaseEntity {
@@ -28,8 +31,13 @@ public class Dict extends BaseEntity {
 	})
 	@Column(nullable = false)
 	private String dictType;
+
 	@NotBlank
 	@Column(name = "`VALUE`", nullable = false)
 	private String value;
+
+	@ColumnDefault("0")
+	@Column(nullable = false)
+	private Integer orderPriority;
 
 }
