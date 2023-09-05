@@ -7,9 +7,11 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 @Setter
 @Getter
+@DynamicInsert
 @Entity
 @Table(name = "`USER`")
 public class User extends BaseEntity {
