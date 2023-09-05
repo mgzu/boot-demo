@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 /**
  * @author MaGuangZu
@@ -17,6 +18,7 @@ import org.hibernate.annotations.ColumnDefault;
  */
 @Setter
 @Getter
+@DynamicInsert
 @Entity
 @Table
 public class Dict extends BaseEntity {
