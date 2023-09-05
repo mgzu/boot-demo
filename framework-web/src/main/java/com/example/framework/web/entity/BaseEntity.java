@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -30,33 +31,34 @@ import java.time.LocalDateTime;
 public class BaseEntity extends PersistableEntity {
 
 	@NotNull
-    @CreatedBy
+	@CreatedBy
 	@Column(nullable = false, updatable = false)
-    private String createdBy;
+	private String createdBy;
 
 	@NotNull
-    @CreatedDate
-    @Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false, updatable = false)
-    private LocalDateTime createdDate;
+	private LocalDateTime createdDate;
 
 	@NotNull
-    @LastModifiedBy
+	@LastModifiedBy
 	@Column(nullable = false)
-    private String lastModifiedBy;
+	private String lastModifiedBy;
 
 	@NotNull
-    @LastModifiedDate
-    @Temporal(TemporalType.TIMESTAMP)
+	@LastModifiedDate
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(nullable = false)
-    private LocalDateTime lastModifiedDate;
+	private LocalDateTime lastModifiedDate;
 
 	@Nullable
 	private String remark;
 
 	@NotNull
 	@Version
+	@ColumnDefault("0")
 	@Column(nullable = false)
-	private int versionLock;
+	private Integer versionLock;
 
 }
