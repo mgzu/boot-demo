@@ -33,6 +33,7 @@ class DictRepositoryTest {
 		entityManager.refresh(saved);
 		assertThat(saved.getId()).isNotBlank();
 		assertThat(saved.getOrderPriority()).isZero();
+		assertThat(saved.getVersionLock()).isZero();
 	}
 
 	@Test
@@ -44,6 +45,7 @@ class DictRepositoryTest {
 		Dict saved = dictRepository.saveAndFlush(dict);
 		assertThat(saved.getId()).isNotBlank();
 		assertThat(saved.getOrderPriority()).isEqualTo(10);
+		assertThat(saved.getVersionLock()).isZero();
 	}
 
 	@Test
