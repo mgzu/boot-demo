@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 /**
  * @author MaGuangZu
@@ -28,8 +29,13 @@ public class Dict extends BaseEntity {
 	})
 	@Column(nullable = false)
 	private String dictType;
+
 	@NotBlank
 	@Column(name = "`VALUE`", nullable = false)
 	private String value;
+
+	@ColumnDefault("0")
+	@Column(nullable = false)
+	private Integer orderPriority;
 
 }
