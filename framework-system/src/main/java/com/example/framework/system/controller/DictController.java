@@ -1,34 +1,33 @@
 package com.example.framework.system.controller;
 
 import com.example.framework.system.entity.Dict;
-import com.example.framework.system.util.DictUtil;
+import com.example.framework.system.entity.dto.DictDto;
+import com.example.framework.system.mapstruct.DictMapper;
+import com.example.framework.system.service.DictService;
 import com.example.framework.web.controller.BaseController;
 import com.example.framework.web.entity.Result;
+import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author MaGuangZu
  * @since 2021-09-27
  */
+@AllArgsConstructor
 @RequestMapping("dict")
 @RestController
 public class DictController extends BaseController {
 
-	List<Dict> dicts = new ArrayList<>();
+	private final DictService dictService;
 
 	@PostMapping
-	public Result<Dict> add(@Validated @RequestBody Dict dict) {
-		dicts.add(dict);
-		return Result.ok();
-	}
-
-	@GetMapping
-	public Result<Object> test() {
-		return Result.ok(DictUtil.typeConvert(dicts));
+	public Result<Dict> save(@Validated @RequestBody DictDto dictDto) {
+		Dict dict = DictMapper.INSTANCE.toDict(dictDto);
+		return Result.ok(dictService.save(dict));
 	}
 
 }

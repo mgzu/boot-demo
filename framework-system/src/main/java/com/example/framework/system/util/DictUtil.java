@@ -1,8 +1,8 @@
 package com.example.framework.system.util;
 
 import com.example.framework.system.constants.DictConstants;
-import com.example.framework.system.entity.Dict;
-import com.example.framework.system.entity.vo.DictVo;
+import com.example.framework.system.entity.DictItem;
+import com.example.framework.system.entity.vo.DictItemVo;
 import lombok.experimental.UtilityClass;
 import org.dromara.hutool.core.collection.CollUtil;
 import org.jetbrains.annotations.NotNull;
@@ -21,41 +21,41 @@ import java.util.stream.Collectors;
 public class DictUtil {
 
 	/**
-	 * Converts a Dict object to a DictVo object.
+	 * Converts a DictItem object to a DictItemVo object.
 	 *
-	 * @param dict the Dict object to be converted
-	 * @return the converted DictVo object
+	 * @param dictItem the DictItem object to be converted
+	 * @return the converted DictItemVo object, or null if the input is null
 	 */
 	@Nullable
-	public static DictVo typeConvert(Dict dict) {
-		if (dict == null) {
+	public static DictItemVo convert(DictItem dictItem) {
+		if (dictItem == null) {
 			return null;
 		}
-		DictVo dictVo = new DictVo();
-		dictVo.setDictType(dict.getDictType());
-		switch (dict.getDictType()) {
-			case DictConstants.DICT_TYPE_INT -> dictVo.setValue(Integer.parseInt(dict.getValue()));
-			case DictConstants.DICT_TYPE_DECIMAL -> dictVo.setValue(new BigDecimal(dict.getValue()));
-			case DictConstants.DICT_TYPE_BOOL -> dictVo.setValue(Boolean.parseBoolean(dict.getValue()));
-			case DictConstants.DICT_TYPE_STRING -> dictVo.setValue(dict.getValue());
-			default -> throw new IllegalArgumentException("Unsupported dict type：" + dict.getDictType());
+		DictItemVo dictItemVo = new DictItemVo();
+		dictItemVo.setDictType(dictItem.getType());
+		switch (dictItem.getType()) {
+			case DictConstants.DICT_TYPE_INT -> dictItemVo.setValue(Integer.parseInt(dictItem.getValue()));
+			case DictConstants.DICT_TYPE_DECIMAL -> dictItemVo.setValue(new BigDecimal(dictItem.getValue()));
+			case DictConstants.DICT_TYPE_BOOL -> dictItemVo.setValue(Boolean.parseBoolean(dictItem.getValue()));
+			case DictConstants.DICT_TYPE_STRING -> dictItemVo.setValue(dictItem.getValue());
+			default -> throw new IllegalArgumentException("Unsupported type：" + dictItem.getValue());
 		}
-		return dictVo;
+		return dictItemVo;
 	}
 
 	/**
-	 * Converts a list of `Dict` objects to a list of `DictVo` objects.
+	 * Converts a list of DictItem objects to a list of DictItemVo objects.
 	 *
-	 * @param dicts the list of `Dict` objects to be converted
-	 * @return the list of converted `DictVo` objects
+	 * @param dicts the list of DictItem objects to convert
+	 * @return the converted list of DictItemVo objects
 	 */
 	@NotNull
-	public static List<DictVo> typeConvert(List<Dict> dicts) {
+	public static List<DictItemVo> convert(List<DictItem> dicts) {
 		if (CollUtil.isEmpty(dicts)) {
 			return Collections.emptyList();
 		}
 		return dicts.stream()
-			.map(DictUtil::typeConvert)
+			.map(DictUtil::convert)
 			.collect(Collectors.toList());
 	}
 
