@@ -3,12 +3,16 @@ package com.example.framework.system.entity.vo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 public class DictVo {
 
-	private String dictType;
+	private String code;
 
-	private Object value;
+	private String name;
+
+	private List<DictItemVo> items;
 
 }
