@@ -21,6 +21,6 @@ public class Permission extends BaseEntity {
 
 	@ColumnDefault("0")
 	@Column(nullable = false)
-	private Integer orderPriority;
+	private Integer orderByPriority;
 
 }
