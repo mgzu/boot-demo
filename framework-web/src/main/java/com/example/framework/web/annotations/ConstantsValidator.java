@@ -3,7 +3,7 @@ package com.example.framework.web.annotations;
 import com.example.framework.web.validation.ConstantsValidatorConstraint;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 import java.lang.annotation.*;
 
@@ -15,7 +15,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = ConstantsValidatorConstraint.class)
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-@NotNull
+@NotBlank
 public @interface ConstantsValidator {
 
 	String[] constants();
