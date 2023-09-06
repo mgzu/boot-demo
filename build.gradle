@@ -29,7 +29,7 @@ ext {
 	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct
 	mapstructVersion = '1.5.5.Final'
 	// https://mvnrepository.com/artifact/io.github.mouzt/bizlog-sdk
-	bizlogSdkVersion = '3.0.6'
+	bizlogSdkVersion = '3.0.6-oxadmin'
 	// https://mvnrepository.com/artifact/org.jeasy/easy-rules-core
 	easyRulesVersion = '4.1.0'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
