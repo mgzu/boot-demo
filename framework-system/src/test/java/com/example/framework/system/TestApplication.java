@@ -9,7 +9,8 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @ComponentScan({
 	"com.example.framework.system",
-	"com.example.framework.web.configure.jpa"
+	"com.example.framework.web.configure.jpa",
+	"com.example.framework.web.aspects"
 })
 @SpringBootApplication
 public class TestApplication {

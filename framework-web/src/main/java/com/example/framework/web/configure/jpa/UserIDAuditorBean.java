@@ -14,9 +14,11 @@ import java.util.Optional;
 @EnableJpaAuditing
 @Configuration
 public class UserIDAuditorBean implements AuditorAware<String> {
-    @NotNull
+
+	@NotNull
     @Override
     public Optional<String> getCurrentAuditor() {
         return Optional.of("1640600092347");
     }
+
 }

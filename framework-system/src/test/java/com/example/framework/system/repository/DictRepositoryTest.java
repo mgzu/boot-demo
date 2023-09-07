@@ -2,7 +2,9 @@ package com.example.framework.system.repository;
 
 import com.example.framework.system.constants.DictConstants;
 import com.example.framework.system.entity.Dict;
+import com.example.framework.web.contexts.TenantContext;
 import jakarta.persistence.EntityManager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,6 +23,11 @@ class DictRepositoryTest {
 
 	@Autowired
 	EntityManager entityManager;
+
+	@BeforeEach
+	void before() {
+		TenantContext.setTenantId("test");
+	}
 
 	@Test
 	void testSaveByDefault() {

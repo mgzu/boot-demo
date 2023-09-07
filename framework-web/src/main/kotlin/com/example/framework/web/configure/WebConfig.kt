@@ -12,10 +12,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
  * @since 2021-12-03
  */
 @Configuration
-open class WebConfig(private val tracer: Tracer) : WebMvcConfigurer {
+open class WebConfig(
+	private val tracer: Tracer,
+	private val tenantInterceptor: TenantRequestInterceptor
+) : WebMvcConfigurer {
 
 	override fun addInterceptors(registry: InterceptorRegistry) {
 		registry.addInterceptor(TraceIdInterceptor(tracer))
+			.addPathPatterns("/**")
+			.excludePathPatterns(WebConstants.STATIC_RESOURCE_PATTERNS)
+		registry.addInterceptor(tenantInterceptor)
 			.addPathPatterns("/**")
 			.excludePathPatterns(WebConstants.STATIC_RESOURCE_PATTERNS)
 	}
