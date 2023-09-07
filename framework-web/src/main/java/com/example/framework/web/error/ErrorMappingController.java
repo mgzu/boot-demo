@@ -14,7 +14,7 @@ public class ErrorMappingController implements ErrorController {
 
     @RequestMapping("/error")
     public Result<Object> error() {
-        return Result.error("System error");
+        return Result.error();
     }
 
 }
