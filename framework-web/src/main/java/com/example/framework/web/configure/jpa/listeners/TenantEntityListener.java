@@ -6,8 +6,9 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreRemove;
 import jakarta.persistence.PreUpdate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Objects;
 
 /**
  * @author MaGuangZu
@@ -16,24 +17,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class TenantEntityListener {
 
-	private TenantContext tenantContext;
-
-	@Autowired
-	public void setTenantContext(TenantContext tenantContext) {
-		this.tenantContext = tenantContext;
-	}
-
 	@PrePersist
 	@PreUpdate
 	public void prePersistAndUpdate(Object object) {
 		if (object instanceof BaseEntity baseEntity) {
-			baseEntity.setTenantId(tenantContext.getTenantId());
+			baseEntity.setTenantId(TenantContext.getTenantId());
 		}
 	}
 
 	@PreRemove
 	public void preRemove(Object object) {
-		if (object instanceof BaseEntity baseEntity && baseEntity.getTenantId() != tenantContext.getTenantId()) {
+		if (object instanceof BaseEntity baseEntity &&
+			!Objects.equals(baseEntity.getTenantId(), TenantContext.getTenantId())) {
 			throw new EntityNotFoundException();
 		}
 	}

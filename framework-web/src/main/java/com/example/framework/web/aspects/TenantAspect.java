@@ -23,21 +23,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class TenantAspect {
 
-	private final TenantContext tenantContext;
-
 	@PersistenceContext
 	private final EntityManager entityManager;
 
 	@Before("execution(* com.example.framework.web.configure.jpa.repositories.TenantRepository+.find*(..))")
 	public void before(JoinPoint joinPoint) {
-//		entityManager.unwrap(Session.class).disableFilter(TenantConstants.TENANT_FILTER_NAME);
 		MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
 
 		if (AnnotationUtils.getAnnotation(methodSignature.getMethod(), DisableTenantFilter.class) == null) {
 			entityManager
 				.unwrap(Session.class)
 				.enableFilter(TenantConstants.TENANT_FILTER_NAME)
-				.setParameter(TenantConstants.TENANT_PARAMETER_NAME, tenantContext.getTenantId());
+				.setParameter(TenantConstants.TENANT_PARAMETER_NAME, TenantContext.getTenantId());
 		} else {
 			entityManager.unwrap(Session.class).disableFilter(TenantConstants.TENANT_FILTER_NAME);
 		}
