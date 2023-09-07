@@ -1,9 +1,7 @@
 package com.example.framework.system.repository;
 
 import com.example.framework.system.entity.Dict;
-import com.example.framework.web.contexts.TenantContext;
 import jakarta.persistence.EntityManager;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,18 +15,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * @since 2023-08-31
  */
 @DataJpaTest
-class DictRepositoryTest {
+class DictRepositoryTest extends TenantBaseCase {
 
 	@Autowired
 	DictRepository dictRepository;
 
 	@Autowired
 	EntityManager entityManager;
-
-	@BeforeEach
-	void before() {
-		TenantContext.setTenantId("test");
-	}
 
 	@Test
 	void testFindAll() {
