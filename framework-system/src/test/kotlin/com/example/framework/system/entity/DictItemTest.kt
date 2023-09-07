@@ -1,6 +1,8 @@
 package com.example.framework.system.entity
 
 import com.example.framework.system.constants.DictConstants
+import com.example.framework.system.entity.vo.DictItemVo
+import com.example.framework.system.entity.vo.DictVo
 import com.example.framework.system.util.DictUtil
 import com.example.framework.testsupport.BaseCase
 import com.fasterxml.jackson.core.JsonProcessingException
@@ -15,30 +17,30 @@ import java.time.LocalDateTime
  * @author MaGuangZu
  * @since 2021-09-27
  */
-class DictTest : BaseCase() {
+class DictItemTest : BaseCase() {
 
 	@Test
 	@Throws(JsonProcessingException::class)
 	fun test() {
-		val dicts: MutableList<Dict> = ArrayList()
+		val dicts: MutableList<DictItem> = ArrayList()
 		dicts.add(of("string", "123"))
 		dicts.add(of("int", "123"))
 		dicts.add(of("bool", "true"))
 		dicts.add(of("decimal", "1.333333333333333333333333"))
-		val toList = DictUtil.typeConvert(dicts)
+		val toList = DictUtil.convert(dicts)
 		println(objectMapper.writeValueAsString(toList))
 	}
 
-	private fun of(type: String?, value: String?): Dict {
-		val dict = Dict()
-		dict.dictType = type
-		dict.value = value
-		dict.createdBy = "createdBy"
-		dict.createdDate = LocalDateTime.now()
-		dict.lastModifiedBy = "lastModifiedBy"
-		dict.lastModifiedDate = LocalDateTime.now()
-		dict.versionLock = 0
-		return dict
+	private fun of(type: String?, value: String?): DictItem {
+		val dictItem = DictItem()
+		dictItem.type = type
+		dictItem.value = value
+		dictItem.createdBy = "createdBy"
+		dictItem.createdDate = LocalDateTime.now()
+		dictItem.lastModifiedBy = "lastModifiedBy"
+		dictItem.lastModifiedDate = LocalDateTime.now()
+		dictItem.versionLock = 0
+		return dictItem
 	}
 
 	private val invalidMessage = setOf(
