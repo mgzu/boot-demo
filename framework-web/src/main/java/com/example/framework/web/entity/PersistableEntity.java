@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
 
@@ -28,15 +29,16 @@ import java.io.Serializable;
 @MappedSuperclass
 public class PersistableEntity implements Persistable<String>, Serializable {
 
-    @Id
-    @GeneratedValue(generator = "snowflakeId")
+	@Id
+	@GeneratedValue(generator = "snowflakeId")
 	@GenericGenerator(name = "snowflakeId", type = SnowflakeIdGenerator.class)
-    protected String id;
+	protected String id;
 
 	@JsonIgnore
-    @Transient
-    @Override
-    public boolean isNew() {
-        return id == null;
-    }
+	@Transient
+	@Override
+	public boolean isNew() {
+		return StringUtils.isNotBlank(id);
+	}
+
 }
