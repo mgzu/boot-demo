@@ -1,7 +1,11 @@
 package com.example.framework.web.error;
 
 import com.example.framework.web.entity.Result;
-import org.springframework.boot.web.servlet.error.ErrorController;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,11 +14,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2022-12-30
  */
 @RestController
-public class ErrorMappingController implements ErrorController {
+@RequestMapping("${server.error.path:${error.path:/error}}")
+public class ErrorMappingController extends AbstractErrorController {
 
-    @RequestMapping("/error")
-    public Result<Object> error() {
-        return Result.error("System error");
-    }
+	public ErrorMappingController(ErrorAttributes errorAttributes) {
+		super(errorAttributes);
+	}
+
+	@RequestMapping
+	public Result<Object> error(HttpServletRequest request, HttpServletResponse response) {
+		response.setStatus(HttpStatus.OK.value());
+		HttpStatus status = getStatus(request);
+		return Result.builder()
+			.success(false)
+			.code(status.value())
+			.message(status.getReasonPhrase())
+			.build();
+	}
 
 }
