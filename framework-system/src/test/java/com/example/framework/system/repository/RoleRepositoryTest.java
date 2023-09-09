@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 2023-08-31
  */
 @DataJpaTest
-class RoleRepositoryTest {
+class RoleRepositoryTest extends TenantBaseCase {
 
 	@Autowired
 	RoleRepository roleRepository;

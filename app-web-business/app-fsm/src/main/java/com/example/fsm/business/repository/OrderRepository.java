@@ -1,7 +1,7 @@
 package com.example.fsm.business.repository;
 
 import com.example.app.common.entity.Order;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.framework.web.configure.jpa.repositories.TenantRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  * @since 2021-12-27
  */
 @Repository
-public interface OrderRepository extends JpaRepository<Order, String> {
+public interface OrderRepository extends TenantRepository<Order> {
 }
