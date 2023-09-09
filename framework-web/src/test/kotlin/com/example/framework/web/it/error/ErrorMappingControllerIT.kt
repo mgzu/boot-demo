@@ -22,6 +22,7 @@ class ErrorMappingControllerIT : BaseCase() {
 	@CsvSource(
 		value = [
 			"/failed, 500",
+			"/failed2, 500",
 			"/favicon.ico, 404"
 		]
 	)
