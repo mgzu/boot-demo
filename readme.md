@@ -10,7 +10,12 @@
 | framework-fsm-core          | framework fsm core     |
 | framework-log               | framework log core     |
 | framework-web               | framework web core     |
+| framework-system            | framework system       |
 | framework-test              | framework test support |
 | app-web-business\app-common | app common code        |
 | app-web-business\app-fsm    | default fsm implement  |
 | app-web-business\app-order  | web business code      |
+
+# Reference link
+
+tenant: https://github.com/filipefox/spring-multitenancy-column-discriminator
