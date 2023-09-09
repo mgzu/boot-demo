@@ -7,6 +7,7 @@ import org.dromara.hutool.core.util.RandomUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.ApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,24 +16,17 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 2023-09-06
  */
 @DataJpaTest
-class DictItemRepositoryTest extends TenantBaseCase {
+class DictItemRepositoryBaseTest extends TenantBaseCase {
 	@Autowired
-	DictItemRepository dictItemRepository;
+	protected DictItemRepository dictItemRepository;
 
 	@Autowired
-	EntityManager entityManager;
+	protected EntityManager entityManager;
 
-	@Test
-	void testFindAll() {
-		assertThat(dictItemRepository.findAll()).isEmpty();
-		randomAndSave();
-		assertThat(dictItemRepository.findAll()).hasSize(1);
-		setRandomTenantId();
-		randomAndSave();
-		assertThat(dictItemRepository.findAll()).hasSize(1);
-	}
+	@Autowired
+	ApplicationContext applicationContext;
 
-	private void randomAndSave() {
+	protected void randomAndSave() {
 		DictItem dictItem = new DictItem();
 		dictItem.setDictId(RandomUtil.randomString(10));
 		dictItem.setType(DictConstants.DICT_TYPE_BOOL);
