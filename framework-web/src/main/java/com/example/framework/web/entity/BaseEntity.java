@@ -1,5 +1,8 @@
 package com.example.framework.web.entity;
 
+import com.example.framework.web.configure.jpa.listeners.TenantEntityListener;
+import com.example.framework.web.constants.TenantConstants;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -8,6 +11,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.ParamDef;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -25,7 +31,11 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Setter
 @Getter
-@EntityListeners(AuditingEntityListener.class)
+@FilterDef(name = TenantConstants.TENANT_FILTER_NAME,
+	parameters = @ParamDef(name = TenantConstants.TENANT_PARAMETER_NAME, type = String.class),
+	defaultCondition = TenantConstants.TENANT_COLUMN_NAME + " = :" + TenantConstants.TENANT_PARAMETER_NAME)
+@Filter(name = TenantConstants.TENANT_FILTER_NAME)
+@EntityListeners({AuditingEntityListener.class, TenantEntityListener.class})
 @MappedSuperclass
 public class BaseEntity extends PersistableEntity {
 
@@ -53,6 +63,10 @@ public class BaseEntity extends PersistableEntity {
 
 	@Nullable
 	private String remark;
+
+	@JsonIgnore
+	@Column(nullable = false)
+	private String tenantId;
 
 	@NotNull
 	@Version

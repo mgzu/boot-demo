@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * @since 2023-08-31
  */
 @DataJpaTest
-class DictRepositoryTest {
+class DictRepositoryTest extends TenantBaseCase {
 
 	@Autowired
 	DictRepository dictRepository;

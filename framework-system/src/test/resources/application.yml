@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    include: common
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:boot_demo_db
+    username: postgres
+    password: 123456
+
+  jpa:
+    show-sql: true
+
+framework:
+  tenant:
+    enable: true
