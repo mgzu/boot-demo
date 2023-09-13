@@ -35,7 +35,7 @@ jobs:
             ${{ matrix.java }}
             17
           distribution: 'temurin'
-          cache: gradle
+#          cache: gradle
 
       - name: Build with Gradle
         run: ./gradlew clean build -P javaVer=${{ matrix.java }} --no-daemon
