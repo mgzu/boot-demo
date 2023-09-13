@@ -31,9 +31,11 @@ jobs:
       - name: Set up JDK ${{ matrix.java }}
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ matrix.java }}
+          java-version: |
+            ${{ matrix.java }}
+            17
           distribution: 'temurin'
           cache: gradle
 
       - name: Build with Gradle
-        run: ./gradlew clean build --no-daemon
+        run: ./gradlew clean build -P javaVer=${{ matrix.java }} --no-daemon
