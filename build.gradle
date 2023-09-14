@@ -5,6 +5,7 @@ plugins {
 	id 'org.graalvm.buildtools.native' version "${nativeBuildToolsVersion}" apply false
 	id 'org.jetbrains.kotlin.jvm' version "${kotlinVersion}" apply false
 	id 'me.champeau.jmh' version "0.7.1" apply false
+	id "com.diffplug.spotless" version "6.21.0" apply false
 }
 
 allprojects {
@@ -50,6 +51,7 @@ subprojects {
 
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'java'
+	apply plugin: 'com.diffplug.spotless'
 
 	repositories {
 		maven {
@@ -103,5 +105,18 @@ subprojects {
 
 	sourceCompatibility = JavaVersion.VERSION_17
 	targetCompatibility = JavaVersion.VERSION_17
+
+	spotless {
+		encoding 'UTF-8'
+		java {
+			// skipJavadocFormatting https://github.com/diffplug/spotless/pull/1793
+			googleJavaFormat().skipJavadocFormatting()
+		}
+		format "properties", {
+			target '**/*.properties'
+			toggleOffOn()
+//			encoding 'ISO-8859-1' // I don't know if this is useful
+		}
+	}
 
 }
