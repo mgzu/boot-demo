@@ -110,7 +110,8 @@ subprojects {
 		encoding 'UTF-8'
 		java {
 			// skipJavadocFormatting https://github.com/diffplug/spotless/pull/1793
-			googleJavaFormat().skipJavadocFormatting()
+			// TODO: indent with tabs and 4
+			googleJavaFormat().reorderImports(false).skipJavadocFormatting()
 		}
 		format "properties", {
 			target '**/*.properties'
