@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [ '17', '21-ea' ]
+        java: [ '21-ea' ]
         os: [ ubuntu-latest, windows-latest ]
 
     runs-on: ${{ matrix.os }}
@@ -33,9 +33,8 @@ jobs:
         with:
           java-version: |
             ${{ matrix.java }}
-            17
           distribution: 'temurin'
 #          cache: gradle
 
       - name: Build with Gradle
-        run: ./gradlew clean build -P javaVer=${{ matrix.java }} --no-daemon
+        run: ./gradlew clean build --no-daemon

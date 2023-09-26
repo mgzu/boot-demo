@@ -43,10 +43,6 @@ ext {
 
 ignoreNoSourceProject = ext.ignoreNoSourceProject.split(",")
 
-ext.javaVer = project.hasProperty('javaVer') ?
-	JavaVersion.toVersion(project.getProperties()['javaVer'])
-	: JavaVersion.VERSION_17
-
 subprojects {
 	if (ignoreNoSourceProject.contains(project.name)) {
 		return
@@ -105,7 +101,7 @@ subprojects {
 		useJUnitPlatform()
 	}
 
-	sourceCompatibility = javaVer
-	targetCompatibility = javaVer
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 
 }
