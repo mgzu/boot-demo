@@ -35,8 +35,12 @@ class DictRepositoryTest extends TenantBaseCase {
 		dict.setCode(code);
 		dict.setName("name");
 		dictRepository.saveAndFlush(dict);
-		assertThatThrownBy(() -> dictRepository.saveAndFlush(dict))
-			.isInstanceOf(DataIntegrityViolationException.class).hasMessageContaining("unique");
+		Dict dict2 = new Dict();
+		dict2.setCode(code);
+		dict2.setName("name");
+		assertThatThrownBy(() -> dictRepository.saveAndFlush(dict2))
+			.isInstanceOf(DataIntegrityViolationException.class)
+			.hasMessageContaining("unique");
 	}
 
 }
