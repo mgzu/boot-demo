@@ -1,7 +1,7 @@
 package com.example;
 
-import com.example.framework.testsupport.BaseCase;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.text.UnicodeUtil;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  * @since 2021-12-22
  */
 @Slf4j
-class StringTest extends BaseCase {
+class StringTest {
 
 	@Test
 	void trimWhiteSpaceTest() {
