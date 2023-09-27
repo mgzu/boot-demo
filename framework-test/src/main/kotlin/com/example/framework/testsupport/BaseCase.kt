@@ -36,7 +36,7 @@ open class BaseCase {
 				),  // supported locales
 				Locale.CHINA,  // default locale
 				{ context: LocaleResolverContext ->
-					if (Objects.nonNull(acceptLanguage)) {
+					if (acceptLanguage != null) {
 						val acceptedLanguages = LanguageRange.parse(acceptLanguage!!.get())
 						val resolvedLocales = Locale.filter(acceptedLanguages, context.supportedLocales)
 						if (resolvedLocales.isNotEmpty()) {
@@ -61,7 +61,9 @@ open class BaseCase {
 	}
 
 	fun <T> validateResult(collection: Collection<String>, validateResult: Set<ConstraintViolation<T>>) {
-		validateResult.stream().forEach { assertThat(collection).contains(it.message) }
+		validateResult.stream().forEach {
+			assertThat(collection).contains(it.message)
+		}
 	}
 
 	fun <T> printResult(validateResult: Set<ConstraintViolation<T>>) {
