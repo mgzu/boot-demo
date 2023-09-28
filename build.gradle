@@ -71,7 +71,6 @@ subprojects {
 	dependencies {
 		// kotlin optional
 		implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
-		implementation "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
 
 		// tool
 		implementation "org.dromara.hutool:hutool-core:${hutoolVersion}"
@@ -86,6 +85,7 @@ subprojects {
 
 		// test
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		testImplementation "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
 		testCompileOnly 'org.projectlombok:lombok'
 		testAnnotationProcessor 'org.projectlombok:lombok'
 		testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
