@@ -70,8 +70,8 @@ subprojects {
 
 	dependencies {
 		// kotlin optional
-		implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-		implementation 'org.jetbrains.kotlin:kotlin-reflect'
+		implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+		implementation "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
 
 		// tool
 		implementation "org.dromara.hutool:hutool-core:${hutoolVersion}"
