@@ -1,7 +1,6 @@
 package com.example.bad;
 
 import com.example.framework.common.util.CastUtil;
-import com.example.framework.testsupport.BaseCase;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author MaGuangZu
  * @since 2021-09-26
  */
-class CastObjectTest extends BaseCase {
+class CastObjectTest {
 
 	@Test
 	void testCast() {

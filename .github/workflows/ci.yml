@@ -21,7 +21,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        java: [ '21-ea' ]
+        java: [ '21' ]
         os: [ ubuntu-latest, windows-latest ]
 
     runs-on: ${{ matrix.os }}
@@ -33,7 +33,7 @@ jobs:
         with:
           java-version: |
             ${{ matrix.java }}
-          distribution: 'temurin'
+          distribution: 'zulu'
           cache: gradle
 
       - name: Build with Gradle
