@@ -9,10 +9,15 @@ rootProject.name = 'boot-demo'
 
 include ':framework-common'
 include ':framework-web'
+include ':framework-starter'
 include ':framework-system'
 include ':framework-fsm-core'
 include ':framework-log'
 include ':framework-test'
+
+file("${rootDir}/framework-starter").eachDir {
+	include ":framework-starter:${it.name}"
+}
 
 file("${rootDir}/app-web-business").eachDir {
 	include ":app-web-business:${it.name}"

@@ -1,0 +1,16 @@
+plugins {
+	id 'org.jetbrains.kotlin.jvm'
+	id 'org.springframework.boot'
+}
+
+dependencies {
+	api project(":framework-web")
+	// test
+	testApi project(':framework-test')
+	// security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+}
+
+kotlin {
+	jvmToolchain(21)
+}
