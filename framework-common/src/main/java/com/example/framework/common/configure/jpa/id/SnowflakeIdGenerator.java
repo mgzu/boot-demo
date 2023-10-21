@@ -1,4 +1,4 @@
-package com.example.framework.web.configure.jpa.id;
+package com.example.framework.common.configure.jpa.id;
 
 import org.dromara.hutool.core.data.id.IdUtil;
 import org.dromara.hutool.core.data.id.Snowflake;

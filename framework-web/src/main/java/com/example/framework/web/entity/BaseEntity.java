@@ -1,5 +1,6 @@
 package com.example.framework.web.entity;
 
+import com.example.framework.common.entity.PersistableEntity;
 import com.example.framework.web.configure.jpa.listeners.TenantEntityListener;
 import com.example.framework.web.constants.TenantConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;

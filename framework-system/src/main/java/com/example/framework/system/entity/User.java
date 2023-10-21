@@ -25,6 +25,10 @@ public class User extends BaseEntity {
 	@Column(nullable = false)
 	private String password;
 
+	@NotBlank
+	@Column(nullable = false)
+	private Boolean enabled;
+
 	@ColumnDefault("0")
 	@Column(nullable = false)
 	private Integer orderByPriority;

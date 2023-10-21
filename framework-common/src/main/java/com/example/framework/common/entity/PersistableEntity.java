@@ -1,6 +1,6 @@
-package com.example.framework.web.entity;
+package com.example.framework.common.entity;
 
-import com.example.framework.web.configure.jpa.id.SnowflakeIdGenerator;
+import com.example.framework.common.configure.jpa.id.SnowflakeIdGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.apache.commons.lang3.StringUtils;
+import org.dromara.hutool.core.text.StrUtil;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.domain.Persistable;
 
@@ -38,7 +38,7 @@ public class PersistableEntity implements Persistable<String>, Serializable {
 	@Transient
 	@Override
 	public boolean isNew() {
-		return StringUtils.isNotBlank(id);
+		return StrUtil.isNotBlank(id);
 	}
 
 }

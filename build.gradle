@@ -39,6 +39,7 @@ ext {
 	openapiVersion = '2.2.0'
 	// https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
 	jmhVersion = '1.37'
+	jetbrainsAnnotationsVersion = '24.0.1'
 }
 
 ignoreNoSourceProject = ext.ignoreNoSourceProject.split(",")
@@ -77,6 +78,7 @@ subprojects {
 		implementation "com.google.guava:guava:${guavaVersion}"
 		implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 		implementation 'org.hibernate.validator:hibernate-validator'
+		implementation "org.jetbrains:annotations:${jetbrainsAnnotationsVersion}"
 
 		// dev
 		compileOnly 'org.projectlombok:lombok'
