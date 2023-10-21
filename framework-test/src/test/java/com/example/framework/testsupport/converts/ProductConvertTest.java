@@ -4,6 +4,7 @@ import com.example.framework.testsupport.entity.Product;
 import com.example.framework.testsupport.entity.Stock;
 import com.google.common.collect.Lists;
 import org.dromara.hutool.core.data.id.IdUtil;
+import org.dromara.hutool.core.net.Ipv6Util;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -17,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 class ProductConvertTest {
 
-	@MethodSource("getProduct")
+	@MethodSource("getProductList")
 	@ParameterizedTest
 	void shadowCloneTest(Product product) {
 		var copy = ProductConvert.INSTANCE.clone(product);
@@ -34,7 +35,7 @@ class ProductConvertTest {
 		assertThat(product.getStocks()).isEqualTo(copy.getStocks());
 	}
 
-	@MethodSource("getProduct")
+	@MethodSource("getProductList")
 	@ParameterizedTest
 	void deepCloneTest(Product product) {
 		var copy = ProductConvert.INSTANCE.deepClone(product);
@@ -51,7 +52,7 @@ class ProductConvertTest {
 		assertThat(product.getStocks()).isNotEqualTo(copy.getStocks());
 	}
 
-	static List<Product> getProduct() {
+	static List<Product> getProductList() {
 		return List.of(Product.builder()
 			.id(IdUtil.getSnowflakeNextIdStr())
 			.name("product")
