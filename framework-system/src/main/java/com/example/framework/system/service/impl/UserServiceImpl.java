@@ -1,6 +1,6 @@
 package com.example.framework.system.service.impl;
 
-import com.example.framework.system.repository.UserRepository;
+import com.example.framework.system.repository.AccountRepository;
 import com.example.framework.system.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-	private final UserRepository userRepository;
+	private final AccountRepository accountRepository;
 
 }

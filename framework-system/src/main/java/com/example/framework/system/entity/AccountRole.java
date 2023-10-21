@@ -12,11 +12,11 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table
-public class UserRole extends BaseEntity {
+public class AccountRole extends BaseEntity {
 
 	@NotBlank
 	@Column(nullable = false)
-	private String userId;
+	private String accountId;
 
 	@NotBlank
 	@Column(nullable = false)

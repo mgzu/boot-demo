@@ -11,14 +11,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 2023-08-31
  */
 @DataJpaTest
-class UserRoleRepositoryTest extends TenantBaseCase {
+class AccountRoleRepositoryTest extends TenantBaseCase {
 
 	@Autowired
-	UserRoleRepository userRoleRepository;
+	AccountRoleRepository accountRoleRepository;
 
 	@Test
 	void testFindAll() {
-		assertThat(userRoleRepository.findAll()).isEmpty();
+		assertThat(accountRoleRepository.findAll()).isEmpty();
 	}
 
 }
