@@ -3,11 +3,11 @@ plugins {
 }
 
 dependencies {
-	api project(":framework-web")
+	implementation 'org.springframework.boot:spring-boot-starter'
 	// test
 	testApi project(':framework-test')
-	// security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testApi project(":framework-web")
+	testApi project(":framework-system")
 }
 
 kotlin {

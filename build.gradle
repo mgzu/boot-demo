@@ -40,6 +40,9 @@ ext {
 	// https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
 	jmhVersion = '1.37'
 	jetbrainsAnnotationsVersion = '24.0.1'
+	// https://mvnrepository.com/artifact/cn.dev33/sa-token-spring-boot-starter
+	saTokenVersion = '1.37.0'
+	okhttpVersion = '5.0.0-alpha.11'
 }
 
 ignoreNoSourceProject = ext.ignoreNoSourceProject.split(",")
@@ -105,5 +108,9 @@ subprojects {
 
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
+
+	jar {
+		duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+	}
 
 }

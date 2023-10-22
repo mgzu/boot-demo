@@ -1,0 +1,17 @@
+plugins {
+	id 'org.jetbrains.kotlin.jvm'
+}
+
+dependencies {
+	api project(':framework-starter:framework-security-starter:framework-security-common')
+	// security
+	implementation "cn.dev33:sa-token-spring-boot-starter:${saTokenVersion}"
+	// test
+	testApi project(':framework-test')
+	testApi project(":framework-web")
+	testApi project(":framework-system")
+}
+
+kotlin {
+	jvmToolchain(21)
+}

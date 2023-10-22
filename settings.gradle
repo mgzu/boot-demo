@@ -16,7 +16,13 @@ include ':framework-log'
 include ':framework-test'
 
 file("${rootDir}/framework-starter").eachDir {
-	include ":framework-starter:${it.name}"
+	if (it.isDirectory()) {
+		it.eachDir { starter ->
+			include ":framework-starter:${it.name}:${starter.name}"
+		}
+	} else {
+		include ":framework-starter:${it.name}"
+	}
 }
 
 file("${rootDir}/app-web-business").eachDir {
