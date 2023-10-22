@@ -1,12 +1,16 @@
-package com.example.fsm.business.processor;
+package com.example.app.order.processor;
 
 import com.example.app.common.constants.BizLogConstants;
 import com.example.app.common.entity.Order;
 import com.example.app.common.entity.bo.OrderBo;
+import com.example.app.order.enums.BizCodeEnum;
+import com.example.app.order.enums.OrderEventEnum;
+import com.example.app.order.enums.OrderStateEnum;
+import com.example.app.order.enums.ServiceType;
 import com.example.fsm.ServiceResult;
 import com.example.fsm.annotation.OrderProcessor;
-import com.example.fsm.business.checker.CreateParamChecker;
-import com.example.fsm.business.context.CreateOrderContext;
+import com.example.app.order.checker.CreateParamChecker;
+import com.example.app.order.context.CreateOrderContext;
 import com.example.fsm.business.enums.*;
 import com.example.fsm.business.mapstruct.OrderMapper;
 import com.example.fsm.business.repository.OrderRepository;

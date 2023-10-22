@@ -1,19 +1,20 @@
-package com.example.fsm.business.context;
+package com.example.app.order.context;
 
+import com.example.app.order.event.CreateEvent;
+import com.example.app.order.event.ReturnEvent;
 import com.example.fsm.FsmOrder;
-import com.example.fsm.business.event.CreateEvent;
-import com.example.fsm.business.event.ReturnEvent;
+import com.example.fsm.business.engine.IStateContextFactory;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.event.OrderStateEvent;
-import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-@UtilityClass
-public class StateContextFactory {
+@Component
+public class StateContextFactory implements IStateContextFactory {
 
 	static final Map<String, BiFunction<OrderStateEvent, FsmOrder, StateContext<?>>> contextMap = new HashMap<>();
 
@@ -23,7 +24,7 @@ public class StateContextFactory {
 	}
 
 	@NotNull
-	public static <C> StateContext<C> create(@NotNull OrderStateEvent orderStateEvent, @NotNull FsmOrder fsmOrder) {
+	public <C> StateContext<C> create(@NotNull OrderStateEvent orderStateEvent, @NotNull FsmOrder fsmOrder) {
 		String clazzName = orderStateEvent.getClass().getName();
 		BiFunction<OrderStateEvent, FsmOrder, StateContext<?>> function = contextMap.get(clazzName);
 		if (function == null) {

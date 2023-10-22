@@ -13,18 +13,13 @@ public class ErrorCodeEnum {
 
 	/* engine error begin */
 
-	public static final String UN_SUPPORT_EVENT = "不支持的事件";
-	public static final String NOT_FOUND_PROCESSOR = "未找到订单处理器";
-	public static final String FOUND_MORE_PROCESSOR = "找到多个订单处理器";
-	public static final String FOUND_MORE_CONTEXT = "找到多个订单处理器";
+	public static final String UNSUPPORTED_EVENT = "Unsupported event";
+	public static final String NOT_FOUND_PROCESSOR = "Not found processor";
+	public static final String FOUND_MORE_PROCESSOR = "Found more processor";
+	public static final String FOUND_MORE_CONTEXT = "Found more context";
+	public static final String ORDER_NOT_FOUND = "Order not found";
+	public static final String ORDER_STATE_NOT_MATCH = "Order state not match";
 
 	/* engine error end */
-
-	/* business error begin */
-
-	public static final String ORDER_NOT_FOUND = "未找到订单";
-	public static final String ORDER_STATE_NOT_MATCH = "订单状态不匹配";
-
-	/* business error end */
 
 }

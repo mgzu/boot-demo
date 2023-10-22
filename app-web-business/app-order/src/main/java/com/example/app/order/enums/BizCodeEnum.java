@@ -1,4 +1,4 @@
-package com.example.fsm.business.enums;
+package com.example.app.order.enums;
 
 import lombok.experimental.UtilityClass;
 

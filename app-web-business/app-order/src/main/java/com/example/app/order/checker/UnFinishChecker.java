@@ -1,7 +1,7 @@
-package com.example.fsm.business.checker;
+package com.example.app.order.checker;
 
+import com.example.app.order.context.CreateOrderContext;
 import com.example.fsm.ServiceResult;
-import com.example.fsm.business.context.CreateOrderContext;
 import com.example.fsm.checker.Checker;
 import com.example.fsm.context.StateContext;
 import org.jetbrains.annotations.NotNull;

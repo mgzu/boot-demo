@@ -14,5 +14,6 @@ public class SceneIdEnum {
     public static final String WEB = "WEB";
     public static final String APP = "APP";
     public static final String H5 = "H5";
+	public static final String CLIENT = "CLIENT";
 
 }

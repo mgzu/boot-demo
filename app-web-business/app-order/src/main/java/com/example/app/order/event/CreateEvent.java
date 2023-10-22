@@ -1,4 +1,4 @@
-package com.example.fsm.business.event;
+package com.example.app.order.event;
 
 import com.example.fsm.event.OrderStateEvent;
 import lombok.Builder;

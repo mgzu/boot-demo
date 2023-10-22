@@ -1,11 +1,11 @@
-package com.example.fsm.business.plugin;
+package com.example.app.order.plugin;
 
 import com.example.fsm.ServiceResult;
 import com.example.fsm.annotation.ProcessorPlugin;
-import com.example.fsm.business.context.CreateOrderContext;
-import com.example.fsm.business.enums.BizCodeEnum;
-import com.example.fsm.business.enums.OrderEventEnum;
-import com.example.fsm.business.enums.OrderStateEnum;
+import com.example.app.order.context.CreateOrderContext;
+import com.example.app.order.enums.BizCodeEnum;
+import com.example.app.order.enums.OrderEventEnum;
+import com.example.app.order.enums.OrderStateEnum;
 import com.example.fsm.business.enums.SceneIdEnum;
 import com.example.fsm.context.StateContext;
 import com.example.fsm.exception.FsmException;
