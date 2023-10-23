@@ -1,4 +1,4 @@
-package com.example.framework.testsupport.converts;
+package com.example.framework.testsupport.converters;
 
 import com.example.framework.testsupport.entity.Product;
 import org.mapstruct.BeanMapping;
@@ -16,9 +16,9 @@ import org.mapstruct.factory.Mappers;
 	builder = @Builder(disableBuilder = true),
 	mappingControl = DeepClone.class
 )
-public interface ProductConvert {
+public interface ProductConverter {
 
-	ProductConvert INSTANCE = Mappers.getMapper(ProductConvert.class);
+	ProductConverter INSTANCE = Mappers.getMapper(ProductConverter.class);
 
 	@SuppressWarnings("DefaultAnnotationParam")
 	@BeanMapping(mappingControl = MappingControl.class)

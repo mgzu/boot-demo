@@ -1,8 +1,8 @@
 package com.example.framework.system.controller;
 
+import com.example.framework.system.converters.DictConverter;
 import com.example.framework.system.entity.Dict;
 import com.example.framework.system.entity.dto.DictDto;
-import com.example.framework.system.mapstruct.DictMapper;
 import com.example.framework.system.service.DictService;
 import com.example.framework.web.controller.BaseController;
 import com.example.framework.web.entity.Result;
@@ -26,7 +26,7 @@ public class DictController extends BaseController {
 
 	@PostMapping
 	public Result<Dict> save(@Validated @RequestBody DictDto dictDto) {
-		Dict dict = DictMapper.INSTANCE.toDict(dictDto);
+		Dict dict = DictConverter.INSTANCE.toDict(dictDto);
 		return Result.ok(dictService.save(dict));
 	}
 

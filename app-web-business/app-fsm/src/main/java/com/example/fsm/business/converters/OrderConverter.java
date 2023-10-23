@@ -1,4 +1,4 @@
-package com.example.fsm.business.mapstruct;
+package com.example.fsm.business.converters;
 
 import com.example.app.common.entity.Order;
 import com.example.app.common.entity.bo.OrderBo;
@@ -12,9 +12,9 @@ import org.mapstruct.factory.Mappers;
  * @since 2021-12-27
  */
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface OrderMapper {
+public interface OrderConverter {
 
-    OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
+    OrderConverter INSTANCE = Mappers.getMapper(OrderConverter.class);
 
     Order toOrder(FsmOrder order);
 

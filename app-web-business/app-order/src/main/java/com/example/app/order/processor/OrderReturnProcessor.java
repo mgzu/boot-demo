@@ -8,8 +8,8 @@ import com.example.app.order.context.ReturnOrderContext;
 import com.example.app.order.enums.BizCodeEnum;
 import com.example.app.order.enums.OrderEventEnum;
 import com.example.app.order.enums.OrderStateEnum;
+import com.example.fsm.business.converters.OrderConverter;
 import com.example.fsm.business.enums.SceneIdEnum;
-import com.example.fsm.business.mapstruct.OrderMapper;
 import com.example.fsm.business.repository.OrderRepository;
 import com.example.fsm.checker.Checkable;
 import com.example.fsm.checker.Checker;
@@ -87,7 +87,7 @@ public class OrderReturnProcessor extends AbstractStateProcessor<String, ReturnO
 	public ServiceResult<String> save(String nextState, StateContext<ReturnOrderContext> context) throws FsmException {
 		FsmOrder orderInfo = context.getContext().getFsmOrder();
 		// 更新状态
-		Order order = OrderMapper.INSTANCE.toOrder(orderInfo);
+		Order order = OrderConverter.INSTANCE.toOrder(orderInfo);
 		// 持久化
 		orderRepository.save(order);
 		log.info("save BUSINESS order success, orderId:{}", order.getOrderId());

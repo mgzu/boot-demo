@@ -1,4 +1,4 @@
-package com.example.framework.system.mapstruct;
+package com.example.framework.system.converters;
 
 import com.example.framework.system.entity.Dict;
 import com.example.framework.system.entity.dto.DictDto;
@@ -15,9 +15,9 @@ import org.mapstruct.factory.Mappers;
 	unmappedTargetPolicy = ReportingPolicy.IGNORE,
 	builder = @Builder(disableBuilder = true)
 )
-public interface DictMapper {
+public interface DictConverter {
 
-	DictMapper INSTANCE = Mappers.getMapper(DictMapper.class);
+	DictConverter INSTANCE = Mappers.getMapper(DictConverter.class);
 
 	Dict toDict(DictDto dictDto);
 

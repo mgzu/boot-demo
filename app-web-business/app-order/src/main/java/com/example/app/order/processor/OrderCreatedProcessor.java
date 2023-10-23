@@ -12,7 +12,7 @@ import com.example.fsm.annotation.OrderProcessor;
 import com.example.app.order.checker.CreateParamChecker;
 import com.example.app.order.context.CreateOrderContext;
 import com.example.fsm.business.enums.*;
-import com.example.fsm.business.mapstruct.OrderMapper;
+import com.example.fsm.business.converters.OrderConverter;
 import com.example.fsm.business.repository.OrderRepository;
 import com.example.fsm.checker.Checkable;
 import com.example.fsm.checker.Checker;
@@ -100,7 +100,7 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
 		orderInfo.setOrderState(nextState);
 		// 持久化
 //        this.updateOrderInfo(orderInfo);
-		Order order = OrderMapper.INSTANCE.toOrder(orderInfo);
+		Order order = OrderConverter.INSTANCE.toOrder(orderInfo);
 		orderRepository.save(order);
 		log.info("save BUSINESS order success, userId:{}, orderId:{}", orderInfo.getUserId(), order.getOrderId());
 		return new ServiceResult<>(orderInfo.getOrderId(), "business下单成功");

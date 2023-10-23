@@ -1,10 +1,9 @@
-package com.example.framework.testsupport.converts;
+package com.example.framework.testsupport.converters;
 
 import com.example.framework.testsupport.entity.Product;
 import com.example.framework.testsupport.entity.Stock;
 import com.google.common.collect.Lists;
 import org.dromara.hutool.core.data.id.IdUtil;
-import org.dromara.hutool.core.net.Ipv6Util;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -16,12 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author MaGuangZu
  * @since 2023-07-26
  */
-class ProductConvertTest {
+class ProductConverterTest {
 
 	@MethodSource("getProductList")
 	@ParameterizedTest
 	void shadowCloneTest(Product product) {
-		var copy = ProductConvert.INSTANCE.clone(product);
+		var copy = ProductConverter.INSTANCE.clone(product);
 
 		assertThat(product).isEqualTo(copy);
 
@@ -38,7 +37,7 @@ class ProductConvertTest {
 	@MethodSource("getProductList")
 	@ParameterizedTest
 	void deepCloneTest(Product product) {
-		var copy = ProductConvert.INSTANCE.deepClone(product);
+		var copy = ProductConverter.INSTANCE.deepClone(product);
 
 		assertThat(product).isEqualTo(copy);
 

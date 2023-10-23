@@ -1,6 +1,6 @@
 package com.example.framework.log.service.impl;
 
-import com.example.framework.log.mapstruct.LogRecordMapper;
+import com.example.framework.log.converters.LogRecordConverter;
 import com.example.framework.log.repository.LogRecordRepository;
 import com.mzt.logapi.beans.LogRecord;
 import com.mzt.logapi.service.ILogRecordService;
@@ -25,7 +25,7 @@ public class DbLogRecordServiceImpl implements ILogRecordService {
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	@Override
 	public void record(LogRecord logRecord) {
-		logRecordRepository.save(LogRecordMapper.INSTANCE.toDbLogRecord(logRecord));
+		logRecordRepository.save(LogRecordConverter.INSTANCE.toDbLogRecord(logRecord));
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class DbLogRecordServiceImpl implements ILogRecordService {
 		logRecord.setBizNo(bizNo);
 		logRecord.setType(type);
 		var logRecordList = logRecordRepository.findAll(Example.of(logRecord));
-		return LogRecordMapper.INSTANCE.toLogRecordList(logRecordList);
+		return LogRecordConverter.INSTANCE.toLogRecordList(logRecordList);
 	}
 
 	@Override
@@ -44,6 +44,6 @@ public class DbLogRecordServiceImpl implements ILogRecordService {
 		logRecord.setType(type);
 		logRecord.setSubType(subType);
 		var logRecordList = logRecordRepository.findAll(Example.of(logRecord));
-		return LogRecordMapper.INSTANCE.toLogRecordList(logRecordList);
+		return LogRecordConverter.INSTANCE.toLogRecordList(logRecordList);
 	}
 }

@@ -1,4 +1,4 @@
-package com.example.framework.log.mapstruct;
+package com.example.framework.log.converters;
 
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -16,9 +16,9 @@ import java.util.List;
 	unmappedTargetPolicy = ReportingPolicy.IGNORE,
 	builder = @Builder(disableBuilder = true)
 )
-public interface LogRecordMapper {
+public interface LogRecordConverter {
 
-	LogRecordMapper INSTANCE = Mappers.getMapper(LogRecordMapper.class);
+	LogRecordConverter INSTANCE = Mappers.getMapper(LogRecordConverter.class);
 
 	com.example.framework.log.entity.LogRecord toDbLogRecord(com.mzt.logapi.beans.LogRecord logRecord);
 
