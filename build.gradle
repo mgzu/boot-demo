@@ -43,6 +43,7 @@ ext {
 	// https://mvnrepository.com/artifact/cn.dev33/sa-token-spring-boot-starter
 	saTokenVersion = '1.37.0'
 	okhttpVersion = '5.0.0-alpha.11'
+	meilisearchJavaVersion = '0.11.3'
 }
 
 ignoreNoSourceProject = ext.ignoreNoSourceProject.split(",")
