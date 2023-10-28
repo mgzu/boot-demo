@@ -38,7 +38,7 @@ public class PersistableEntity implements Persistable<String>, Serializable {
 	@Transient
 	@Override
 	public boolean isNew() {
-		return StrUtil.isNotBlank(id);
+		return StrUtil.isBlank(id);
 	}
 
 }
