@@ -2,6 +2,8 @@ package com.example.framework.web.error;
 
 import com.example.framework.web.entity.Result;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -26,5 +28,14 @@ public class GlobalExceptionHandler {
         log.error(localizedMessage, e);
 		return Result.error();
     }
+
+	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
+	public Result<Void> httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+		return Result.<Void>builder()
+			.success(false)
+			.message(HttpStatus.METHOD_NOT_ALLOWED.getReasonPhrase())
+			.code(HttpStatus.METHOD_NOT_ALLOWED.value())
+			.build();
+	}
 
 }
