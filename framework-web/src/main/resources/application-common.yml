@@ -5,7 +5,7 @@ spring:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
         physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
-    open-in-view: true
+    open-in-view: false
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
