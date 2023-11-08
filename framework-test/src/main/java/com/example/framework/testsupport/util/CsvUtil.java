@@ -23,10 +23,14 @@ public class CsvUtil {
 		.build();
 
 	public static <T> List<T> readCsvList(String path, Class<T> clazz) {
+		return readCsvList(path, clazz, true);
+	}
+
+	public static <T> List<T> readCsvList(String path, Class<T> clazz, boolean withColumnReordering) {
 		try {
 			var schema = csvMapper.typedSchemaFor(clazz)
 				.withHeader()
-				.withColumnReordering(true);
+				.withColumnReordering(withColumnReordering);
 
 			MappingIterator<T> iterator = csvMapper
 				.readerWithTypedSchemaFor(clazz)

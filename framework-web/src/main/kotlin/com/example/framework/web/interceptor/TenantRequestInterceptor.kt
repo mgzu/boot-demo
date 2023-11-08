@@ -13,7 +13,7 @@ class TenantRequestInterceptor : AsyncHandlerInterceptor {
 	override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
 		return Optional.ofNullable(request)
 			// .map(req -> securityDomain.getTenantIdFromJwt(req))
-			.map { _: HttpServletRequest? -> setTenantContext(TenantConstants.ROOT_TENANT) }
+			.map { setTenantContext(TenantConstants.ROOT_TENANT) }
 			.orElse(false)
 	}
 
