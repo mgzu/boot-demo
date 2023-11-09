@@ -28,7 +28,13 @@ public class JsonUtil {
 	}
 
 	@SneakyThrows
+	public static <T> T readValue(String json, Class<T> clazz) {
+		return objectMapper.readValue(json, clazz);
+	}
+
+	@SneakyThrows
 	public static String toJson(Object obj) {
 		return objectMapper.writeValueAsString(obj);
 	}
+
 }
