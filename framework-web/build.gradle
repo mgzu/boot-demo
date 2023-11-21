@@ -13,7 +13,7 @@ dependencies {
 	implementation 'io.micrometer:micrometer-tracing-bridge-otel'
 //	implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
 	// docs
-    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}"
+	api "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}"
 
 	// test
 	testApi project(':framework-test')

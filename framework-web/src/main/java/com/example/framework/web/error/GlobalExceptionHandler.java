@@ -1,11 +1,21 @@
 package com.example.framework.web.error;
 
+import com.example.framework.common.exceptions.ServiceException;
 import com.example.framework.web.entity.Result;
+import io.swagger.v3.oas.annotations.media.SchemaProperty;
 import lombok.extern.slf4j.Slf4j;
+import org.dromara.hutool.core.annotation.AnnotationUtil;
+import org.dromara.hutool.core.reflect.FieldUtil;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.lang.reflect.Field;
 
 /**
  * @author MaGuangZu
@@ -29,10 +39,39 @@ public class GlobalExceptionHandler {
 		return Result.error();
     }
 
+	@ExceptionHandler({ServiceException.class})
+	public Result<Void> exception(ServiceException e) {
+		return Result.error(e.getLocalizedMessage());
+	}
+
+	@ExceptionHandler({MethodArgumentNotValidException.class})
+	public Result<Void> exception(MethodArgumentNotValidException e) {
+		BindingResult bindingResult = e.getBindingResult();
+		StringBuilder errorMessage = new StringBuilder();
+		for (ObjectError error : bindingResult.getGlobalErrors()) {
+			errorMessage.append(error.getDefaultMessage()).append(";");
+		}
+		Object target = bindingResult.getTarget();
+		if (target != null) {
+			Class<?> clazz = target.getClass();
+			for (FieldError error : bindingResult.getFieldErrors()) {
+				Field field = FieldUtil.getField(clazz, error.getField());
+				SchemaProperty schemaProperty = AnnotationUtil.getAnnotation(field, SchemaProperty.class);
+				if (schemaProperty != null) {
+					errorMessage.append(schemaProperty.name()).append(":");
+				}
+				errorMessage.append(error.getDefaultMessage()).append(";");
+			}
+		}
+		return Result.<Void>builder()
+			.code(HttpStatus.BAD_REQUEST.value())
+			.message(errorMessage.toString())
+			.build();
+	}
+
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
 	public Result<Void> httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
 		return Result.<Void>builder()
-			.success(false)
 			.message(HttpStatus.METHOD_NOT_ALLOWED.getReasonPhrase())
 			.code(HttpStatus.METHOD_NOT_ALLOWED.value())
 			.build();

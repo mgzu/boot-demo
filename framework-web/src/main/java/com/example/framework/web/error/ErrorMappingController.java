@@ -26,7 +26,6 @@ public class ErrorMappingController extends AbstractErrorController {
 		response.setStatus(HttpStatus.OK.value());
 		HttpStatus status = getStatus(request);
 		return Result.builder()
-			.success(false)
 			.code(status.value())
 			.message(status.getReasonPhrase())
 			.build();

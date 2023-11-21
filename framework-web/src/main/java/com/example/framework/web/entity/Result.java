@@ -50,7 +50,6 @@ public class Result<T> {
 
 	public static <T> Result<T> error() {
 		return Result.<T>builder()
-			.success(false)
 			.message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
 			.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
 			.build();
@@ -58,7 +57,6 @@ public class Result<T> {
 
     public static <T> Result<T> error(String message) {
 		return Result.<T>builder()
-			.success(false)
 			.message(message)
 			.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
 			.build();
@@ -66,7 +64,6 @@ public class Result<T> {
 
     public static <T> Result<T> error(T data, String message) {
 		return Result.<T>builder()
-			.success(false)
 			.message(message)
 			.code(HttpStatus.INTERNAL_SERVER_ERROR.value())
 			.data(data)

@@ -35,7 +35,6 @@ class ErrorMappingControllerIT : BaseCase() {
 		assertThat(responseEntity.body).isEqualTo(
 			objectMapper.writeValueAsString(
 				Result.builder<Any>()
-					.success(false)
 					.code(httpStatus.value())
 					.message(httpStatus.reasonPhrase)
 					.build()
