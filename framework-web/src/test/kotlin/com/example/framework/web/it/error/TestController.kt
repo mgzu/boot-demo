@@ -4,6 +4,7 @@ import com.example.framework.common.exceptions.ServiceException
 import com.example.framework.web.entity.Result
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.ResponseBody
 
 /**
@@ -22,6 +23,12 @@ class TestController {
 	@GetMapping("/failed2")
 	fun failed2(): Result<Void> {
 		throw ServiceException("failed")
+	}
+
+	@ResponseBody
+	@PostMapping("/failed3")
+	fun failed3(): Result<Void> {
+		return Result.ok();
 	}
 
 }

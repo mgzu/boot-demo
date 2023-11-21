@@ -58,9 +58,11 @@ public class GlobalExceptionHandler {
 				Field field = FieldUtil.getField(clazz, error.getField());
 				SchemaProperty schemaProperty = AnnotationUtil.getAnnotation(field, SchemaProperty.class);
 				if (schemaProperty != null) {
-					errorMessage.append(schemaProperty.name()).append(":");
+					errorMessage.append(schemaProperty.name());
+				} else {
+					errorMessage.append(error.getField());
 				}
-				errorMessage.append(error.getDefaultMessage()).append(";");
+				errorMessage.append(":").append(error.getDefaultMessage()).append(";");
 			}
 		}
 		return Result.<Void>builder()

@@ -23,7 +23,28 @@ class ErrorMappingControllerIT : BaseCase() {
 		value = [
 			"/failed, 500",
 			"/failed2, 500",
-			"/favicon.ico, 404"
+		]
+	)
+	@ParameterizedTest
+	fun `test service exception mapping`(url: String, statusCode: Int) {
+		val httpStatus = HttpStatus.valueOf(statusCode)
+		val responseEntity = template.getForEntity(url, String::class.java)
+
+		assertThat(responseEntity.statusCode.value()).isEqualTo(HttpStatus.OK.value())
+		assertThat(responseEntity.body).isEqualTo(
+			objectMapper.writeValueAsString(
+				Result.builder<Any>()
+					.code(httpStatus.value())
+					.message("failed")
+					.build()
+			)
+		)
+	}
+
+	@CsvSource(
+		value = [
+			"/failed3, 405",
+			"/favicon.ico, 404",
 		]
 	)
 	@ParameterizedTest
