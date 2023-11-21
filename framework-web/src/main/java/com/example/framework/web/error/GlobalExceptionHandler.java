@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -72,10 +73,18 @@ public class GlobalExceptionHandler {
 	}
 
 	@ExceptionHandler({HttpRequestMethodNotSupportedException.class})
-	public Result<Void> httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
+	public Result<Void> httpRequestMethodNotSupportedException() {
 		return Result.<Void>builder()
 			.message(HttpStatus.METHOD_NOT_ALLOWED.getReasonPhrase())
 			.code(HttpStatus.METHOD_NOT_ALLOWED.value())
+			.build();
+	}
+
+	@ExceptionHandler({HttpMediaTypeNotSupportedException.class})
+	public Result<Void> httpMediaTypeNotSupportedException() {
+		return Result.<Void>builder()
+			.message(HttpStatus.UNSUPPORTED_MEDIA_TYPE.getReasonPhrase())
+			.code(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value())
 			.build();
 	}
 
