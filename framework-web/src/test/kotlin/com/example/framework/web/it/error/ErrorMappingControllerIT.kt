@@ -8,7 +8,12 @@ import org.junit.jupiter.params.provider.CsvSource
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpHeaders
+import org.springframework.http.HttpMethod
 import org.springframework.http.HttpStatus
+import org.springframework.util.LinkedMultiValueMap
+import org.springframework.util.MultiValueMap
 
 /**
  * @author MaGuangZu
@@ -48,10 +53,33 @@ class ErrorMappingControllerIT : BaseCase() {
 		]
 	)
 	@ParameterizedTest
-	fun `test error mapping`(url: String, statusCode: Int) {
+	fun `test error mapping for json`(url: String, statusCode: Int) {
 		val httpStatus = HttpStatus.valueOf(statusCode)
 		val responseEntity = template.getForEntity(url, String::class.java)
 
+		assertThat(responseEntity.statusCode.value()).isEqualTo(HttpStatus.OK.value())
+		assertThat(responseEntity.body).isEqualTo(
+			objectMapper.writeValueAsString(
+				Result.builder<Any>()
+					.code(httpStatus.value())
+					.message(httpStatus.reasonPhrase)
+					.build()
+			)
+		)
+	}
+
+	@CsvSource(
+		value = [
+			"/favicon.ico, 404",
+		]
+	)
+	@ParameterizedTest
+	fun `test error mapping for other resource`(url: String, statusCode: Int) {
+		val headers: MultiValueMap<String, String> = LinkedMultiValueMap()
+		headers.add(HttpHeaders.ACCEPT, "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8")
+		val responseEntity = template.exchange(url, HttpMethod.GET, HttpEntity<Any>(headers), String::class.java)
+
+		val httpStatus = HttpStatus.valueOf(statusCode)
 		assertThat(responseEntity.statusCode.value()).isEqualTo(HttpStatus.OK.value())
 		assertThat(responseEntity.body).isEqualTo(
 			objectMapper.writeValueAsString(

@@ -15,6 +15,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.lang.reflect.Field;
 
@@ -85,6 +86,14 @@ public class GlobalExceptionHandler {
 		return Result.<Void>builder()
 			.message(HttpStatus.UNSUPPORTED_MEDIA_TYPE.getReasonPhrase())
 			.code(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value())
+			.build();
+	}
+
+	@ExceptionHandler({NoResourceFoundException.class})
+	public Result<Void> noResourceFoundException() {
+		return Result.<Void>builder()
+			.code(HttpStatus.NOT_FOUND.value())
+			.message(HttpStatus.NOT_FOUND.getReasonPhrase())
 			.build();
 	}
 
