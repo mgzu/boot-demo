@@ -41,7 +41,7 @@ ext {
 
 	// docs
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
-	openapiVersion = '2.2.0'
+	openapiVersion = '2.3.0'
 
 	// test
 	// https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
@@ -80,9 +80,6 @@ subprojects {
 	}
 
 	dependencies {
-		// kotlin optional
-		implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
-
 		// tool
 		implementation "org.dromara.hutool:hutool-core:${hutoolVersion}"
 		implementation "com.google.guava:guava:${guavaVersion}"
@@ -101,6 +98,9 @@ subprojects {
 		testCompileOnly 'org.projectlombok:lombok'
 		testAnnotationProcessor 'org.projectlombok:lombok'
 		testAnnotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+		// kotlin
+		testImplementation "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
 	}
 
 	configurations {
@@ -122,19 +122,28 @@ subprojects {
 
 	if (applyMavenPublish) {
 		def localProperties = project.rootProject.file('local.properties')
-		if (!localProperties.exists()) {
+		def ghUsername = null
+		def ghPassword = null
+		if (localProperties.exists()) {
+			Properties properties = new Properties()
+			properties.load(localProperties.newDataInputStream())
+			ghUsername = properties.getProperty("GITHUB_USERNAME")
+			ghPassword = properties.getProperty("GITHUB_TOKEN")
+		} else {
+			ghUsername = System.getenv("GITHUB_USERNAME")
+			ghPassword = System.getenv("GITHUB_TOKEN")
+		}
+		if (ghUsername == null || ghUsername.isEmpty()) {
 			return
 		}
 		publishing {
-			Properties properties = new Properties()
-			properties.load(localProperties.newDataInputStream())
 			repositories {
 				maven {
 					name = "GitHubPackages"
 					url = uri("https://maven.pkg.github.com/mgzu/boot-demo")
 					credentials {
-						username = properties.getProperty("GITHUB_USERNAME")
-						password = properties.getProperty("GITHUB_TOKEN")
+						username = ghUsername
+						password = ghPassword
 					}
 				}
 			}
