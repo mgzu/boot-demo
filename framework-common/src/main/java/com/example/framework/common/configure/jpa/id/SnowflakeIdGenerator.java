@@ -13,10 +13,10 @@ import java.io.Serializable;
  * @since 2022-01-04
  */
 public class SnowflakeIdGenerator implements IdentifierGenerator {
-    Snowflake snowflake = IdUtil.getSnowflake();
+	static Snowflake snowflake = IdUtil.getSnowflake();
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        return snowflake.nextIdStr();
+		return snowflake.nextStr();
     }
 }
