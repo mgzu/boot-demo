@@ -39,7 +39,7 @@ public class OrderController extends BaseController {
 			.orderState(OrderStateEnum.INIT)
 			.bizCode(BizCodeEnum.FBA)
 			.sceneId(SceneIdEnum.H5)
-			.orderId(IdUtil.getSnowflake().nextIdStr())
+			.orderId(IdUtil.getSnowflake().nextStr())
 			.build();
 		log.info("order id:" + order.getOrderId());
 		OrderStateEvent event = CreateEvent.builder()
