@@ -37,7 +37,7 @@ ext {
 	// https://mvnrepository.com/artifact/org.jetbrains/annotations
 	jetbrainsAnnotationsVersion = '24.1.0'
 	// https://mvnrepository.com/artifact/cn.dev33/sa-token-spring-boot-starter
-	saTokenVersion = '1.37.0'
+	saTokenVersion = '1.38.0'
 
 	// docs
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
