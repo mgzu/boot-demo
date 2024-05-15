@@ -38,3 +38,7 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew clean build --no-daemon
+
+      - name: Publishing
+        if: "contains(github.event.head_commit.message, '[publish]')"
+        run: ./gradlew publish
