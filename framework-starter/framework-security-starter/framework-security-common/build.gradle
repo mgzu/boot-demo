@@ -1,15 +1,7 @@
-plugins {
-	id 'org.jetbrains.kotlin.jvm'
-}
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	// test
-	testApi project(':framework-test')
-	testApi project(":framework-web")
-	testApi project(":framework-system")
-}
-
-kotlin {
-	jvmToolchain(21)
+	testImplementation project(':framework-test')
+	testImplementation project(":framework-web")
+	testImplementation project(":framework-system")
 }

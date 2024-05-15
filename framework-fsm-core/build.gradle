@@ -1,14 +1,5 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm'
-}
-
 dependencies {
     api project(':framework-common')
 
     implementation 'org.springframework.boot:spring-boot-starter'
-
-}
-
-kotlin {
-	jvmToolchain(21)
 }

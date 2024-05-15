@@ -1,13 +1,5 @@
-plugins {
-	id 'org.jetbrains.kotlin.jvm'
-}
-
 dependencies {
 	api project(":framework-web")
 	// test
-	testApi project(':framework-test')
-}
-
-kotlin {
-	jvmToolchain(21)
+	testImplementation project(':framework-test')
 }

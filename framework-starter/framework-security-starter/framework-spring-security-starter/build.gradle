@@ -1,17 +1,9 @@
-plugins {
-	id 'org.jetbrains.kotlin.jvm'
-}
-
 dependencies {
 	api project(':framework-starter:framework-security-starter:framework-security-common')
 	// security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	// test
-	testApi project(':framework-test')
-	testApi project(":framework-web")
-	testApi project(":framework-system")
-}
-
-kotlin {
-	jvmToolchain(21)
+	testImplementation project(':framework-test')
+	testImplementation project(":framework-web")
+	testImplementation project(":framework-system")
 }

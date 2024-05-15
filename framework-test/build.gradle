@@ -1,5 +1,4 @@
 plugins {
-	id 'org.jetbrains.kotlin.jvm'
 	id 'me.champeau.jmh'
 }
 
@@ -7,6 +6,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
+
+	// test
 	testImplementation "org.jetbrains.kotlin:kotlin-scripting-jsr223:${kotlinVersion}"
 	testImplementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
 
@@ -17,8 +18,4 @@ dependencies {
 	jmh "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
 	testAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
 	jmhAnnotationProcessor "org.openjdk.jmh:jmh-generator-annprocess:${jmhVersion}"
-}
-
-kotlin {
-	jvmToolchain(21)
 }

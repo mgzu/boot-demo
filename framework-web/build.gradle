@@ -1,7 +1,3 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm'
-}
-
 dependencies {
 	api project(':framework-common')
 	api 'org.springframework.boot:spring-boot-starter-web'
@@ -16,9 +12,5 @@ dependencies {
 	api "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}"
 
 	// test
-	testApi project(':framework-test')
-}
-
-kotlin {
-	jvmToolchain(21)
+	testImplementation project(':framework-test')
 }

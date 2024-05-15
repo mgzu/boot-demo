@@ -7,9 +7,3 @@ dependencies {
 	// test
 	testImplementation project(':framework-test')
 }
-
-configurations {
-	all.collect { configuration ->
-		configuration.exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
-	}
-}
