@@ -41,7 +41,7 @@ ext {
 
 	// docs
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
-	openapiVersion = '2.3.0'
+	openapiVersion = '2.5.0'
 
 	// test
 	// https://mvnrepository.com/artifact/org.openjdk.jmh/jmh-core
