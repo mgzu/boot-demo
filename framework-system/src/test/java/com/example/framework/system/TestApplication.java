@@ -1,8 +1,8 @@
 package com.example.framework.system;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * @author MaGuangZu
@@ -10,10 +10,12 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @ComponentScan({
 	"com.example.framework.system",
-	"com.example.framework.web.configure.jpa",
-	"com.example.framework.web.aspects"
+	"com.example.framework.web.configure.mybatisplus",
+	"com.example.framework.web.properties"
 })
-@EnableAspectJAutoProxy
+@MapperScan(basePackages = {
+	"com.example.framework.system.mapper"
+})
 @SpringBootApplication
 public class TestApplication {
 }

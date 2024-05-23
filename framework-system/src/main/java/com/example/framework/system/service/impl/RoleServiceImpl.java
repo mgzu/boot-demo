@@ -1,6 +1,6 @@
 package com.example.framework.system.service.impl;
 
-import com.example.framework.system.repository.RoleRepository;
+import com.example.framework.system.mapper.RoleMapper;
 import com.example.framework.system.service.RoleService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-	private final RoleRepository roleRepository;
+	private final RoleMapper roleMapper;
 
 }

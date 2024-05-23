@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
 
@@ -55,7 +56,7 @@ public class BaseCase {
 		return validator.validate(obj);
 	}
 
-	<T> Set<ConstraintViolation<T>> validate(Locale lang, T obj) {
+	protected <T> Set<ConstraintViolation<T>> validate(@NotNull Locale lang, T obj) {
 		acceptLanguage = lang::getLanguage;
 		return validator.validate(obj);
 	}

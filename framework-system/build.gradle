@@ -2,4 +2,5 @@ dependencies {
 	api project(":framework-web")
 	// test
 	testImplementation project(':framework-test')
+	testImplementation "com.baomidou:mybatis-plus-spring-boot3-starter-test:${mybatisPlusVersion}"
 }

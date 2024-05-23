@@ -1,25 +1,19 @@
 package com.example.framework.web.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.example.framework.common.entity.PersistableEntity;
-import com.example.framework.web.configure.jpa.listeners.TenantEntityListener;
 import com.example.framework.web.constants.TenantConstants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterDef;
-import org.hibernate.annotations.ParamDef;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -32,46 +26,33 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @Setter
 @Getter
-@FilterDef(name = TenantConstants.TENANT_FILTER_NAME,
-	parameters = @ParamDef(name = TenantConstants.TENANT_PARAMETER_NAME, type = String.class),
-	defaultCondition = TenantConstants.TENANT_COLUMN_NAME + " = :" + TenantConstants.TENANT_PARAMETER_NAME)
-@Filter(name = TenantConstants.TENANT_FILTER_NAME)
-@EntityListeners({AuditingEntityListener.class, TenantEntityListener.class})
-@MappedSuperclass
 public class BaseEntity extends PersistableEntity {
 
 	@NotNull
-	@CreatedBy
-	@Column(nullable = false, updatable = false)
-	private String createdBy;
+	@TableField(value = "created_by", fill = FieldFill.INSERT)
+	protected String createdBy;
 
-	@NotNull
-	@CreatedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false, updatable = false)
-	private LocalDateTime createdDate;
+	@TableField(value = "created_date", fill = FieldFill.INSERT)
+	protected LocalDateTime createdDate;
 
-	@NotNull
-	@LastModifiedBy
-	@Column(nullable = false)
-	private String lastModifiedBy;
+	@TableField(value = "last_modified_by", fill = FieldFill.UPDATE)
+	protected String lastModifiedBy;
 
-	@NotNull
-	@LastModifiedDate
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(nullable = false)
-	private LocalDateTime lastModifiedDate;
+	@TableField(value = "last_modified_date", fill = FieldFill.UPDATE)
+	protected LocalDateTime lastModifiedDate;
 
 	@Nullable
 	private String remark;
 
 	@JsonIgnore
-	@Column(nullable = false)
+	@TableField(value = TenantConstants.TENANT_COLUMN_NAME)
 	private String tenantId;
 
 	@NotNull
 	@Version
-	@Column(nullable = false)
 	private Integer versionLock;
+
+	@TableLogic
+	private LocalDateTime deleted;
 
 }

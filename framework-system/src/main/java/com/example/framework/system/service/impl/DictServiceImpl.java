@@ -1,7 +1,7 @@
 package com.example.framework.system.service.impl;
 
 import com.example.framework.system.entity.Dict;
-import com.example.framework.system.repository.DictRepository;
+import com.example.framework.system.mapper.DictMapper;
 import com.example.framework.system.service.DictService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,11 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class DictServiceImpl implements DictService {
 
-	private final DictRepository dictRepository;
+	private final DictMapper dictMapper;
 
 	@Override
 	public Dict save(Dict dict) {
-		return dictRepository.save(dict);
+		dictMapper.insert(dict);
+		return dict;
 	}
 
 }

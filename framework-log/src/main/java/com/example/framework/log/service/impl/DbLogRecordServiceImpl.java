@@ -1,11 +1,11 @@
 package com.example.framework.log.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.framework.log.converters.LogRecordConverter;
-import com.example.framework.log.repository.LogRecordRepository;
+import com.example.framework.log.mapper.LogRecordMapper;
 import com.mzt.logapi.beans.LogRecord;
 import com.mzt.logapi.service.ILogRecordService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,12 +20,12 @@ import java.util.List;
 @Service
 public class DbLogRecordServiceImpl implements ILogRecordService {
 
-	private final LogRecordRepository logRecordRepository;
+	private final LogRecordMapper logRecordMapper;
 
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	@Override
 	public void record(LogRecord logRecord) {
-		logRecordRepository.save(LogRecordConverter.INSTANCE.toDbLogRecord(logRecord));
+		logRecordMapper.insert(LogRecordConverter.INSTANCE.toDbLogRecord(logRecord));
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class DbLogRecordServiceImpl implements ILogRecordService {
 		var logRecord = new com.example.framework.log.entity.LogRecord();
 		logRecord.setBizNo(bizNo);
 		logRecord.setType(type);
-		var logRecordList = logRecordRepository.findAll(Example.of(logRecord));
+		var logRecordList = logRecordMapper.selectList(new QueryWrapper<>(logRecord));
 		return LogRecordConverter.INSTANCE.toLogRecordList(logRecordList);
 	}
 
@@ -43,7 +43,7 @@ public class DbLogRecordServiceImpl implements ILogRecordService {
 		logRecord.setBizNo(bizNo);
 		logRecord.setType(type);
 		logRecord.setSubType(subType);
-		var logRecordList = logRecordRepository.findAll(Example.of(logRecord));
+		var logRecordList = logRecordMapper.selectList(new QueryWrapper<>(logRecord));
 		return LogRecordConverter.INSTANCE.toLogRecordList(logRecordList);
 	}
 }

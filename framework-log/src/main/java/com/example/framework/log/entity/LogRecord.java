@@ -1,9 +1,9 @@
 package com.example.framework.log.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.framework.common.entity.PersistableEntity;
 import com.mzt.logapi.beans.CodeVariableType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +18,7 @@ import java.util.Map;
  */
 @Setter
 @Getter
-@Entity(name = "t_log_record")
+@TableName(value = "t_log_record")
 public class LogRecord extends PersistableEntity {
 	/**
 	 * 租户
@@ -83,6 +83,6 @@ public class LogRecord extends PersistableEntity {
 	 * 打印日志的代码信息
 	 * CodeVariableType 日志记录的ClassName、MethodName
 	 */
-	@Transient
+	@TableField(exist = false)
 	private Map<CodeVariableType, Object> codeVariable;
 }

@@ -4,8 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -17,11 +15,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = false)
 @Setter
 @Getter
-public class LogRecordDto extends PageRequest implements Serializable {
-
-	public LogRecordDto(int page, int size, Sort sort) {
-		super(page, size, sort);
-	}
+public class LogRecordDto implements Serializable {
 
 	private String id;
 	private String tenant;

@@ -1,16 +1,12 @@
 package com.example.framework.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.framework.system.constants.DictConstants;
 import com.example.framework.web.annotations.ConstantsValidator;
 import com.example.framework.web.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.DynamicInsert;
 
 /**
  * @author MaGuangZu
@@ -18,12 +14,9 @@ import org.hibernate.annotations.DynamicInsert;
  */
 @Setter
 @Getter
-@DynamicInsert
-@Entity
-@Table
+@TableName(value = "dict_item")
 public class DictItem extends BaseEntity {
 
-	@Column(nullable = false)
 	private String dictId;
 
 	@ConstantsValidator(constants = {
@@ -32,15 +25,11 @@ public class DictItem extends BaseEntity {
 		DictConstants.DICT_TYPE_DECIMAL,
 		DictConstants.DICT_TYPE_BOOL,
 	})
-	@Column(nullable = false)
 	private String type;
 
 	@NotBlank
-	@Column(name = "`VALUE`", nullable = false)
 	private String value;
 
-	@ColumnDefault("0")
-	@Column(nullable = false)
 	private Integer orderByPriority;
 
 }
