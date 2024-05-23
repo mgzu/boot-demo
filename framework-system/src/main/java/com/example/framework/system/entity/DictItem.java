@@ -1,5 +1,6 @@
 package com.example.framework.system.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.example.framework.system.constants.DictConstants;
 import com.example.framework.web.annotations.ConstantsValidator;
@@ -28,6 +29,7 @@ public class DictItem extends BaseEntity {
 	private String type;
 
 	@NotBlank
+	@TableField(value = "\"value\"")
 	private String value;
 
 	private Integer orderByPriority;

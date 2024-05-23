@@ -11,6 +11,7 @@ import net.sf.jsqlparser.expression.StringValue;
  * @since 2024-05-19
  */
 public class FrameworkTenantHandler implements TenantLineHandler {
+
 	@Override
 	public Expression getTenantId() {
 		return new StringValue(TenantContext.getTenantId());

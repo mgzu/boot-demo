@@ -35,17 +35,17 @@ public class BaseEntity extends PersistableEntity {
 	@TableField(value = "created_date", fill = FieldFill.INSERT)
 	protected LocalDateTime createdDate;
 
-	@TableField(value = "last_modified_by", fill = FieldFill.UPDATE)
+	@TableField(value = "last_modified_by", fill = FieldFill.INSERT_UPDATE)
 	protected String lastModifiedBy;
 
-	@TableField(value = "last_modified_date", fill = FieldFill.UPDATE)
+	@TableField(value = "last_modified_date", fill = FieldFill.INSERT_UPDATE)
 	protected LocalDateTime lastModifiedDate;
 
 	@Nullable
 	private String remark;
 
 	@JsonIgnore
-	@TableField(value = TenantConstants.TENANT_COLUMN_NAME)
+	@TableField(value = TenantConstants.TENANT_COLUMN_NAME, fill = FieldFill.INSERT)
 	private String tenantId;
 
 	@NotNull

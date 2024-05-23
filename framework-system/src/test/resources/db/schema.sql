@@ -1,22 +1,22 @@
 create table ACCOUNT
 (
-	ID                 CHARACTER VARYING(255) not null
+	ID                 CHARACTER VARYING(255)  not null
 		primary key,
-	CREATED_BY         CHARACTER VARYING(255) not null,
-	CREATED_DATE       TIMESTAMP              not null,
-	LAST_MODIFIED_BY   CHARACTER VARYING(255) not null,
-	LAST_MODIFIED_DATE TIMESTAMP              not null,
+	CREATED_BY         CHARACTER VARYING(255)  not null,
+	CREATED_DATE       TIMESTAMP               not null,
+	LAST_MODIFIED_BY   CHARACTER VARYING(255)  not null,
+	LAST_MODIFIED_DATE TIMESTAMP               not null,
 	REMARK             CHARACTER VARYING(255),
-	TENANT_ID          CHARACTER VARYING(255) not null,
-	VERSION_LOCK       INTEGER                not null,
-	ACTIVATION         BOOLEAN default FALSE  not null,
+	TENANT_ID          CHARACTER VARYING(255)  not null,
+	VERSION_LOCK       INTEGER   default 0     not null,
+	ACTIVATION         BOOLEAN   default FALSE not null,
 	ACTIVATION_DATE    TIMESTAMP,
-	EMAIL              CHARACTER VARYING(255) not null,
-	ENABLED            BOOLEAN                not null,
-	ORDER_BY_PRIORITY  INTEGER default 0      not null,
-	PASSWORD           CHARACTER VARYING(255) not null,
-	USERNAME           CHARACTER VARYING(255) not null,
-	DELETED            TIMESTAMP
+	EMAIL              CHARACTER VARYING(255)  not null,
+	ENABLED            BOOLEAN                 not null,
+	ORDER_BY_PRIORITY  INTEGER   default 0     not null,
+	PASSWORD           CHARACTER VARYING(255)  not null,
+	USERNAME           CHARACTER VARYING(255)  not null,
+	DELETED            TIMESTAMP default null
 );
 
 create table ACCOUNT_ROLE
@@ -29,10 +29,10 @@ create table ACCOUNT_ROLE
 	LAST_MODIFIED_DATE TIMESTAMP              not null,
 	REMARK             CHARACTER VARYING(255),
 	TENANT_ID          CHARACTER VARYING(255) not null,
-	VERSION_LOCK       INTEGER                not null,
+	VERSION_LOCK       INTEGER   default 0    not null,
 	ACCOUNT_ID         CHARACTER VARYING(255) not null,
 	ROLE_ID            CHARACTER VARYING(255) not null,
-	DELETED            TIMESTAMP
+	DELETED            TIMESTAMP default null
 );
 
 create table DICT
@@ -45,12 +45,12 @@ create table DICT
 	LAST_MODIFIED_DATE TIMESTAMP              not null,
 	REMARK             CHARACTER VARYING(255),
 	TENANT_ID          CHARACTER VARYING(255) not null,
-	VERSION_LOCK       INTEGER                not null,
+	VERSION_LOCK       INTEGER   default 0    not null,
 	CODE               CHARACTER VARYING(255) not null
-            unique,
+		unique,
 	NAME               CHARACTER VARYING(255) not null,
-	ORDER_BY_PRIORITY  INTEGER default 0      not null,
-	DELETED            TIMESTAMP
+	ORDER_BY_PRIORITY  INTEGER   default 0    not null,
+	DELETED            TIMESTAMP default null
 );
 
 create table DICT_ITEM
@@ -63,12 +63,12 @@ create table DICT_ITEM
 	LAST_MODIFIED_DATE TIMESTAMP              not null,
 	REMARK             CHARACTER VARYING(255),
 	TENANT_ID          CHARACTER VARYING(255) not null,
-	VERSION_LOCK       INTEGER                not null,
+	VERSION_LOCK       INTEGER   default 0    not null,
 	DICT_ID            CHARACTER VARYING(255) not null,
-	ORDER_BY_PRIORITY  INTEGER default 0      not null,
+	ORDER_BY_PRIORITY  INTEGER   default 0    not null,
 	TYPE               CHARACTER VARYING(255) not null,
 	"value"            CHARACTER VARYING(255) not null,
-	DELETED            TIMESTAMP
+	DELETED            TIMESTAMP default null
 );
 
 create table PERMISSION
@@ -81,10 +81,10 @@ create table PERMISSION
 	LAST_MODIFIED_DATE TIMESTAMP              not null,
 	REMARK             CHARACTER VARYING(255),
 	TENANT_ID          CHARACTER VARYING(255) not null,
-	VERSION_LOCK       INTEGER                not null,
+	VERSION_LOCK       INTEGER   default 0    not null,
 	NAME               CHARACTER VARYING(255) not null,
-	ORDER_BY_PRIORITY  INTEGER default 0      not null,
-	DELETED            TIMESTAMP
+	ORDER_BY_PRIORITY  INTEGER   default 0    not null,
+	DELETED            TIMESTAMP default null
 );
 
 create table ROLE
@@ -97,12 +97,12 @@ create table ROLE
 	LAST_MODIFIED_DATE TIMESTAMP              not null,
 	REMARK             CHARACTER VARYING(255),
 	TENANT_ID          CHARACTER VARYING(255) not null,
-	VERSION_LOCK       INTEGER                not null,
+	VERSION_LOCK       INTEGER   default 0    not null,
 	IS_ADMIN           BOOLEAN                not null,
 	IS_SUPER_ADMIN     BOOLEAN                not null,
 	NAME               CHARACTER VARYING(255) not null,
-	ORDER_BY_PRIORITY  INTEGER default 0      not null,
-	DELETED            TIMESTAMP
+	ORDER_BY_PRIORITY  INTEGER   default 0    not null,
+	DELETED            TIMESTAMP default null
 );
 
 create table ROLE_PERMISSION
@@ -115,10 +115,10 @@ create table ROLE_PERMISSION
 	LAST_MODIFIED_DATE TIMESTAMP              not null,
 	REMARK             CHARACTER VARYING(255),
 	TENANT_ID          CHARACTER VARYING(255) not null,
-	VERSION_LOCK       INTEGER                not null,
+	VERSION_LOCK       INTEGER   default 0    not null,
 	PERMISSION_ID      CHARACTER VARYING(255) not null,
 	ROLE_ID            CHARACTER VARYING(255) not null,
-	DELETED            TIMESTAMP
+	DELETED            TIMESTAMP default null
 );
 
 create table T_LOG_RECORD
@@ -134,7 +134,7 @@ create table T_LOG_RECORD
 	SUB_TYPE    CHARACTER VARYING(255),
 	TENANT      CHARACTER VARYING(255),
 	TYPE        CHARACTER VARYING(200),
-	DELETED            TIMESTAMP
+	DELETED     TIMESTAMP default null
 );
 
 create table T_ORDER
@@ -147,11 +147,11 @@ create table T_ORDER
 	LAST_MODIFIED_DATE TIMESTAMP              not null,
 	REMARK             CHARACTER VARYING(255),
 	TENANT_ID          CHARACTER VARYING(255) not null,
-	VERSION_LOCK       INTEGER                not null,
+	VERSION_LOCK       INTEGER   default 0    not null,
 	BIZ_CODE           CHARACTER VARYING(255) not null,
 	ORDER_ID           CHARACTER VARYING(255),
 	ORDER_STATE        CHARACTER VARYING(255) not null,
 	SCENE_ID           CHARACTER VARYING(255) not null,
-	DELETED            TIMESTAMP
+	DELETED            TIMESTAMP default null
 );
 

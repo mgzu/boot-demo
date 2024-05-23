@@ -1,5 +1,7 @@
 package com.example.framework.system.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.baomidou.mybatisplus.test.autoconfigure.MybatisPlusTest;
 import com.example.framework.web.contexts.TenantContext;
 import org.junit.jupiter.api.Test;
@@ -13,11 +15,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @MybatisPlusTest(properties = "framework.tenant.enable=false")
 class DictItemRepositoryTenantDisableTest extends DictItemRepositoryBaseTest {
 
-//	@Test
-//	void tenantAspectBeanShouldBeNoSuch() {
-//		assertThatThrownBy(() -> applicationContext.getBean(TenantAspect.class))
-//			.isInstanceOf(NoSuchBeanDefinitionException.class);
-//	}
+	@Test
+	void doesNotHaveTenantLineInnerInterceptor() {
+		MybatisPlusInterceptor mybatisPlusInterceptor = applicationContext.getBean(MybatisPlusInterceptor.class);
+		assertThat(mybatisPlusInterceptor.getInterceptors())
+			.doesNotHaveAnyElementsOfTypes(TenantLineInnerInterceptor.class);
+	}
 
 	@Test
 	void testSelectList() {

@@ -10,6 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 /**
+ * TODO: Extends ServerHttpObservationFilter
+ * https://github.com/spring-projects/spring-framework/issues/30632
+ *
  * @author MaGuangZu
  * @since 2024-05-19
  */

@@ -1,5 +1,7 @@
 package com.example.framework.system.mapper;
 
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.example.framework.web.contexts.TenantContext;
 import org.junit.jupiter.api.Test;
 
@@ -10,11 +12,13 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 2023-09-06
  */
 class DictItemRepositoryTenantEnableTest extends DictItemRepositoryBaseTest {
-//	@Test
-//	void tenantAspectBeanShouldBeNotNull() {
-//		TenantAspect bean = applicationContext.getBean(TenantAspect.class);
-//		assertThat(bean).isNotNull();
-//	}
+
+	@Test
+	void hasTenantLineInnerInterceptor() {
+		MybatisPlusInterceptor mybatisPlusInterceptor = applicationContext.getBean(MybatisPlusInterceptor.class);
+		assertThat(mybatisPlusInterceptor.getInterceptors())
+			.hasAtLeastOneElementOfType(TenantLineInnerInterceptor.class);
+	}
 
 	@Test
 	void testSelectList() {
