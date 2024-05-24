@@ -1,17 +1,6 @@
-plugins {
-    id 'org.jetbrains.kotlin.jvm'
-}
-
 dependencies {
     api project(':framework-fsm-core')
 	api project(':framework-log')
     api project(':framework-web')
     api project(':app-web-business:app-common')
-
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-}
-
-kotlin {
-	jvmToolchain(21)
 }

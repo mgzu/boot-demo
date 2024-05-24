@@ -1,13 +1,13 @@
 package com.example.fsm.business.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.example.app.common.entity.Order;
 import com.example.framework.common.exceptions.ServiceException;
 import com.example.fsm.FsmOrder;
-import com.example.fsm.business.repository.OrderRepository;
+import com.example.fsm.business.mapper.OrderMapper;
 import com.example.fsm.service.FsmOrderService;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -20,14 +20,14 @@ import java.util.Optional;
 @Component
 public class FsmOrderServiceImpl implements FsmOrderService {
 
-    private final OrderRepository orderRepository;
+	private final OrderMapper orderMapper;
 
     @Override
     public FsmOrder getFsmOrder(@NotNull String orderId) {
-        Order order = new Order();
-        order.setOrderId(orderId);
-        Optional<Order> one = orderRepository.findOne(Example.of(order));
-        return one.orElseThrow(() -> new ServiceException("not found order:" + orderId));
+		Order order = orderMapper.selectOne(new LambdaQueryWrapper<Order>()
+			.eq(Order::getOrderId, orderId));
+		return Optional.ofNullable(order)
+			.orElseThrow(() -> new ServiceException("not found order:" + orderId));
     }
 
 }

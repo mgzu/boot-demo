@@ -13,7 +13,7 @@ import com.example.app.order.checker.CreateParamChecker;
 import com.example.app.order.context.CreateOrderContext;
 import com.example.fsm.business.enums.*;
 import com.example.fsm.business.converters.OrderConverter;
-import com.example.fsm.business.repository.OrderRepository;
+import com.example.fsm.business.mapper.OrderMapper;
 import com.example.fsm.checker.Checkable;
 import com.example.fsm.checker.Checker;
 import com.example.fsm.checker.CheckerExecutor;
@@ -43,16 +43,16 @@ import java.util.List;
 public class OrderCreatedProcessor extends AbstractStateProcessor<String, CreateOrderContext> {
 
 	public OrderCreatedProcessor(CheckerExecutor checkerExecutor, PluginExecutor pluginExecutor,
-								 CreateParamChecker createParamChecker, OrderRepository orderRepository) {
+								 CreateParamChecker createParamChecker, OrderMapper orderMapper) {
 		super(checkerExecutor, pluginExecutor);
 		this.createParamChecker = createParamChecker;
-		this.orderRepository = orderRepository;
+		this.orderMapper = orderMapper;
 	}
 
 	private final CreateParamChecker createParamChecker;
 	//    private UserChecker userChecker;
 //    private UnFinishChecker unfinishChecker;
-	private final OrderRepository orderRepository;
+	private final OrderMapper orderMapper;
 
 	@Override
 	public Checkable getCheckable(StateContext<CreateOrderContext> context) {
@@ -101,7 +101,7 @@ public class OrderCreatedProcessor extends AbstractStateProcessor<String, Create
 		// 持久化
 //        this.updateOrderInfo(orderInfo);
 		Order order = OrderConverter.INSTANCE.toOrder(orderInfo);
-		orderRepository.save(order);
+		orderMapper.insert(order);
 		log.info("save BUSINESS order success, userId:{}, orderId:{}", orderInfo.getUserId(), order.getOrderId());
 		return new ServiceResult<>(orderInfo.getOrderId(), "business下单成功");
 	}

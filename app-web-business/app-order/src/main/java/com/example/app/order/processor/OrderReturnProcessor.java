@@ -10,7 +10,7 @@ import com.example.app.order.enums.OrderEventEnum;
 import com.example.app.order.enums.OrderStateEnum;
 import com.example.fsm.business.converters.OrderConverter;
 import com.example.fsm.business.enums.SceneIdEnum;
-import com.example.fsm.business.repository.OrderRepository;
+import com.example.fsm.business.mapper.OrderMapper;
 import com.example.fsm.checker.Checkable;
 import com.example.fsm.checker.Checker;
 import com.example.fsm.checker.CheckerExecutor;
@@ -38,12 +38,12 @@ import java.util.List;
 public class OrderReturnProcessor extends AbstractStateProcessor<String, ReturnOrderContext> {
 
 	public OrderReturnProcessor(CheckerExecutor checkerExecutor, PluginExecutor pluginExecutor,
-								OrderRepository orderRepository) {
+								OrderMapper orderMapper) {
 		super(checkerExecutor, pluginExecutor);
-		this.orderRepository = orderRepository;
+		this.orderMapper = orderMapper;
 	}
 
-	private final OrderRepository orderRepository;
+	private final OrderMapper orderMapper;
 
 	@Override
 	public Checkable getCheckable(StateContext<ReturnOrderContext> context) {
@@ -89,7 +89,7 @@ public class OrderReturnProcessor extends AbstractStateProcessor<String, ReturnO
 		// 更新状态
 		Order order = OrderConverter.INSTANCE.toOrder(orderInfo);
 		// 持久化
-		orderRepository.save(order);
+		orderMapper.insert(order);
 		log.info("save BUSINESS order success, orderId:{}", order.getOrderId());
 		return new ServiceResult<>(orderInfo.getOrderId(), "business退货成功");
 	}
