@@ -40,6 +40,7 @@ out/
 ### Project ###
 **/rebel.xml
 /local.properties
+**/generated/
 
 # snap
 framework-merger
