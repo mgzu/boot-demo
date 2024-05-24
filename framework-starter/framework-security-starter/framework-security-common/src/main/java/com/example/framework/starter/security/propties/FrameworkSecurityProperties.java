@@ -5,9 +5,6 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-import java.util.Set;
-
 /**
  * @author MaGuangZu
  * @since 2023-09-28
@@ -19,8 +16,10 @@ import java.util.Set;
 public class FrameworkSecurityProperties {
 
 	/**
-	 * permit urls
+	 * white list
 	 */
-	private Set<String> permits = Collections.emptySet();
+	private String[] whiteList = new String[]{
+		"/docs"
+	};
 
 }

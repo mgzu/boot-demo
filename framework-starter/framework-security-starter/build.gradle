@@ -1,3 +1,5 @@
-dependencies {
-
+subprojects {
+	dependencies {
+		api project(':framework-system')
+	}
 }

@@ -4,6 +4,4 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	// test
 	testImplementation project(':framework-test')
-	testImplementation project(":framework-web")
-	testImplementation project(":framework-system")
 }

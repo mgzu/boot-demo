@@ -22,13 +22,9 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//		String[] whiteList = new String[]{
-//			"/docs"
-//		};
-		String[] permits = frameworkSecurityProperties.getPermits().toArray(new String[0]);
 		http
 			.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers(permits).permitAll()
+				.requestMatchers(frameworkSecurityProperties.getWhiteList()).permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin(AbstractHttpConfigurer::disable)
