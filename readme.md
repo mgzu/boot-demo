@@ -15,7 +15,3 @@
 | app-web-business\app-common | app common code        |
 | app-web-business\app-fsm    | default fsm implement  |
 | app-web-business\app-order  | web business code      |
-
-# Reference link
-
-tenant: https://github.com/filipefox/spring-multitenancy-column-discriminator
