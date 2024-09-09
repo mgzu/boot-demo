@@ -30,8 +30,6 @@ ext {
 	mapstructVersion = '1.5.5.Final'
 	// https://mvnrepository.com/artifact/io.github.mouzt/bizlog-sdk
 	bizlogSdkVersion = '3.0.6'
-	// https://mvnrepository.com/artifact/org.jeasy/easy-rules-core
-	easyRulesVersion = '4.1.0'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
 	guavaVersion = '33.2.0-jre'
 	// https://mvnrepository.com/artifact/org.jetbrains/annotations
