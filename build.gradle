@@ -27,7 +27,7 @@ ext {
 	// https://mvnrepository.com/artifact/org.dromara.hutool/hutool-core
 	hutoolVersion = '6.0.0-M16'
 	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct
-	mapstructVersion = '1.5.5.Final'
+	mapstructVersion = '1.6.0'
 	// https://mvnrepository.com/artifact/io.github.mouzt/bizlog-sdk
 	bizlogSdkVersion = '3.0.6'
 	// https://mvnrepository.com/artifact/com.google.guava/guava
