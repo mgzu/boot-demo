@@ -1,6 +1,6 @@
 package com.example;
 
-import org.dromara.hutool.core.convert.Convert;
+import org.dromara.hutool.core.convert.ConvertUtil;
 import org.dromara.hutool.core.util.RandomUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ class ConvertTest {
     @Test
 	void Test1() {
         for (int i = 0; i < forNum; i++) {
-            Convert.toBigDecimal(list.get(i));
+			ConvertUtil.toBigDecimal(list.get(i));
         }
     }
 }
