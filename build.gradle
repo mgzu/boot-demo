@@ -35,7 +35,7 @@ ext {
 	// https://mvnrepository.com/artifact/org.jetbrains/annotations
 	jetbrainsAnnotationsVersion = '24.1.0'
 	// https://mvnrepository.com/artifact/cn.dev33/sa-token-spring-boot-starter
-	saTokenVersion = '1.38.0'
+	saTokenVersion = '1.39.0'
 	// https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-spring-boot3-starter
 	mybatisPlusVersion = '3.5.6'
 
