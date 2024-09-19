@@ -9,6 +9,9 @@ mybatis-plus:
       logic-delete-field: deleted
       logic-not-delete-value: 'null'
       logic-delete-value: 'now()'
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
 
 management:
   tracing:
