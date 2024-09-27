@@ -9,7 +9,7 @@ plugins {
 
 allprojects {
 	group = 'com.github.mgzu'
-	version = '0.0.1-SNAPSHOT'
+	version = '0.0.3-SNAPSHOT'
 
 	repositories {
 		maven {
@@ -127,14 +127,14 @@ subprojects {
 		if (localProperties.exists()) {
 			Properties properties = new Properties()
 			properties.load(localProperties.newDataInputStream())
-			ghUsername = properties.getProperty("GITHUB_USERNAME")
-			ghPassword = properties.getProperty("GITHUB_TOKEN")
+			ghUsername = properties.getProperty("GH_USERNAME")
+			ghPassword = properties.getProperty("GH_TOKEN")
 		} else {
-			ghUsername = System.getenv("GITHUB_USERNAME")
-			ghPassword = System.getenv("GITHUB_TOKEN")
+			ghUsername = System.getenv("GH_USERNAME")
+			ghPassword = System.getenv("GH_TOKEN")
 		}
 		if (ghUsername == null || ghUsername.isEmpty()) {
-			println("GITHUB_USERNAME or GITHUB_TOKEN are not set.")
+			println("GH_USERNAME or GH_TOKEN are not set.")
 			return
 		}
 		publishing {

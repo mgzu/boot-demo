@@ -42,4 +42,7 @@ jobs:
       - name: Publishing
         # Only run on ubuntu
         if: "contains(github.event.head_commit.message, '[publish]') && contains(matrix.os, 'ubuntu')"
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_USERNAME: ${{ secrets.GH_USERNAME }}
         run: ./gradlew publish
