@@ -25,7 +25,7 @@ allprojects {
 
 ext {
 	// https://mvnrepository.com/artifact/org.dromara.hutool/hutool-core
-	hutoolVersion = '6.0.0-M16'
+	hutoolVersion = '6.0.0-M18'
 	// https://mvnrepository.com/artifact/org.mapstruct/mapstruct
 	mapstructVersion = '1.6.0'
 	// https://mvnrepository.com/artifact/io.github.mouzt/bizlog-sdk
@@ -82,7 +82,7 @@ subprojects {
 
 	dependencies {
 		// tool
-		implementation "org.dromara.hutool:hutool-core:${hutoolVersion}"
+		api "org.dromara.hutool:hutool-core:${hutoolVersion}"
 		implementation "com.google.guava:guava:${guavaVersion}"
 		implementation "org.mapstruct:mapstruct:${mapstructVersion}"
 		implementation 'org.hibernate.validator:hibernate-validator'
