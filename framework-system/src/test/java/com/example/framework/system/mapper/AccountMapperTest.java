@@ -1,6 +1,7 @@
 package com.example.framework.system.mapper;
 
 import com.baomidou.mybatisplus.test.autoconfigure.MybatisPlusTest;
+import com.example.framework.system.TenantBaseCase;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

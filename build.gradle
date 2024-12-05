@@ -37,7 +37,7 @@ ext {
 	// https://mvnrepository.com/artifact/cn.dev33/sa-token-spring-boot-starter
 	saTokenVersion = '1.39.0'
 	// https://mvnrepository.com/artifact/com.baomidou/mybatis-plus-spring-boot3-starter
-	mybatisPlusVersion = '3.5.7'
+	mybatisPlusVersion = '3.5.9'
 
 	// docs
 	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
@@ -76,6 +76,7 @@ subprojects {
 	dependencyManagement {
 		imports {
 			mavenBom SpringBootPlugin.BOM_COORDINATES
+			mavenBom "com.baomidou:mybatis-plus-bom:${mybatisPlusVersion}"
 		}
 	}
 

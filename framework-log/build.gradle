@@ -2,7 +2,7 @@ dependencies {
 	api project(':framework-common')
 	api project(':framework-web')
 
-	implementation "com.baomidou:mybatis-plus-spring-boot3-starter:${mybatisPlusVersion}"
+	implementation "com.baomidou:mybatis-plus-spring-boot3-starter"
 	api("io.github.mouzt:bizlog-sdk:${bizlogSdkVersion}") {
 		exclude group: 'org.springframework.boot', module: 'spring-boot-starter'
 		exclude group: 'org.projectlombok', module: 'lombok'

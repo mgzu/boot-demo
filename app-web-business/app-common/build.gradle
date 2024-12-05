@@ -3,7 +3,8 @@ dependencies {
 	api project(':framework-web')
 
 	api 'org.springframework.boot:spring-boot-starter-web'
-	api "com.baomidou:mybatis-plus-spring-boot3-starter:${mybatisPlusVersion}"
+	api "com.baomidou:mybatis-plus-spring-boot3-starter"
+	implementation "com.baomidou:mybatis-plus-jsqlparser"
 
 	// test
 	testImplementation project(':framework-test')

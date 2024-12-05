@@ -1,6 +1,7 @@
 package com.example.framework.system.mapper;
 
 import com.baomidou.mybatisplus.test.autoconfigure.MybatisPlusTest;
+import com.example.framework.system.TenantBaseCase;
 import com.example.framework.system.constants.DictConstants;
 import com.example.framework.system.entity.DictItem;
 import org.dromara.hutool.core.util.RandomUtil;
@@ -27,6 +28,7 @@ class DictItemRepositoryBaseTest extends TenantBaseCase {
 		dictItem.setDictId(RandomUtil.randomString(10));
 		dictItem.setType(DictConstants.DICT_TYPE_BOOL);
 		dictItem.setValue(Boolean.toString(RandomUtil.randomBoolean()));
+		applyDefault(dictItem);
 		dictItemMapper.insert(dictItem);
 	}
 
@@ -36,6 +38,7 @@ class DictItemRepositoryBaseTest extends TenantBaseCase {
 		dictItem.setDictId("0");
 		dictItem.setType(DictConstants.DICT_TYPE_BOOL);
 		dictItem.setValue(Boolean.FALSE.toString());
+		applyDefault(dictItem);
 		dictItemMapper.insert(dictItem);
 		assertThat(dictItem.getId()).isNotBlank();
 		DictItem saved = dictItemMapper.selectById(dictItem.getId());
@@ -49,6 +52,7 @@ class DictItemRepositoryBaseTest extends TenantBaseCase {
 		dictItem.setType(DictConstants.DICT_TYPE_BOOL);
 		dictItem.setValue(Boolean.FALSE.toString());
 		dictItem.setOrderByPriority(10);
+		applyDefault(dictItem);
 		dictItemMapper.insert(dictItem);
 		assertThat(dictItem.getId()).isNotBlank();
 		DictItem saved = dictItemMapper.selectById(dictItem.getId());

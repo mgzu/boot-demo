@@ -41,6 +41,12 @@ public class BaseEntity extends PersistableEntity {
 	@TableField(value = "last_modified_date", fill = FieldFill.INSERT_UPDATE)
 	protected LocalDateTime lastModifiedDate;
 
+	@TableField(value = "app_version", fill = FieldFill.INSERT)
+	protected String appVersion;
+
+	@TableField(value = "data_version", fill = FieldFill.INSERT)
+	protected String dataVersion;
+
 	@Nullable
 	private String remark;
 

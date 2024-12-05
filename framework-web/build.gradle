@@ -1,9 +1,9 @@
 dependencies {
 	api project(':framework-common')
 	api 'org.springframework.boot:spring-boot-starter-web'
-	api "com.baomidou:mybatis-plus-spring-boot3-starter:${mybatisPlusVersion}"
+	api "com.baomidou:mybatis-plus-spring-boot3-starter"
+	implementation "com.baomidou:mybatis-plus-jsqlparser"
     implementation 'org.springframework.boot:spring-boot-configuration-processor'
-	implementation 'com.h2database:h2'
 	// observability, etc
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'io.micrometer:micrometer-tracing-bridge-otel'

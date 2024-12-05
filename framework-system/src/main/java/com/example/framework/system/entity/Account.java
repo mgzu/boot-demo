@@ -32,9 +32,7 @@ public class Account extends BaseEntity {
 	@NotNull
 	private Boolean enabled;
 
-	private Boolean activation;
-
-	private LocalDateTime activationDate;
+	private LocalDateTime enabledDate;
 
 	private Integer orderByPriority;
 

@@ -1,6 +1,7 @@
 package com.example.framework.system.mapper;
 
 import com.baomidou.mybatisplus.test.autoconfigure.MybatisPlusTest;
+import com.example.framework.system.TenantBaseCase;
 import com.example.framework.system.entity.Dict;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,12 @@ class DictMapperTest extends TenantBaseCase {
 		Dict dict = new Dict();
 		dict.setCode(code);
 		dict.setName("name");
+		applyDefault(dict);
 		dictMapper.insert(dict);
 		Dict dict2 = new Dict();
 		dict2.setCode(code);
 		dict2.setName("name");
+		applyDefault(dict2);
 		assertThatThrownBy(() -> dictMapper.insert(dict2))
 			.isInstanceOf(DataIntegrityViolationException.class)
 			.hasMessageContaining("unique");

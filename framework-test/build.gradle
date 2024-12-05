@@ -6,9 +6,11 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
+	implementation 'com.h2database:h2'
 
 	// test
 	testImplementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
+	testImplementation 'com.h2database:h2'
 
 	// jmh
 	testImplementation "org.openjdk.jmh:jmh-core:${jmhVersion}"
